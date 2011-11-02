@@ -11,6 +11,8 @@
 
 #include <string>
 
+using namespace std;
+
 class Primitive {
     string id, texture,material;
 
