@@ -7,8 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C7D3924146149E90092B047 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D3923146149E90092B047 /* main.cpp */; };
 		2C7D3926146149E90092B047 /* Laig_p2.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C7D3925146149E90092B047 /* Laig_p2.1 */; };
+		2C7D392D14614A520092B047 /* GLUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7D392C14614A520092B047 /* GLUI.framework */; };
+		2C7D392F14614A580092B047 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7D392E14614A580092B047 /* GLUT.framework */; };
+		2C7D393114614A650092B047 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7D393014614A650092B047 /* OpenGL.framework */; };
+		2C7D393614614D250092B047 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D393214614D250092B047 /* tinyxml.cpp */; };
+		2C7D393714614D250092B047 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D393414614D250092B047 /* tinyxmlerror.cpp */; };
+		2C7D393814614D250092B047 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D393514614D250092B047 /* tinyxmlparser.cpp */; };
+		2C7D393D14614D530092B047 /* SceneLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D393A14614D530092B047 /* SceneLoader.cpp */; };
+		2C7D393E14614D530092B047 /* XML_alunos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D393C14614D530092B047 /* XML_alunos.cpp */; };
+		2C7D394114614DB50092B047 /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D393F14614DB50092B047 /* tinystr.cpp */; };
+		2C7D394414614E190092B047 /* demograph.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C7D394214614DF00092B047 /* demograph.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -22,12 +31,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		2C7D394314614E040092B047 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				2C7D394414614E190092B047 /* demograph.xml in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2C7D391F146149E90092B047 /* Laig-p2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Laig-p2"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2C7D3923146149E90092B047 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2C7D3925146149E90092B047 /* Laig_p2.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Laig_p2.1; sourceTree = "<group>"; };
+		2C7D392C14614A520092B047 /* GLUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUI.framework; path = Library/Frameworks/GLUI.framework; sourceTree = SDKROOT; };
+		2C7D392E14614A580092B047 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		2C7D393014614A650092B047 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		2C7D393214614D250092B047 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		2C7D393314614D250092B047 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		2C7D393414614D250092B047 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		2C7D393514614D250092B047 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		2C7D393A14614D530092B047 /* SceneLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneLoader.cpp; sourceTree = "<group>"; };
+		2C7D393B14614D530092B047 /* SceneLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneLoader.h; sourceTree = "<group>"; };
+		2C7D393C14614D530092B047 /* XML_alunos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XML_alunos.cpp; sourceTree = "<group>"; };
+		2C7D393F14614DB50092B047 /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
+		2C7D394014614DB50092B047 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
+		2C7D394214614DF00092B047 /* demograph.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = demograph.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +66,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C7D393114614A650092B047 /* OpenGL.framework in Frameworks */,
+				2C7D392F14614A580092B047 /* GLUT.framework in Frameworks */,
+				2C7D392D14614A520092B047 /* GLUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,8 +78,13 @@
 		2C7D3914146149E80092B047 = {
 			isa = PBXGroup;
 			children = (
+				2C7D394214614DF00092B047 /* demograph.xml */,
+				2C7D393014614A650092B047 /* OpenGL.framework */,
+				2C7D392E14614A580092B047 /* GLUT.framework */,
+				2C7D392C14614A520092B047 /* GLUI.framework */,
 				2C7D3922146149E90092B047 /* Laig-p2 */,
 				2C7D3920146149E90092B047 /* Products */,
+				2C7D393914614D340092B047 /* tinyxml */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,10 +99,25 @@
 		2C7D3922146149E90092B047 /* Laig-p2 */ = {
 			isa = PBXGroup;
 			children = (
-				2C7D3923146149E90092B047 /* main.cpp */,
+				2C7D393A14614D530092B047 /* SceneLoader.cpp */,
+				2C7D393B14614D530092B047 /* SceneLoader.h */,
+				2C7D393C14614D530092B047 /* XML_alunos.cpp */,
 				2C7D3925146149E90092B047 /* Laig_p2.1 */,
 			);
 			path = "Laig-p2";
+			sourceTree = "<group>";
+		};
+		2C7D393914614D340092B047 /* tinyxml */ = {
+			isa = PBXGroup;
+			children = (
+				2C7D393F14614DB50092B047 /* tinystr.cpp */,
+				2C7D394014614DB50092B047 /* tinystr.h */,
+				2C7D393214614D250092B047 /* tinyxml.cpp */,
+				2C7D393314614D250092B047 /* tinyxml.h */,
+				2C7D393414614D250092B047 /* tinyxmlerror.cpp */,
+				2C7D393514614D250092B047 /* tinyxmlparser.cpp */,
+			);
+			name = tinyxml;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -76,6 +130,7 @@
 				2C7D391B146149E90092B047 /* Sources */,
 				2C7D391C146149E90092B047 /* Frameworks */,
 				2C7D391D146149E90092B047 /* CopyFiles */,
+				2C7D394314614E040092B047 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -113,7 +168,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C7D3924146149E90092B047 /* main.cpp in Sources */,
+				2C7D393614614D250092B047 /* tinyxml.cpp in Sources */,
+				2C7D393714614D250092B047 /* tinyxmlerror.cpp in Sources */,
+				2C7D393814614D250092B047 /* tinyxmlparser.cpp in Sources */,
+				2C7D393D14614D530092B047 /* SceneLoader.cpp in Sources */,
+				2C7D393E14614D530092B047 /* XML_alunos.cpp in Sources */,
+				2C7D394114614DB50092B047 /* tinystr.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
