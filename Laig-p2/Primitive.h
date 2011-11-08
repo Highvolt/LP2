@@ -10,7 +10,8 @@
 #define Laig_p2_Primitive_h
 
 #include <string>
-
+#include <GL/glut.h>
+#include <GL/glui.h>
 using namespace std;
 
 class Primitive {
@@ -18,7 +19,7 @@ class Primitive {
 
 public:
     Primitive();
-    virtual int render();
+    virtual int render()=0;
 };
 /*
 class Circle: public Primitive {
@@ -38,6 +39,7 @@ public:
 };
 
 class Cylinder: public Primitive {
+	GLUquadric *glQ;
     float base,top,height;
     int slices,stacks;
 
@@ -59,6 +61,17 @@ class Rectangle: public Primitive {
 
 public:
     Rectangle(string id, string texture, string material,float x1,float y1,float x2, float y2);
+	int render();
+};
+
+class Sphere: public Primitive {
+	GLUquadric *glQ;
+	float radius;
+	int slices, stacks;
+
+public:
+	Sphere(string id, string texture, string material, float radius, int slices, int stacks);
+	int render();
 };
 
 #endif
