@@ -18,7 +18,7 @@ class Primitive {
     string id, texture,material;
 
 public:
-    Primitive();
+    Primitive(string id,string texture,string material);
     virtual int render()=0;
 };
 /*

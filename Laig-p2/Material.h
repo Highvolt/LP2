@@ -1,0 +1,28 @@
+#ifndef MATERIAL_H_
+#define MATERIAL_H_
+
+#include <string>
+#include <GL\glui.h>
+
+using namespace std;
+
+class Material{
+	string id;
+	float mat_shininess[1];
+	float mat_specular[4];
+	float mat_diffuse[4];
+	float mat_ambient[4];
+	float mat_emission[4];
+	
+public:
+	Material(string id);
+	void setMatShininess(float);
+	void setMatSpecular(float, float, float, float);
+	void setMatDiffuse(float, float, float, float);
+	void setMatAmbient(float, float, float, float);
+	void setMatEmission(float, float, float, float);
+
+	void applyMat();
+};
+
+#endif

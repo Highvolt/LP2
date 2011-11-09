@@ -1,0 +1,1740 @@
+<?xml version="1.0"?>
+
+<!-- Versão 1.0.3 -->
+<dsx>
+    <!-- deve definir-se um objeto para raiz do grafo , assim -->
+    <!-- como o comprimento dos tres eixos (cilindros) -->
+    <scene root="Cena" axis_length="10.0" />
+
+
+    <views default="perspective" >
+        <!-- tem de existir, pelo menos, uma vista das -->
+        <!-- seguintes (perspective ou ortho) -->
+        <perspective id="perspective" near="0.1" far="500.0" angle="45.0">
+            <from x="2.5" y="0.0" z="10" />
+            <to x="2.5" y="0.0" z="0.0" />
+        </perspective>
+        <!-- <ortho id="ss" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" /> -->
+    </views>
+
+    <illumination doublesided="0" local="1" >
+        <ambient r="0.6" g="0.6" b="0.6" a="1.0" />
+        <background r="0.0" g="0.6" b="1.0" a="1.0" />
+    </illumination>
+
+    <lights>
+        <!-- Deve existir um ou mais blocos "omni" ou "spot" -->
+        <!-- Os identificadores "id" nao podem ser repetidos -->
+         <!-- <omni id="ss" enabled="tt" > -->
+         <!--     <location x="ff" y="ff" z="ff" w="ff" /> -->
+         <!--     <ambient r="ff" g="ff" b="ff" a="ff" />  -->
+         <!--     <diffuse r="ff" g="ff" b="ff" a="ff" />  -->
+         <!--     <specular r="ff" g="ff" b="ff" a="ff" /> -->
+        <!--  </omni>  -->
+
+        <spot id="spot1" enabled="1" angle="45" exponent="5.0">
+            <location x="0" y="20" z="0" />
+            <!-- atencao, "target" e' diferente de "direction" -->
+            <target x="0.0" y="0.0" z="-1.0" />
+            <ambient r="0.6" g="0.6" b="0.6" a="1.0" />
+            <diffuse r="0.5" g="0.5" b="0.5" a="1.0" />
+            <specular r="0.7" g="0.7" b="0.7" a="1.0" />
+        </spot>
+
+    </lights>
+
+    <textures>
+        <!-- Deve existir um ou mais blocos "texture" -->
+        <!-- Os identificadores "id" nao podem ser repetidos -->
+        <!-- s e t: factores de escala (ver notas finais) -->
+        <texture id="cafe_text" file="Textures/cafe.bmp" length_s="180" length_t="150" />  
+		<texture id="chao_text" file="Textures/chao.bmp" length_s="8" length_t="8" />  
+		<texture id="edificio_text" file="Textures/building.bmp" length_s="90" length_t="150" />  		
+		<texture id="mesa_superficie_text" file="Textures/mesa.bmp" length_s="15" length_t="15" /> 
+		<texture id="mesa_lados_text" file="Textures/mesa.bmp" length_s="15" length_t="1" /> 
+		<texture id="mesa_suporte_text" file="Textures/cup_base.bmp" length_s="1" length_t="1" />  
+		<texture id="cadeira_assent_sup_text" file="Textures/cadeira.bmp" length_s="5" length_t="5" />  
+		<texture id="cadeira_assento_lado_text" file="Textures/cadeira.bmp" length_s="5" length_t="0.5" /> 		
+		<texture id="cadeira_suporte_text" file="Textures/cadeira.bmp" length_s="5" length_t="7" />  		
+		<texture id="perna_cadeira_text" file="Textures/cup_base.bmp" length_s="1" length_t="1" />  		
+		<texture id="cabeca_text" file="Textures/face.bmp" length_s="1" length_t="1" />  
+		<texture id="pescoco_text" file="Textures/neck.bmp" length_s="1" length_t="1" /> 
+		<texture id="tronco_frente_text" file="Textures/tshirt.bmp" length_s="4" length_t="6" /> 
+		<texture id="tronco_tras_text" file="Textures/tshirt_lados.bmp" length_s="4" length_t="6" /> 
+		<texture id="tronco_lados_text" file="Textures/tshirt_lados.bmp" length_s="2" length_t="6" />
+		<texture id="tronco_topo_text" file="Textures/tshirt_topo.bmp" length_s="4" length_t="2" />
+		<texture id="mao_text" file="Textures/hands.bmp" length_s="1" length_t="1" />  
+		<texture id="calcas_text" file="Textures/trousers.bmp" length_s="1" length_t="1" />  
+		<texture id="joelho_text" file="Textures/knees.bmp" length_s="1" length_t="1" /> 
+		<texture id="bico_pe_text" file="Textures/front.bmp" length_s="1" length_t="1" />  
+		<texture id="topo_pe_text" file="Textures/top.bmp" length_s="1" length_t="2" />  
+		<texture id="sola_text" file="Textures/sola.bmp" length_s="1" length_t="2" />  
+		<texture id="lado_pe_text" file="Textures/shoe_side.bmp" length_s="2" length_t="0.7" /> 
+		<texture id="tras_pe_text" file="Textures/back.bmp" length_s="1" length_t="0.7" /> 		 
+		<texture id="base_copo_text" file="Textures/cup_base.bmp" length_s="1" length_t="1" />  
+		<texture id="fundo_copo_text" file="Textures/beer_bottom.bmp" length_s="1" length_t="1" />  
+		<texture id="topo_copo_text" file="Textures/beer.bmp" length_s="1" length_t="1" /> 
+		<texture id="espuma_text" file="Textures/espuma.bmp" length_s="1" length_t="1" />  
+		<texture id="donuts_text" file="Textures/donut.bmp" length_s="1" length_t="1" />  				
+    </textures>
+
+   
+    <materials>
+        <!-- Deve existir um ou mais blocos "material" -->
+        <!-- Os identificadores "id" nao podem ser repetidos -->
+        <material id="white plastic" >
+            <emission r="0.0" g="0.0" b="0.0" a="0.0" />
+            <ambient r="0.0" g="0.0" b="0.0" a="0.0" />
+            <diffuse r="0.55" g="0.55" b="0.55" a="0.0" />
+            <specular r="0.7" g="0.7" b="0.7" a="0.0" />
+            <shininess value="0.25" />
+        </material>
+    </materials>
+
+    <transformations>
+        <!-- Deve existir um ou mais blocos "transformation" -->
+        <!-- Os identificadores "id" nao podem ser repetidos -->
+		 <transformation id="tampo_mesa_sup_t">
+          <translate x="-7.5" y="8" z="7.5" /> 
+		  <rotate axis="x" angle="-90" />
+        </transformation>
+		
+
+		 <transformation id="tampo_mesa_inf_t">
+          <translate x="-7.5" y="7" z="-7.5" /> 
+		  <rotate axis="x" angle="90" />
+        </transformation>
+		
+		 <transformation id="tampo_mesa_esq_t">
+          <translate x="-7.5" y="7" z="-7.5" /> 
+		  <rotate axis="y" angle="-90" />
+        </transformation>
+		
+		 <transformation id="tampo_mesa_frt_t">
+          <translate x="-7.5" y="7" z="7.5" /> 
+        </transformation>
+		
+		 <transformation id="tampo_mesa_tras_t">
+          <translate x="7.5" y="7" z="-7.5" /> 
+		  <rotate axis="y" angle="180" />
+        </transformation>
+		
+		<transformation id="tampo_mesa_drt_t">
+          <translate x="7.5" y="7" z="7.5" /> 
+		  <rotate axis="y" angle="90" />
+        </transformation>
+		
+		 <transformation id="sup_mesa_t">
+          <translate x="0" y="7" z="0" /> 
+		  <rotate axis="x" angle="90" />
+        </transformation>
+		
+		 <transformation id="base_mesa_f_t">
+          <translate x="0" y="0.5" z="0" /> 
+		  <rotate axis="x" angle="90" />
+        </transformation>
+		
+		 <transformation id="base_mesa_p_t">
+          <translate x="0" y="1.5" z="0" /> 
+		  <rotate axis="x" angle="90" />
+        </transformation>
+		
+		 <transformation id="cad_assnt_sup_t">
+          <translate x="-2.5" y="5" z="2.5" /> 
+		  <rotate axis="x" angle="-90" />
+        </transformation>
+		
+		 <transformation id="cad_assnt_inf_t">
+          <translate x="-2.5" y="4.5" z="-2.5" /> 
+		  <rotate axis="x" angle="90" />
+        </transformation>
+		
+		 <transformation id="cad_assnt_esq_t">
+          <translate x="-2.5" y="4.5" z="-2.5" /> 
+		  <rotate axis="y" angle="-90" />
+        </transformation>
+		
+		 <transformation id="cad_assnt_frt_t">
+          <translate x="-2.5" y="4.5" z="2.5" /> 
+        </transformation>
+		
+		 <transformation id="cad_assnt_tras_t">
+          <translate x="2.5" y="4.5" z="-2.5" /> 
+		  <rotate axis="y" angle="180" />
+        </transformation>
+		
+		 <transformation id="cad_assnt_dir_t">
+          <translate x="2.5" y="4.5" z="2.5" /> 
+		  <rotate axis="y" angle="90" />
+        </transformation>
+		
+		 <transformation id="cad_perna_tras_esq_t">
+          <translate x="-2.1" y="4.5" z="-2.1" /> 
+		  <rotate axis="x" angle="90" />
+        </transformation>
+		
+		 <transformation id="cad_perna_frt_esq_t">
+          <translate x="-2.1" y="4.5" z="2.1" /> 
+		  <rotate axis="x" angle="90" />
+        </transformation>
+		
+		 <transformation id="cad_perna_frt_dir_t">
+          <translate x="2.1" y="4.5" z="2.1" /> 
+		  <rotate axis="x" angle="90" />
+        </transformation>
+		
+		 <transformation id="cad_perna_tras_dir_t">
+          <translate x="2.1" y="4.5" z="-2.1" /> 
+		  <rotate axis="x" angle="90" />
+        </transformation>
+		
+		 <transformation id="cad_sup_sup_t">
+          <translate x="-2.5" y="5" z="-2" /> 
+        </transformation>
+		
+		 <transformation id="cad_sup_inf_t">
+          <translate x="2.5" y="5" z="-2.5" /> 
+		  <rotate axis="y" angle="180" />
+        </transformation>
+		
+		 <transformation id="cad_sup_dir_t">
+          <translate x="2.5" y="5" z="-2" /> 
+		  <rotate axis="y" angle="90" />
+        </transformation>
+		
+		 <transformation id="cad_sup_esq_t">
+          <translate x="-2.5" y="5" z="-2.5" /> 
+		  <rotate axis="y" angle="-90" />
+        </transformation>
+
+		 <transformation id="cad_sup_cima_t">
+          <translate x="-2.5" y="12" z="-2" /> 
+		  <rotate axis="x" angle="-90" />
+        </transformation>
+		
+		 <transformation id="cabeca_t">
+         <translate x="0" y="13" z="0" /> 
+		 <rotate axis="x" angle="-90" />
+        </transformation>
+
+		 <transformation id="pescoco_t">
+         <translate x="0" y="12" z="0" /> 
+		 <rotate axis="y" angle="180" />
+		 <rotate axis="x" angle="90" />
+        </transformation>
+
+		 <transformation id="tronco_frt_t">
+         <translate x="-2" y="5" z="1" /> 
+        </transformation>
+
+		 <transformation id="tronco_tras_t">
+         <translate x="2" y="5" z="-0.9" /> 
+		 <rotate axis="y" angle="180" />
+        </transformation>
+
+		 <transformation id="tronco_dir_t">
+         <translate x="2" y="5" z="1.1" /> 
+		 <rotate axis="y" angle="90" />
+        </transformation>
+
+		 <transformation id="tronco_esq_t">
+         <translate x="-2" y="5" z="-0.9" /> 
+		 <rotate axis="y" angle="-90" />
+        </transformation>
+		
+		 <transformation id="tronco_cima_t">
+         <translate x="-2" y="11" z="1.1" /> 
+		 <rotate axis="x" angle="-90" />
+        </transformation>
+		
+		 <transformation id="ombro_esq_t">
+         <translate x="2" y="10.5" z="0" /> 
+        </transformation>
+		
+		 <transformation id="ombro_dir_t">
+         <translate x="-2" y="10.5" z="0" /> 
+        </transformation>
+		
+		 <transformation id="braco_esq_t">
+         <translate x="2.2" y="10.5" z="0" /> 
+		 <rotate axis="x" angle="35" />
+        </transformation>
+		
+		 <transformation id="braco_dir_t">
+         <translate x="-2.2" y="10.5" z="0" /> 
+		 <rotate axis="y" angle="-35" />
+		 <rotate axis="x" angle="35" />
+        </transformation>
+		
+		
+		 <transformation id="cotovelo_esq_t">
+         <translate x="2.2" y="8.8" z="2.3" /> 
+        </transformation>
+		
+		
+		 <transformation id="cotovelo_dir_t">
+         <translate x="-3.7" y="8.7" z="2.1" /> 
+        </transformation>
+		
+		 <transformation id="antebraco_esq_t">
+         <translate x="2.2" y="8.8" z="2.3" /> 
+        </transformation>
+		
+		<transformation id="antebraco_dir_t">
+         <translate x="-3.7" y="8.7" z="2.1" /> 
+		 <rotate axis="y" angle="40" />
+        </transformation>
+		
+		<transformation id="mao_dir_t">
+         <translate x="-2" y="8.7" z="4" /> 
+        </transformation>
+		
+		<transformation id="mao_esq_t">
+         <translate x="2.2" y="8.8" z="5" /> 
+        </transformation>
+		
+		<transformation id="perna_dir_t">
+         <translate x="-1" y="5.8" z="1" /> 
+        </transformation>
+		
+		<transformation id="perna_esq_t">
+         <translate x="1" y="5.8" z="1" /> 
+		 <rotate axis="y" angle="20" />
+        </transformation>
+		
+		<transformation id="joelho_dir_t">
+         <translate x="-1" y="5.8" z="4.5" /> 
+        </transformation>
+		
+		<transformation id="joelho_esq_t">
+         <translate x="2.2" y="5.8" z="4.3" /> 
+        </transformation>
+		
+		<transformation id="anteperna_dir_t">
+         <translate x="-1" y="5.8" z="4.5" /> 
+		  <rotate axis="x" angle="90" />
+        </transformation>
+		
+		<transformation id="anteperna_esq_t">
+         <translate x="0.9" y="1.9" z="0.6" /> 
+		 <rotate axis="y" angle="20" />
+		 <rotate axis="x" angle="-45" />
+        </transformation>
+		
+		<transformation id="pe_cima_t">
+         <translate x="-1.5" y="0.7" z="6" /> 
+		 <rotate axis="x" angle="-90" />
+        </transformation>
+		
+		<transformation id="pe_baixo_t">
+         <translate x="-1.5" y="0" z="4" /> 
+		 <rotate axis="x" angle="90" />
+        </transformation>
+		
+		<transformation id="pe_dir_t">
+         <translate x="-0.5" y="0" z="6" /> 
+		 <rotate axis="y" angle="90" />
+        </transformation>
+		
+		<transformation id="pe_esq_t">
+         <translate x="-1.5" y="0" z="4" /> 
+		 <rotate axis="y" angle="-90" />
+        </transformation>
+		
+		<transformation id="pe_tras_t">
+         <translate x="-0.5" y="0" z="4" /> 
+		 <rotate axis="y" angle="180" />
+        </transformation>
+		
+		<transformation id="base_copo_t">
+         <translate x="0" y="8" z="0" /> 
+		 <rotate axis="x" angle="-90" />
+        </transformation>
+		
+		<transformation id="sup_copo_t">
+         <translate x="0" y="9.2" z="0" /> 
+		 <rotate axis="x" angle="90" />
+        </transformation>
+		
+		<transformation id="fundo_copo_t">
+         <translate x="0" y="9.6" z="0" /> 
+        </transformation>
+		
+		<transformation id="topo_copo_t">
+         <translate x="0" y="9.8" z="0" /> 
+		 <rotate axis="x" angle="-90" />
+        </transformation>
+		
+		<transformation id="esp_copo_t">
+         <translate x="0" y="10.8" z="0" /> 
+		 <rotate axis="x" angle="-90" />
+        </transformation>
+		
+		<transformation id="prato_t">
+         <translate x="0" y="8" z="0" /> 
+		 <rotate axis="x" angle="-90" />
+        </transformation>
+		
+		<transformation id="donut1_t">
+         <translate x="0.2" y="8.5" z="-0.2" /> 
+		 <rotate axis="x" angle="-90" />
+        </transformation>
+		
+		<transformation id="donut2_t">
+         <translate x="-0.5" y="8.8" z="0.4" /> 
+		 <rotate axis="x" angle="-45" />
+        </transformation>
+		
+		<transformation id="donut3_t">
+         <translate x="-0.5" y="8.8" z="-0.3" /> 
+		 <rotate axis="y" angle="-90" />
+		 <rotate axis="x" angle="-60" />
+        </transformation>
+		
+		<transformation id="pe_direito_t">
+         <translate x="0.6" y="4.8" z="-3" /> 
+		 <rotate axis="y" angle="20" />
+		  <rotate axis="x" angle="45" />
+        </transformation>
+		
+		<transformation id="chao_t">
+         <translate x="-90" y="0" z="90" /> 
+		 <rotate axis="x" angle="-90" />
+        </transformation>
+		
+		<transformation id="edificio_t">
+         <translate x="-90" y="0" z="90" /> 
+		 <rotate axis="y" angle="90" />
+        </transformation>
+		
+		<transformation id="cafe_t">
+         <translate x="-90" y="0" z="-90" /> 
+        </transformation>
+		
+		
+		 <transformation id="scene_t">
+          <translate x="0" y="0" z="-35" /> 
+		  <rotate axis="x" angle="20" />
+		  <rotate axis="y" angle="-45" />
+        </transformation>
+		
+		
+    </transformations>
+	
+	
+	
+	<!-- =========================== Primitivas =========================== -->
+
+    <primitives>
+   	
+		<primitive id="chao_mod">
+		 <material id = "inherit" />                
+            <texture id="inherit" />
+            <rectangle x1="0" y1="0" x2="180" y2="180" />             
+        </primitive>
+		
+		<primitive id="tampo_mesa_mod">
+		 <material id = "inherit" />                
+            <texture id="inherit" />
+            <rectangle x1="0" y1="0" x2="15" y2="15" />             
+        </primitive>
+		
+		<primitive id="tampo_mesa_lado_mod">
+		 <material id = "inherit" />                
+            <texture id="inherit" />
+            <rectangle x1="0" y1="0" x2="15" y2="1" />             
+        </primitive>
+		
+		<primitive id="sup_mesa_mod">
+		<material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.3" top="0.7" height="7" slices="20" stacks="16" />            
+        </primitive>
+		
+		<primitive id="base_mesa_f_mod">
+		<material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="5" top="5" height="0.5" slices="20" stacks="1" />            
+        </primitive>
+		
+		<primitive id="base_mesa_p_mod">
+		 <material id = "inherit" />                
+         <texture id="inherit" />
+		<cylinder base="0.6" top="5" height="1" slices="20" stacks="16" />            
+        </primitive>
+		
+		<primitive id="cad_assnt_mod">
+		<material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="5" y2="5" />           
+        </primitive>
+		
+		
+		<primitive id="cad_assnt_lado_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="5" y2="0.5" />           
+        </primitive>
+		
+		<primitive id="cad_perna_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.3" top="0.3" height="4.5" slices="20" stacks="1" />               
+        </primitive>
+		
+		<primitive id="cad_sup_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="5" y2="7" />              
+        </primitive>
+		
+		<primitive id="cad_lado_esq_dir_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="0.5" y2="7" />              
+        </primitive>
+		
+		<primitive id="cad_lado_cima_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="5" y2="0.5" />              
+        </primitive>
+		
+		<primitive id="cabeca_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<sphere radius="1.5" slices="20" stacks="20" />             
+        </primitive>
+		
+		
+		<primitive id="pescoco_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.3" top="0.7" height="1" slices="20" stacks="10" />            
+        </primitive>
+		
+		<primitive id="tronco_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="4" y2="6" />         
+        </primitive>
+		
+		<primitive id="tronco_esq_dir_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="2" y2="6" />         
+        </primitive>
+		
+		<primitive id="tronco_cima_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="4" y2="2" />         
+        </primitive>
+		
+		<primitive id="ombro_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<sphere radius="0.7" slices="20" stacks="20" />             
+        </primitive>
+		
+		<primitive id="braco_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.5" top="0.5" height="3" slices="20" stacks="16" />              
+        </primitive>
+		
+		<primitive id="cotovelo_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<sphere radius="0.5" slices="10" stacks="10" />            
+        </primitive>
+		
+		<primitive id="antebraco_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.5" top="0.5" height="3" slices="20" stacks="16" />              
+        </primitive>
+		
+		<primitive id="mao_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<sphere radius="0.7" slices="10" stacks="10" />            
+        </primitive>
+		
+		
+		<primitive id="perna_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.9" top="0.6" height="3.5" slices="20" stacks="16" />              
+        </primitive>
+		
+		
+		<primitive id="joelho_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<sphere radius="0.6" slices="10" stacks="10" />            
+        </primitive>
+		
+		<primitive id="anteperna_dir_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.6" top="0.4" height="5.2" slices="20" stacks="16" />                      
+        </primitive>
+		
+		<primitive id="anteperna_esq_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.4" top="0.6" height="5.6" slices="20" stacks="16" />                      
+        </primitive>
+		
+		<primitive id="bico_pe_centro_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<triangle x1="-1.5" y1="0.7" z1="6" x2="-1" y2="0" z2="7" x3="-0.5" y3="0.7" z3="6"/>        
+        </primitive>
+		
+		<primitive id="bico_pe_esq_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<triangle x1="-1.5" y1="0.7" z1="6" x2="-1.5" y2="0" z2="6" x3="-1" y3="0" z3="7"/>
+        </primitive>
+		
+		<primitive id="bico_pe_dir_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<triangle x1="-0.5" y1="0.7" z1="6" x2="-1" y2="0" z2="7" x3="-0.5" y3="0" z3="6" />         
+        </primitive>
+		
+		<primitive id="bico_pe_baixo_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<triangle x1="-1.5" y1="0" z1="6" x2="-0.5" y2="0" z2="6" x3="-1" y3="0" z3="7" /> 
+        </primitive>
+		        	
+		<primitive id="pe_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="1" y2="2" />                  
+        </primitive>
+		
+		<primitive id="pe_lado_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="2" y2="0.7" />                
+        </primitive>
+	
+		<primitive id="pe_tras_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="1" y2="0.7" />                
+        </primitive>		
+		
+		<primitive id="base_copo_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.5" top="0.1" height="0.3" slices="10" stacks="6" />                
+        </primitive>		
+		
+		<primitive id="sup_copo_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.1" top="0.1" height="1.2" slices="10" stacks="1" />                
+        </primitive>
+		
+		<primitive id="fundo_copo_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<sphere radius="0.6" slices="10" stacks="10" />         
+        </primitive>
+		
+		<primitive id="topo_copo_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.6" top="0.4" height="1" slices="10" stacks="10" />       
+        </primitive>
+		
+		<primitive id="esp_copo_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="0.4" top="0" height="0.1" slices="5" stacks="2" />       
+        </primitive>
+		
+		<primitive id="prato_mod">
+		 <material id = "inherit" />                
+        <texture id="inherit" />
+		<cylinder base="1" top="2" height="0.4" slices="10" stacks="4" />       
+        </primitive>
+		
+		<primitive id="donut_mod">
+		<material id = "inherit" />                
+        <texture id="inherit" />
+		<torus inner="0.2" outer="0.4" slices="10" loops="10" />
+        </primitive>
+		
+		<primitive id="edificio_mod">
+		<material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="180" y2="150" />       
+        </primitive>
+		
+		<primitive id="cafe_mod">
+		<material id = "inherit" />                
+        <texture id="inherit" />
+		<rectangle x1="0" y1="0" x2="180" y2="150" />       
+        </primitive>
+		
+    </primitives>
+
+    <components>
+      		
+		<component id="chao">
+            <transformation>
+                <transformationref id="chao_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="chao_text" />
+            <children>             
+                <primitiveref id="chao_mod" />				
+            </children>
+        </component>
+			
+		<component id="edificio">
+            <transformation>
+                <transformationref id="edificio_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="edificio_text" />
+            <children>             
+                <primitiveref id="edificio_mod" />				
+            </children>
+        </component>
+		
+					
+		<component id="cafe">
+            <transformation>
+                <transformationref id="cafe_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cafe_text" />
+            <children>             
+                <primitiveref id="cafe_mod" />				
+            </children>
+        </component>
+		
+		<component id="tampo_superior_mesa">
+            <transformation>
+                <transformationref id="tampo_mesa_sup_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mesa_superficie_text" />
+            <children>             
+                <primitiveref id="tampo_mesa_mod" />				
+            </children>
+        </component>
+		
+		<component id="tampo_inferior_mesa">
+            <transformation>
+                <transformationref id="tampo_mesa_inf_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mesa_superficie_text" />
+            <children>             
+                <primitiveref id="tampo_mesa_mod" />				
+            </children>
+        </component>
+		
+		<component id="tampo_esquerdo_mesa">
+            <transformation>
+                <transformationref id="tampo_mesa_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mesa_lados_text" />
+            <children>             
+                <primitiveref id="tampo_mesa_lado_mod" />				
+            </children>
+        </component>
+		
+		
+		<component id="tampo_frente_mesa">
+            <transformation>
+                <transformationref id="tampo_mesa_frt_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mesa_lados_text" />
+            <children>             
+                <primitiveref id="tampo_mesa_lado_mod" />				
+            </children>
+        </component>
+		
+		<component id="tampo_tras_mesa">
+            <transformation>
+                <transformationref id="tampo_mesa_tras_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mesa_lados_text" />
+            <children>             
+                <primitiveref id="tampo_mesa_lado_mod" />				
+            </children>
+        </component>
+		
+		<component id="tampo_direito_mesa">
+            <transformation>
+                <transformationref id="tampo_mesa_drt_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mesa_lados_text" />
+            <children>             
+                <primitiveref id="tampo_mesa_lado_mod" />				
+            </children>
+        </component>
+		
+		<component id="suporte_mesa">
+            <transformation>
+                <transformationref id="sup_mesa_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mesa_suporte_text" />
+            <children>             
+                <primitiveref id="sup_mesa_mod" />				
+            </children>
+        </component>
+		
+		<component id="base_mesa_fora">
+            <transformation>
+                <transformationref id="base_mesa_f_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mesa_suporte_text" />
+            <children>             
+                <primitiveref id="base_mesa_f_mod" />				
+            </children>
+        </component>
+		
+		<component id="base_mesa_principal">
+            <transformation>
+                <transformationref id="base_mesa_p_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mesa_suporte_text" />
+            <children>             
+                <primitiveref id="base_mesa_f_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_assento_superior">
+            <transformation>
+                <transformationref id="cad_assnt_sup_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_assent_sup_text" />
+            <children>             
+                <primitiveref id="cad_assnt_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_assento_inferior">
+            <transformation>
+                <transformationref id="cad_assnt_inf_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_assent_sup_text" />
+            <children>             
+                <primitiveref id="cad_assnt_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_assento_esquerdo">
+            <transformation>
+                <transformationref id="cad_assnt_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_assento_lado_text" />
+            <children>             
+                 <primitiveref id="cad_assnt_lado_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_assento_frente">
+            <transformation>
+                <transformationref id="cad_assnt_frt_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_assento_lado_text" />
+            <children>             
+                <primitiveref id="cad_assnt_lado_mod" />				
+            </children>
+        </component>
+		
+		
+		<component id="cadeira_assento_tras">
+            <transformation>
+                <transformationref id="cad_assnt_tras_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_assento_lado_text" />
+            <children>             
+                <primitiveref id="cad_assnt_lado_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_assento_direito">
+            <transformation>
+                <transformationref id="cad_assnt_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_assento_lado_text" />
+            <children>             
+                <primitiveref id="cad_assnt_lado_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_perna_tras_esquerda">
+            <transformation>
+                <transformationref id="cad_perna_tras_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="perna_cadeira_text" />
+            <children>             
+                <primitiveref id="cad_perna_mod" />				
+            </children>
+        </component>
+		
+		
+		<component id="cadeira_perna_frente_esquerda">
+            <transformation>
+                <transformationref id="cad_perna_frt_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="perna_cadeira_text" />
+            <children>             
+                <primitiveref id="cad_perna_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_perna_frente_direita">
+            <transformation>
+                <transformationref id="cad_perna_frt_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="perna_cadeira_text" />
+            <children>             
+                <primitiveref id="cad_perna_mod" />				
+            </children>
+        </component>
+		
+		
+		<component id="cadeira_perna_tras_direita">
+            <transformation>
+                <transformationref id="cad_perna_tras_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="perna_cadeira_text" />
+            <children>             
+                <primitiveref id="cad_perna_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_suporte_superior">
+            <transformation>
+                <transformationref id="cad_sup_sup_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_suporte_text" />
+            <children>             
+                <primitiveref id="cad_sup_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_suporte_inferior">
+            <transformation>
+                <transformationref id="cad_sup_inf_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_suporte_text" />
+            <children>             
+                <primitiveref id="cad_sup_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_suporte_direito">
+            <transformation>
+                <transformationref id="cad_sup_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_suporte_text" />
+            <children>             
+                <primitiveref id="cad_lado_esq_dir_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_suporte_esquerdo">
+            <transformation>
+                <transformationref id="cad_sup_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_suporte_text" />
+            <children>             
+                <primitiveref id="cad_lado_esq_dir_mod" />				
+            </children>
+        </component>
+		
+		<component id="cadeira_suporte_cima">
+            <transformation>
+                <transformationref id="cad_sup_cima_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cadeira_suporte_text" />
+            <children>             
+                <primitiveref id="cad_lado_cima_mod" />				
+            </children>
+        </component>
+		
+		<component id="cabeca">
+            <transformation>
+                <transformationref id="cabeca_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="cabeca_text" />
+            <children>             
+                <primitiveref id="cabeca_mod" />				
+            </children>
+        </component>
+		
+		
+		<component id="pescoco">
+            <transformation>
+                <transformationref id="pescoco_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="pescoco_text" />
+            <children>             
+                <primitiveref id="pescoco_mod" />				
+            </children>
+        </component>
+		
+		<component id="tronco_frente">
+            <transformation>
+                <transformationref id="tronco_frt_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_frente_text" />
+            <children>             
+                <primitiveref id="tronco_mod" />				
+            </children>
+        </component>
+		
+		<component id="tronco_tras">
+            <transformation>
+                <transformationref id="tronco_tras_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_tras_text" />
+            <children>             
+                <primitiveref id="tronco_mod" />				
+            </children>
+        </component>
+		
+		<component id="tronco_direito">
+            <transformation>
+                <transformationref id="tronco_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_lados_text" />
+            <children>             
+                <primitiveref id="tronco_esq_dir_mod" />				
+            </children>
+        </component>
+		
+		<component id="tronco_esquerdo">
+            <transformation>
+                <transformationref id="tronco_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_lados_text" />
+            <children>             
+                <primitiveref id="tronco_esq_dir_mod" />				
+            </children>
+        </component>
+		
+		<component id="tronco_cima">
+            <transformation>
+                <transformationref id="tronco_cima_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_topo_text" />
+            <children>             
+                <primitiveref id="tronco_cima_mod" />				
+            </children>
+        </component>
+		
+		<component id="ombro_esquerdo">
+            <transformation>
+                <transformationref id="ombro_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_lados_text" />
+            <children>             
+                <primitiveref id="ombro_mod" />				
+            </children>
+        </component>
+		
+		<component id="ombro_direito">
+            <transformation>
+                <transformationref id="ombro_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_lados_text" />
+            <children>             
+                <primitiveref id="ombro_mod" />				
+            </children>
+        </component>
+		
+		<component id="braco_esquerdo">
+            <transformation>
+                <transformationref id="braco_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_lados_text" />
+            <children>             
+                <primitiveref id="braco_mod" />				
+            </children>
+        </component>
+		
+		<component id="braco_direito">
+            <transformation>
+                <transformationref id="braco_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_lados_text" />
+            <children>             
+                <primitiveref id="braco_mod" />				
+            </children>
+        </component>
+				
+		<component id="cotovelo_esquerdo">
+            <transformation>
+                <transformationref id="cotovelo_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_lados_text" />
+            <children>             
+                <primitiveref id="cotovelo_mod" />				
+            </children>
+        </component>
+		
+		<component id="cotovelo_direito">
+            <transformation>
+                <transformationref id="cotovelo_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_lados_text" />
+            <children>             
+                <primitiveref id="cotovelo_mod" />				
+            </children>
+        </component>
+		
+		
+		<component id="antebraco_esquerdo">
+            <transformation>
+                <transformationref id="antebraco_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_lados_text" />
+            <children>             
+                <primitiveref id="antebraco_mod" />				
+            </children>
+        </component>
+		
+		<component id="antebraco_direito">
+            <transformation>
+                <transformationref id="antebraco_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tronco_lados_text" />
+            <children>             
+                <primitiveref id="antebraco_mod" />				
+            </children>
+        </component>
+		
+		<component id="mao_direita">
+            <transformation>
+                <transformationref id="mao_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mao_text" />
+            <children>             
+                <primitiveref id="mao_mod" />				
+            </children>
+        </component>
+		
+		
+		<component id="mao_esquerda">
+            <transformation>
+                <transformationref id="mao_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="mao_text" />
+            <children>             
+                <primitiveref id="mao_mod" />				
+            </children>
+        </component>
+		
+		
+		<component id="perna_direita">
+            <transformation>
+                <transformationref id="perna_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="calcas_text" />
+            <children>             
+                <primitiveref id="perna_mod" />				
+            </children>
+        </component>
+		
+		<component id="perna_esquerda">
+            <transformation>
+                <transformationref id="perna_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="calcas_text" />
+            <children>             
+                <primitiveref id="perna_mod" />				
+            </children>
+        </component>
+		
+		
+		<component id="joelho_direito">
+            <transformation>
+                <transformationref id="joelho_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="joelho_text" />
+            <children>             
+                <primitiveref id="joelho_mod" />				
+            </children>
+        </component>
+		
+		<component id="joelho_esquerdo">
+            <transformation>
+                <transformationref id="joelho_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="joelho_text" />
+            <children>             
+                <primitiveref id="joelho_mod" />				
+            </children>
+        </component>
+		
+		<component id="anteperna_direita">
+            <transformation>
+                <transformationref id="anteperna_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="calcas_text" />
+            <children>             
+                <primitiveref id="anteperna_dir_mod" />				
+            </children>
+        </component>
+		
+		<component id="anteperna_esquerda">
+            <transformation>
+                <transformationref id="anteperna_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="calcas_text" />
+            <children>             
+                <primitiveref id="anteperna_esq_mod" />				
+            </children>
+        </component>
+		
+		<component id="bico_pe">
+            <transformation>
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="bico_pe_text" />
+            <children>             
+                <primitiveref id="bico_pe_centro_mod" />	
+				<primitiveref id="bico_pe_dir_mod" />
+				<primitiveref id="bico_pe_esq_mod" />	
+				<primitiveref id="bico_pe_baixo_mod" />				
+            </children>
+        </component>
+		
+		<component id="pe_cima">
+            <transformation>
+                <transformationref id="pe_cima_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="topo_pe_text" />
+            <children>             
+                <primitiveref id="pe_mod" />			
+            </children>
+        </component>
+		
+		<component id="pe_baixo">
+            <transformation>
+                <transformationref id="pe_baixo_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="sola_text" />
+            <children>             
+                <primitiveref id="pe_mod" />			
+            </children>
+        </component>
+		
+		<component id="pe_lado_direito">
+            <transformation>
+                <transformationref id="pe_dir_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="lado_pe_text"/>    
+			<children>      
+                <primitiveref id="pe_lado_mod" />			
+            </children>
+        </component>
+		
+		<component id="pe_lado_esquerdo">
+            <transformation>
+                <transformationref id="pe_esq_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="lado_pe_text" />
+            <children>             
+                <primitiveref id="pe_lado_mod" />			
+            </children>
+        </component>
+		
+		<component id="pe_tras">
+            <transformation>
+                <transformationref id="pe_tras_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="tras_pe_text" />
+            <children>             
+                <primitiveref id="pe_tras_mod" />			
+            </children>
+        </component>
+		
+		<component id="base_copo">
+            <transformation>
+                <transformationref id="base_copo_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="base_copo_text" />
+            <children>             
+                <primitiveref id="base_copo_mod" />			
+            </children>
+        </component>
+		
+		<component id="suporte_copo">
+            <transformation>
+                <transformationref id="sup_copo_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="base_copo_text" />
+            <children>             
+                <primitiveref id="sup_copo_mod" />			
+            </children>
+        </component>
+		
+		<component id="fundo_copo">
+            <transformation>
+                <transformationref id="fundo_copo_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="fundo_copo_text" />
+            <children>             
+                <primitiveref id="fundo_copo_mod" />			
+            </children>
+        </component>
+		
+		<component id="topo_copo">
+            <transformation>
+                <transformationref id="topo_copo_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="topo_copo_text" />
+            <children>             
+                <primitiveref id="topo_copo_mod" />			
+            </children>
+        </component>
+		
+		<component id="espuma_copo">
+            <transformation>
+                <transformationref id="esp_copo_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="espuma_text" />
+            <children>             
+                <primitiveref id="esp_copo_mod" />			
+            </children>
+        </component>
+		
+		<component id="prato">
+            <transformation>
+                <transformationref id="prato_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="base_copo_text" />
+            <children>             
+                <primitiveref id="prato_mod" />			
+            </children>
+        </component>
+		
+		<component id="Donut1">
+            <transformation>
+                <transformationref id="donut1_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="donuts_text" />
+            <children>             
+                <primitiveref id="donut_mod" />			
+            </children>
+        </component>
+		
+		<component id="Donut2">
+            <transformation>
+                <transformationref id="donut2_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+           <texture id="donuts_text" />
+            <children>             
+                <primitiveref id="donut_mod" />			
+            </children>
+        </component>
+		
+		<component id="Donut3">
+            <transformation>
+                <transformationref id="donut3_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="donuts_text" />
+            <children>             
+                <primitiveref id="donut_mod" />			
+            </children>
+        </component>
+		
+		
+		<component id="Pe_direito">
+            <transformation>
+				<transformationref id="pe_direito_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="none" />
+            <children>             
+               <componentref id="bico_pe" />
+			   <componentref id="pe_cima" />
+			   <componentref id="pe_baixo" />
+			   <componentref id="pe_lado_direito" />
+			   <componentref id="pe_lado_esquerdo" />
+			   <componentref id="pe_tras" />			
+            </children>
+        </component>
+		
+		<component id="Pe_esquerdo">
+            <transformation>
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="none" />
+            <children>             
+               <componentref id="bico_pe" />
+			   <componentref id="pe_cima" />
+			   <componentref id="pe_baixo" />
+			   <componentref id="pe_lado_direito" />
+			   <componentref id="pe_lado_esquerdo" />
+			   <componentref id="pe_tras" />			
+            </children>
+        </component>
+		
+		
+		<component id="Mesa">
+            <transformation>
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="none" />
+            <children>             
+              <componentref id="tampo_superior_mesa"/>
+			  <componentref id="tampo_inferior_mesa"/>
+			  <componentref id="tampo_esquerdo_mesa"/>
+			  <componentref id="tampo_frente_mesa"/>
+			  <componentref id="tampo_tras_mesa"/>
+			  <componentref id="tampo_direito_mesa"/>
+			  <componentref id="suporte_mesa"/>
+			  <componentref id="base_mesa_fora"/>
+			  <componentref id="base_mesa_principal"/>	
+            </children>
+        </component>
+		
+		
+		<component id="Cadeira">
+            <transformation>
+				<translate x="0" y="0" z="-10" /> 
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="none" />
+            <children>             
+               <componentref id="cadeira_assento_superior"/>
+			   <componentref id="cadeira_assento_inferior"/>
+			   <componentref id="cadeira_assento_esquerdo"/>
+			   <componentref id="cadeira_assento_frente"/>
+			   <componentref id="cadeira_assento_tras"/>
+			   <componentref id="cadeira_assento_direito"/>
+			   <componentref id="cadeira_perna_tras_esquerda"/>
+			   <componentref id="cadeira_perna_frente_esquerda"/>
+			   <componentref id="cadeira_perna_frente_direita"/>
+			   <componentref id="cadeira_perna_tras_direita"/>
+			   <componentref id="cadeira_suporte_superior"/>
+			   <componentref id="cadeira_suporte_inferior"/>
+			   <componentref id="cadeira_suporte_direito"/>
+			   <componentref id="cadeira_suporte_esquerdo"/>
+			   <componentref id="cadeira_suporte_cima"/>		
+            </children>
+        </component>
+		
+		
+		<component id="Pessoa">
+            <transformation>
+				<translate x="0" y="0" z="-10" /> 
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="none" />
+            <children>             
+               <componentref id="cabeca"/>
+			   <componentref id="pescoco"/>
+			   <componentref id="tronco_frente"/>
+			   <componentref id="tronco_tras"/>
+			   <componentref id="tronco_direito"/>
+			   <componentref id="tronco_esquerdo"/>
+			   <componentref id="tronco_cima"/>
+			   <componentref id="ombro_esquerdo"/>
+			   <componentref id="ombro_direito"/>
+			   <componentref id="braco_esquerdo"/>
+			   <componentref id="braco_direito"/>
+			   <componentref id="cotovelo_esquerdo"/>
+			   <componentref id="cotovelo_direito"/>
+			   <componentref id="antebraco_esquerdo"/>
+			   <componentref id="antebraco_direito"/>
+			   <componentref id="mao_direita"/>
+			   <componentref id="mao_esquerda"/>
+			   <componentref id="perna_direita"/>
+			   <componentref id="perna_esquerda"/>
+			   <componentref id="joelho_direito"/>
+			   <componentref id="joelho_esquerdo"/>
+			   <componentref id="anteperna_direita"/>
+			   <componentref id="anteperna_esquerda"/>
+			   <componentref id="Pe_direito"/>
+			   <componentref id="Pe_esquerdo"/>
+            </children>
+        </component>		
+		
+		<component id="Copo">
+            <transformation>
+				<translate x="0" y="0" z="-5" /> 
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="none" />
+            <children>             
+				<componentref id="base_copo"/>
+				<componentref id="suporte_copo"/>
+				<componentref id="fundo_copo"/>
+				<componentref id="topo_copo"/>
+				<componentref id="espuma_copo"/>
+            </children>
+        </component>
+		
+		<component id="Donuts">
+            <transformation>
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="none" />
+            <children>             
+				<componentref id="Donut1"/>
+				<componentref id="Donut2"/>
+				<componentref id="Donut3"/>
+            </children>
+        </component>
+		
+		<component id="Paredes">
+            <transformation>
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="none" />
+            <children>             
+				<componentref id="chao"/>
+				<componentref id="edificio"/>
+				<componentref id="cafe"/>
+            </children>
+        </component>
+		
+		
+		<component id="Cena">
+            <transformation>
+				<transformationref id="scene_t" />
+            </transformation>           
+            <materials>
+                <material id="white plastic" />
+            </materials>
+            <texture id="none" />
+            <children>             
+				<componentref id="Paredes"/>
+				<componentref id="Donuts"/>
+				<componentref id="Pessoa"/>
+				<componentref id="Cadeira"/>
+				<componentref id="Mesa"/>
+				<componentref id="Copo"/>
+				<componentref id="prato"/>				
+            </children>
+        </component>
+		
+		
+		
+    </components>
+</dsx>
+
+<!-- Original Version by Artur Gomes e Vitor Figueira -->

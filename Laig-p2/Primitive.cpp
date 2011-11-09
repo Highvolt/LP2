@@ -9,8 +9,14 @@
 #include <iostream>
 #include "Primitive.h"
 
+Primitive::Primitive(string id,string texture,string material){
+	this->id=id;
+	this->texture=texture;
+	this->material=material;
 
-Torus::Torus(string id, string texture, string material, float inner, float outer,int slices,int stacks){
+}
+
+Torus::Torus(string id, string texture, string material, float inner, float outer,int slices,int stacks):Primitive(id,texture,material){
 	this->inner = inner;
 	this->outer = outer;
 	this->slices = slices;
@@ -18,10 +24,13 @@ Torus::Torus(string id, string texture, string material, float inner, float oute
 }
 
 int Torus::render(){
+	glPushMatrix();
 	glutSolidTorus(inner, outer, slices, stacks);
+	glPopMatrix();
+	return 0;
 }
 
-Cylinder::Cylinder(string id, string texture, string material,float base,float top,float height,int slices,int stacks){
+Cylinder::Cylinder(string id, string texture, string material,float base,float top,float height,int slices,int stacks):Primitive(id,texture,material){
 	this->base = base;
 	this->height = height;
 	this->top = top;
@@ -30,12 +39,15 @@ Cylinder::Cylinder(string id, string texture, string material,float base,float t
 }
 
 int Cylinder::render(){
+	glPushMatrix();
 	gluCylinder(glQ,base,top,height,slices,stacks);
+	glPopMatrix();
+		return 0;
 }
 
 
 Triangle::Triangle(string id, string texture, string material,
-	float x1,float y1,float z1,float x2,float y2,float z2, float x3, float y3,float z3){
+	float x1,float y1,float z1,float x2,float y2,float z2, float x3, float y3,float z3):Primitive(id,texture,material){
 		this->x1 = x1;
 		this->y1 = y1;
 		this->z1 = z1;
@@ -49,7 +61,7 @@ Triangle::Triangle(string id, string texture, string material,
 int Triangle::render(){
 
 	//Carregar textura e material
-
+	glPushMatrix();
 	glBegin(GL_TRIANGLES);
     glNormal3f(0,0,1);
     //glTexCoord2f(0,0);
@@ -59,11 +71,12 @@ int Triangle::render(){
     //glTexCoord2f();
     glVertex3f(x3,y3,z3);
     glEnd();
-
+	glPopMatrix();
+		return 0;
 
 }
 
-Rectangle::Rectangle(string id, string texture, string material,float x1,float y1,float x2, float y2){
+Rectangle::Rectangle(string id, string texture, string material,float x1,float y1,float x2, float y2):Primitive(id,texture,material){
 	this->x1 = x1;
 	this->x2 = x2;
 	this->y1 = y1;
@@ -72,7 +85,7 @@ Rectangle::Rectangle(string id, string texture, string material,float x1,float y
 
 int Rectangle::render(){
 	bool has_texture=false;
-
+	glPushMatrix();
     //VERIFICA SE TEM TEXTURA
     //CARREGAR MATERIAL
     if(has_texture){
@@ -94,18 +107,22 @@ int Rectangle::render(){
 		glTexCoord2f(0.0, 1.0); 
     glVertex3f(x1, y2, 0);
     glEnd();
-
+	glPopMatrix();
     if(has_texture)
         glDisable(GL_TEXTURE_2D);
-
+		return 0;
+	
 }
 
-Sphere::Sphere(string id, string texture, string material, float radius,int slices,int stacks){
+Sphere::Sphere(string id, string texture, string material, float radius,int slices,int stacks):Primitive(id,texture,material){
 	this->radius = radius;
 	this->slices = slices;
 	this->stacks = stacks;
 }
 
 int Sphere::render(){
+	glPushMatrix();
 	gluSphere(glQ, radius, slices, stacks);
+	glPopMatrix();
+		return 0;
 }
