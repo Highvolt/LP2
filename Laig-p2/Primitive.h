@@ -23,6 +23,7 @@
 using namespace std;
 
 class Primitive {
+protected:
     string id, texture,material;
 
 public:
@@ -47,7 +48,7 @@ public:
 };
 
 class Cylinder: public Primitive {
-	GLUquadric *glQ;
+	GLUquadric* glQ;
     float base,top,height;
     int slices,stacks;
 

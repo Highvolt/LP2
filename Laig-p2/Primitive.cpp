@@ -39,10 +39,11 @@ Cylinder::Cylinder(string id, string texture, string material,float base,float t
 }
 
 int Cylinder::render(){
+	glQ = gluNewQuadric();
 	glPushMatrix();
 	gluCylinder(glQ,base,top,height,slices,stacks);
 	glPopMatrix();
-		return 0;
+	return 0;
 }
 
 
@@ -121,6 +122,7 @@ Sphere::Sphere(string id, string texture, string material, float radius,int slic
 }
 
 int Sphere::render(){
+	glQ = gluNewQuadric();
 	glPushMatrix();
 	gluSphere(glQ, radius, slices, stacks);
 	glPopMatrix();

@@ -15,13 +15,16 @@ class Texture{
 	int id_texture;
 	float length_s;
     float length_t;
+	char* file;
 
 public:
-	Texture(void);
+	bool has_none, inherits;
+	Texture(int id, float ls, float lt, char* file, int tex_type);
 	void setLengthS(float lenght_s);
     void setLengthT(float lenght_t);
     float getLengthS();
     float getLengthT();
+	void apply();
 };
 
 #endif

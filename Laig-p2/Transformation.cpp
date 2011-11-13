@@ -38,3 +38,7 @@ void Transformation::translate(float x, float y, float z){
 float* Transformation::getTransformationMatrix(){
 	return &transf_matrix[0][0];
 }
+
+void Transformation::apply(){
+	 glMultMatrixf(&transf_matrix[0][0]);
+}

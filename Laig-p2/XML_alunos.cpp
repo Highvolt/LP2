@@ -10,6 +10,12 @@
 #include <math.h>
 #include <iostream>
 #include "SceneParser.h"
+#include "Texture.h"
+#include "Primitive.h"
+#include "Illumination.h"
+#include "Lights.h"
+#include "Material.h"
+#include "Views.h"
 
 using namespace std;
 
@@ -194,6 +200,9 @@ void display(void)
 	glMaterialfv(GL_FRONT, GL_SPECULAR,  mat1_specular);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE,   mat1_diffuse);
 	glMaterialfv(GL_FRONT, GL_AMBIENT,   mat1_ambient);
+
+	
+
 
 	
 	// swapping the buffers causes the rendering above to be shown
@@ -405,7 +414,7 @@ int main(int argc, char* argv[])
 	GLUI_Master.set_glutIdleFunc( myGlutIdle );
 	 loaddsxfile("cafe.xml");
 	inicializacao();
-   
+	
 	glutMainLoop();
 
 	return 0;

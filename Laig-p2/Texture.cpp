@@ -1,10 +1,21 @@
 #include "Texture.h"
 
 
-Texture::Texture(void)
+Texture::Texture(int id, float ls, float lt, char* file, int tex_type)
 {
-	this->length_s = 1.0;
-	this->length_t = 1.0;
+	if(tex_type == 0){
+		this->id_texture = id;
+		this->file = file;
+		this->length_s = ls;
+		this->length_t = lt;
+		RGBpixmap * pixmap = new RGBpixmap();
+        pixmap->readBMPFile(file);
+		pixmap->setTexture(id_texture);
+	}else if(tex_type == 1){
+		this->inherits = true;
+	}else if(tex_type == 2){
+		this->has_none = true;
+	}
 }
 
 void Texture::setLengthS(float lenght_s){
@@ -21,4 +32,15 @@ float Texture::getLengthS(){
     
 float Texture::getLengthT(){
 	return length_t;
+}
+
+void Texture::apply(){
+        if(has_none){
+            glBindTexture(GL_TEXTURE_2D,0);
+            glDisable(GL_TEXTURE_2D);
+        }
+        else
+            glEnable(GL_TEXTURE_2D);
+        if(!inherits)
+            glBindTexture(GL_TEXTURE_2D,id_texture);
 }
