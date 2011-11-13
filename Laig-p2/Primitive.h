@@ -10,8 +10,16 @@
 #define Laig_p2_Primitive_h
 
 #include <string>
-#include <GL/glut.h>
-#include <GL/glui.h>
+#ifdef __APPLE__
+#include <GLUT/GLUT.h>
+#else
+#include <gl/glut.h>
+#endif
+#ifdef __APPLE__
+#include <GLUI/GLUI.h>
+#else
+#include <gl/glui.h>
+#endif
 using namespace std;
 
 class Primitive {

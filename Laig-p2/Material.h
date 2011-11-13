@@ -2,7 +2,12 @@
 #define MATERIAL_H_
 
 #include <string>
-#include <GL\glui.h>
+
+#ifdef __APPLE__
+#include <GLUI/GLUI.h>
+#else
+#include <gl/glui.h>
+#endif
 
 using namespace std;
 

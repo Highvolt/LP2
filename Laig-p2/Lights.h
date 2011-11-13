@@ -1,7 +1,12 @@
 #ifndef LIGHTS_H_
 #define LIGHTS_H_
 
-#include <GL\glui.h>
+
+#ifdef __APPLE__
+#include <GLUI/GLUI.h>
+#else
+#include <gl/glui.h>
+#endif
 #include <string>
 #include <cmath>
 using namespace std;

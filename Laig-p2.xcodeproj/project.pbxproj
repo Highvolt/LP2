@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C348396146FFE8900703145 /* Illumination.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C348387146FFE8900703145 /* Illumination.cpp */; };
+		2C348397146FFE8900703145 /* Lights.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C348389146FFE8900703145 /* Lights.cpp */; };
+		2C348398146FFE8900703145 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C34838B146FFE8900703145 /* Material.cpp */; };
+		2C348399146FFE8900703145 /* RGBpixmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C34838D146FFE8900703145 /* RGBpixmap.cpp */; };
+		2C34839A146FFE8900703145 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C348390146FFE8900703145 /* Texture.cpp */; };
+		2C34839B146FFE8900703145 /* Transformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C348392146FFE8900703145 /* Transformation.cpp */; };
+		2C34839C146FFE8900703145 /* Views.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C348394146FFE8900703145 /* Views.cpp */; };
 		2C7D3926146149E90092B047 /* Laig_p2.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C7D3925146149E90092B047 /* Laig_p2.1 */; };
 		2C7D392D14614A520092B047 /* GLUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7D392C14614A520092B047 /* GLUI.framework */; };
 		2C7D392F14614A580092B047 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7D392E14614A580092B047 /* GLUT.framework */; };
@@ -46,6 +53,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C348387146FFE8900703145 /* Illumination.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Illumination.cpp; sourceTree = "<group>"; };
+		2C348388146FFE8900703145 /* Illumination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Illumination.h; sourceTree = "<group>"; };
+		2C348389146FFE8900703145 /* Lights.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lights.cpp; sourceTree = "<group>"; };
+		2C34838A146FFE8900703145 /* Lights.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lights.h; sourceTree = "<group>"; };
+		2C34838B146FFE8900703145 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
+		2C34838C146FFE8900703145 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		2C34838D146FFE8900703145 /* RGBpixmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RGBpixmap.cpp; sourceTree = "<group>"; };
+		2C34838E146FFE8900703145 /* RGBpixmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGBpixmap.h; sourceTree = "<group>"; };
+		2C34838F146FFE8900703145 /* SceneParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneParser.h; sourceTree = "<group>"; };
+		2C348390146FFE8900703145 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		2C348391146FFE8900703145 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		2C348392146FFE8900703145 /* Transformation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transformation.cpp; sourceTree = "<group>"; };
+		2C348393146FFE8900703145 /* Transformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transformation.h; sourceTree = "<group>"; };
+		2C348394146FFE8900703145 /* Views.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Views.cpp; sourceTree = "<group>"; };
+		2C348395146FFE8900703145 /* Views.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Views.h; sourceTree = "<group>"; };
+		2C34839E1470082900703145 /* SceneParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneParser.h; sourceTree = "<group>"; };
 		2C7D391F146149E90092B047 /* Laig-p2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Laig-p2"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C7D3925146149E90092B047 /* Laig_p2.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Laig_p2.1; sourceTree = "<group>"; };
 		2C7D392C14614A520092B047 /* GLUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUI.framework; path = Library/Frameworks/GLUI.framework; sourceTree = SDKROOT; };
@@ -104,6 +127,21 @@
 		2C7D3922146149E90092B047 /* Laig-p2 */ = {
 			isa = PBXGroup;
 			children = (
+				2C348387146FFE8900703145 /* Illumination.cpp */,
+				2C348388146FFE8900703145 /* Illumination.h */,
+				2C348389146FFE8900703145 /* Lights.cpp */,
+				2C34838A146FFE8900703145 /* Lights.h */,
+				2C34838B146FFE8900703145 /* Material.cpp */,
+				2C34838C146FFE8900703145 /* Material.h */,
+				2C34838D146FFE8900703145 /* RGBpixmap.cpp */,
+				2C34838E146FFE8900703145 /* RGBpixmap.h */,
+				2C34838F146FFE8900703145 /* SceneParser.h */,
+				2C348390146FFE8900703145 /* Texture.cpp */,
+				2C348391146FFE8900703145 /* Texture.h */,
+				2C348392146FFE8900703145 /* Transformation.cpp */,
+				2C348393146FFE8900703145 /* Transformation.h */,
+				2C348394146FFE8900703145 /* Views.cpp */,
+				2C348395146FFE8900703145 /* Views.h */,
 				2C7D393A14614D530092B047 /* SceneLoader.cpp */,
 				2C7D393B14614D530092B047 /* SceneLoader.h */,
 				2C7D393C14614D530092B047 /* XML_alunos.cpp */,
@@ -111,6 +149,7 @@
 				2C7D394514615C490092B047 /* Primitive.h */,
 				2C7D394614615C5F0092B047 /* Primitive.cpp */,
 				2C7D394914616B6B0092B047 /* SceneParser.cpp */,
+				2C34839E1470082900703145 /* SceneParser.h */,
 			);
 			path = "Laig-p2";
 			sourceTree = "<group>";
@@ -184,6 +223,13 @@
 				2C7D394114614DB50092B047 /* tinystr.cpp in Sources */,
 				2C7D394714615C5F0092B047 /* Primitive.cpp in Sources */,
 				2C7D394A14616B6B0092B047 /* SceneParser.cpp in Sources */,
+				2C348396146FFE8900703145 /* Illumination.cpp in Sources */,
+				2C348397146FFE8900703145 /* Lights.cpp in Sources */,
+				2C348398146FFE8900703145 /* Material.cpp in Sources */,
+				2C348399146FFE8900703145 /* RGBpixmap.cpp in Sources */,
+				2C34839A146FFE8900703145 /* Texture.cpp in Sources */,
+				2C34839B146FFE8900703145 /* Transformation.cpp in Sources */,
+				2C34839C146FFE8900703145 /* Views.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +314,7 @@
 				2C7D392B146149E90092B047 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

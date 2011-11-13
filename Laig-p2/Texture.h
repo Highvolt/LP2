@@ -1,7 +1,12 @@
 #ifndef TEXTURE_H_
 #define TEXTURE_H_
 
-#include <GL/glui.h>
+
+#ifdef __APPLE__
+#include <GLUI/GLUI.h>
+#else
+#include <gl/glui.h>
+#endif
 #include "RGBpixmap.h"
 
 

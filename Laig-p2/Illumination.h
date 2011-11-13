@@ -1,7 +1,11 @@
 #ifndef ILLUMINATION_H_
 #define ILLUMINATION_H_
 
-#include <GL\glui.h>
+#ifdef __APPLE__
+#include <GLUI/GLUI.h>
+#else
+#include <gl/glui.h>
+#endif
 using namespace std;
 
 class Illumination{
