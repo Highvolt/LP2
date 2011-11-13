@@ -360,7 +360,144 @@ int loadtransformations(TiXmlElement* transformations){
 	if (transformations->ValueTStr()=="transformations"){
 		cout<<"Transformations root"<<endl;
 		TiXmlElement * child=transformations->FirstChildElement();
+		string id;
+		do{
 
+		if(child && child->ValueTStr()=="transformation" && (id=child->Attribute("id"))!=""){
+			cout << "Transformation id: "<< id << endl;
+			TiXmlElement * subchild = child->FirstChildElement();
+			do{
+				float x, y, z, angle;
+				string axis;
+				if(subchild->ValueTStr()=="translate"
+				&& subchild->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
+				&& subchild->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
+				&& subchild->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
+
+					//add to class
+					cout<<"translate: x:"<<x<<" y: "<<y<<" z "
+						<<z<<endl;
+
+				}
+
+				if(subchild->ValueTStr()=="rotate"
+				&& (axis=subchild->Attribute("axis"))!=""
+				&& subchild->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS){
+
+					//add to class
+					cout<<"rotate: axis:"<<axis<<" angle: "<<angle<<endl;
+
+				}
+
+				if(subchild->ValueTStr()=="scale"
+				&& subchild->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
+				&& subchild->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
+				&& subchild->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
+
+					//add to class
+					cout<<"scale: x:"<<x<<" y: "<<y<<" z "
+						<<z<<endl;
+
+				}
+
+				}while((subchild=subchild->NextSiblingElement())!=NULL);
+		}
+		}while((child=child->NextSiblingElement())!=NULL);
+	}
+	return 0;
+}
+
+int loadprimitives(TiXmlElement* primitives){
+	if(primitives->ValueTStr()=="primitives"){
+		cout << "Primitives root" << endl;
+		TiXmlElement* child = primitives->FirstChildElement();
+		do{
+			string id;
+			if(child->ValueTStr()=="primitive" && (id=child->Attribute("id"))!=""){
+				cout << "id: " << id << endl;
+				TiXmlElement* subchild = child->FirstChildElement();
+				do{
+					string id;
+					float x1, y1, x2, y2, z1, z2, x3, y3, z3, base, top, height, radius, inner, outer;
+					int slices, stacks, loops;
+
+					if(subchild->ValueTStr()=="material"
+						&& (id=subchild->Attribute("id"))!=""){
+
+						//add to class
+						cout<<"material: id:"<<id<<endl;
+					}
+					if(subchild->ValueTStr()=="texture"
+						&& (id=subchild->Attribute("id"))!=""){
+
+						//add to class
+						cout<<"texture: id:"<<id<<endl;
+					}
+					if(subchild->ValueTStr()=="rectangle"
+					&& subchild->QueryFloatAttribute("x1",&x1)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("y1",&y1)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("x2",&x2)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("y2",&y2)==TIXML_SUCCESS){
+
+						//add to class
+						cout<<"rectangle: x1:"<<x1<<" y1: "<<y1<<" x2: "
+							<<x2<< " y2: " << y2 <<endl;
+
+					}
+					if(subchild->ValueTStr()=="triangle"
+					&& subchild->QueryFloatAttribute("x1",&x1)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("y1",&y1)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("z1",&z1)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("x2",&x2)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("y2",&y2)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("z2",&z2)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("x3",&x3)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("y3",&y3)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("z3",&z3)==TIXML_SUCCESS){
+
+						//add to class
+						cout<<"rectangle: x1:"<<x1<<" y1: "<<y1<< " z1: "<<z1<<
+							"x2: "<<x2<< " y2: " << y2 << " z2: " << z2 <<
+							" x3: " << x3 << " y3: " << y3 << " z3: " << z3 <<endl;
+					}
+
+					if(subchild->ValueTStr()=="cylinder"
+					&& subchild->QueryFloatAttribute("base",&base)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("top",&top)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("height",&height)==TIXML_SUCCESS
+					&& subchild->QueryIntAttribute("slices",&slices)==TIXML_SUCCESS
+					&& subchild->QueryIntAttribute("stacks",&stacks)==TIXML_SUCCESS){
+
+						//add to class
+						cout<<"cylinder: base:"<<base<<" top: "<<top<<" height: "
+							<<height<< " slices: " << slices << " stacks: " << stacks << endl;
+
+					}
+					if(subchild->ValueTStr()=="sphere"
+					&& subchild->QueryFloatAttribute("radius",&radius)==TIXML_SUCCESS
+					&& subchild->QueryIntAttribute("slices",&slices)==TIXML_SUCCESS
+					&& subchild->QueryIntAttribute("stacks",&stacks)==TIXML_SUCCESS){
+
+						//add to class
+						cout<<"cylinder: radius:"<<radius << " slices: " << slices << " stacks: " << stacks << endl;
+
+					}
+
+					if(subchild->ValueTStr()=="torus"
+					&& subchild->QueryFloatAttribute("inner",&inner)==TIXML_SUCCESS
+					&& subchild->QueryFloatAttribute("outer",&outer)==TIXML_SUCCESS
+					&& subchild->QueryIntAttribute("slices",&slices)==TIXML_SUCCESS
+					&& subchild->QueryIntAttribute("loops",&loops)==TIXML_SUCCESS){
+
+						//add to class
+						cout<<"torus: inner:"<<inner << " outer: "<< outer<< " slices: " << slices << " loops: " << loops << endl;
+
+					}
+
+
+				}while((subchild=subchild->NextSiblingElement())!=NULL);
+			}
+		}while((child=child->NextSiblingElement())!=NULL);
 	}
 	return 0;
 }
@@ -395,9 +532,9 @@ int loaddsxfile(const string & filename){
 		loadtextures(textures);
 		loadmaterials(materials);
 		
-		//loadtransformations(transformations);
+		loadtransformations(transformations);
 		//loadcomponents(component);
-		//loadprimitives(primitives);
+		loadprimitives(primitives);
 	}
 	return 0;
 }
