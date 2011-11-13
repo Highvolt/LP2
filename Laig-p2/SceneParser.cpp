@@ -2,9 +2,9 @@
 
 int loadviews(TiXmlElement* view){
 	float flodo;
-	string default="";
-	if (view->ValueTStr()=="views" && ((default=view->Attribute("default"))!="")){
-		cout<<"Root Views default:"<<default<<endl;
+	string default1="";
+	if (view->ValueTStr()=="views" && ((default1=view->Attribute("default"))!="")){
+		cout<<"Root Views default:"<<default1<<endl;
 		//criar class
 		TiXmlElement *viewchild=view->FirstChildElement();
 		

@@ -1,5 +1,9 @@
 
-#include <GL\glui.h>
+#ifdef __APPLE__
+#include <GLUI/GLUI.h>
+#else
+#include <gl/glui.h>
+#endif
 #include "RGBpixmap.h"
 #include <fstream>
 

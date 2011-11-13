@@ -1,7 +1,11 @@
 #ifndef TRANSFORMATION_H_
 #define TRANSFORMATION_H_
 
-#include <GL/glui.h>
+#ifdef __APPLE__
+#include <GLUI/GLUI.h>
+#else
+#include <gl/glui.h>
+#endif
 #include <string>
 using namespace std;
 
