@@ -502,6 +502,24 @@ int loadprimitives(TiXmlElement* primitives){
 	return 0;
 }
 
+int loadcomponent(TiXmlElement * component){
+    return -1;
+
+}
+
+
+int loadcomponents(TiXmlElement * components){
+    if(components->ValueTStr()=="components"){
+        TiXmlElement * child=components->FirstChildElement();
+        
+        do{
+            loadcomponent(child);
+        }while((child=components->FirstChildElement())!=NULL);
+    
+    }
+        
+    return -1;
+}
 
 TiXmlElement* raiz=NULL;
 
