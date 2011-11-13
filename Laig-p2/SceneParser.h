@@ -14,6 +14,8 @@
 #include "Texture.h"
 #include "Views.h"
 #include "Illumination.h"
+#include "Texture.h"
+#include "Transformation.h"
 #include <string>
 #include <cstdlib>
 #include "../tinyxml.h"

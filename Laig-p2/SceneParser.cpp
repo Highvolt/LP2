@@ -222,6 +222,8 @@ int loadmaterials(TiXmlElement* mat){
 		TiXmlElement * child=mat->FirstChildElement();
 		do{
             Material * mat=createMaterial(child);
+            
+            //guardar mats
 		
 		}while((child=child->NextSiblingElement())!=NULL);
 
@@ -394,11 +396,29 @@ int loadlights(TiXmlElement* lights){
 		cout<<"Lights root"<<endl;
 		TiXmlElement * child=lights->FirstChildElement();
 		do{
-			
+			Light * l=createLight(child);
 		}while((child=child->NextSiblingElement())!=NULL);
 
 }
 	return 0;
+}
+
+Texture * createTexture(TiXmlElement * child){
+    string id, file;
+    float length_s, length_t;
+    if(child
+       && child->ValueTStr()=="texture"
+       && (id=child->Attribute("id"))!=""  && (file=child->Attribute("file"))!="" && (child->QueryFloatAttribute("length_s",&length_s)==TIXML_SUCCESS)
+       && (child->QueryFloatAttribute("length_t",&length_t)==TIXML_SUCCESS)){
+        Texture* a= new Texture();
+        a->setLengthS(length_s);
+        a->setLengthT(length_t);
+        
+        cout<< "id: " << id << " file: " << file << " length_s: " << length_s << " length_t: " << length_t<<endl;
+        return a;
+    }
+    return NULL;
+    
 }
 
 int loadtextures(TiXmlElement* textures){
@@ -407,15 +427,9 @@ int loadtextures(TiXmlElement* textures){
 		cout<<"Textures root"<<endl;
 		TiXmlElement * child=textures->FirstChildElement();
 		do{
-			string id, file;
-			float length_s, length_t;
-			if(child
-				&& child->ValueTStr()=="texture"
-				&& (id=child->Attribute("id"))!=""  && (file=child->Attribute("file"))!="" && (child->QueryFloatAttribute("length_s",&length_s)==TIXML_SUCCESS)
-				&& (child->QueryFloatAttribute("length_t",&length_t)==TIXML_SUCCESS)){
-					cout<< "id: " << id << " file: " << file << " length_s: " << length_s << " length_t: " << length_t<<endl;
-			}
-			}while((child=child->NextSiblingElement())!=NULL);
+			Texture * a= createTexture(child);
+        
+        }while((child=child->NextSiblingElement())!=NULL);
 	}
 	return 0;
 }
@@ -431,52 +445,81 @@ int loadscene(TiXmlElement* scene){
 	return 0;
 }
 
+
+
+Transformation * createTransformation(TiXmlElement * child){
+    string id;
+    Transformation * trans=NULL;
+    if(child && child->ValueTStr()=="transformation" && (id=child->Attribute("id"))!=""){
+        cout << "Transformation id: "<< id << endl;
+        trans=new Transformation(id);
+        TiXmlElement * subchild = child->FirstChildElement();
+        do{
+            float x, y, z, angle;
+            string axis;
+            if(subchild->ValueTStr()=="translate"
+               && subchild->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
+                
+                //add to class
+                trans->translate(x, y, z);
+                cout<<"translate: x:"<<x<<" y: "<<y<<" z "
+                <<z<<endl;
+                
+            }
+            
+            if(subchild->ValueTStr()=="rotate"
+               && (axis=subchild->Attribute("axis"))!=""
+               && subchild->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS){
+                int ax=0,ay=0,az=0;
+                
+                if(axis=="x" || axis=="X"){
+                    ax=1;
+                }
+                if(axis=="y" || axis=="Y"){
+                    ay=1;
+                }
+                if(axis=="z" || axis=="Z"){
+                    az=1;
+                }
+                
+                //add to class
+                trans->rotate(ax, ay, az, angle);
+                cout<<"rotate: axis:"<<axis<<" angle: "<<angle<<endl;
+                
+            }
+            
+            if(subchild->ValueTStr()=="scale"
+               && subchild->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
+                
+                //add to class
+                trans->scale(x, y, z);
+                cout<<"scale: x:"<<x<<" y: "<<y<<" z "
+                <<z<<endl;
+                
+            }
+            
+        }while((subchild=subchild->NextSiblingElement())!=NULL);
+   
+        return trans;
+    }
+    
+    return NULL;
+}
+
+
 int loadtransformations(TiXmlElement* transformations){
 	if (transformations->ValueTStr()=="transformations"){
 		cout<<"Transformations root"<<endl;
 		TiXmlElement * child=transformations->FirstChildElement();
-		string id;
+		//string id;
 		do{
+            Transformation * t=createTransformation(transformations);
+            //adicionar ao map
 
-		if(child && child->ValueTStr()=="transformation" && (id=child->Attribute("id"))!=""){
-			cout << "Transformation id: "<< id << endl;
-			TiXmlElement * subchild = child->FirstChildElement();
-			do{
-				float x, y, z, angle;
-				string axis;
-				if(subchild->ValueTStr()=="translate"
-				&& subchild->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
-				&& subchild->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
-				&& subchild->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
-
-					//add to class
-					cout<<"translate: x:"<<x<<" y: "<<y<<" z "
-						<<z<<endl;
-
-				}
-
-				if(subchild->ValueTStr()=="rotate"
-				&& (axis=subchild->Attribute("axis"))!=""
-				&& subchild->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS){
-
-					//add to class
-					cout<<"rotate: axis:"<<axis<<" angle: "<<angle<<endl;
-
-				}
-
-				if(subchild->ValueTStr()=="scale"
-				&& subchild->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
-				&& subchild->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
-				&& subchild->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
-
-					//add to class
-					cout<<"scale: x:"<<x<<" y: "<<y<<" z "
-						<<z<<endl;
-
-				}
-
-				}while((subchild=subchild->NextSiblingElement())!=NULL);
-		}
 		}while((child=child->NextSiblingElement())!=NULL);
 	}
 	return 0;
