@@ -234,6 +234,7 @@ return 0;
 Light * createLight(TiXmlElement * child){
     Light* light=NULL;
     string id="";
+    bool location=false,ambient=false,specular=false,diffuse=false,target=false;
     bool enabled = 0;
     float angle, exponent;
     if(child
@@ -253,6 +254,7 @@ Light * createLight(TiXmlElement * child){
                 
                 //add to class
                 light->setLightLocation(x, y, z, w);
+                location=true;
                 cout<<"location x: "<<x<<" y: "<<y<<" z "
                 <<z<<" w "<<w<<endl;
                 
@@ -265,6 +267,7 @@ Light * createLight(TiXmlElement * child){
                && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
                 
                 light->setLightAmbient(r, g, b, a);
+                ambient=true;
                 cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
                 <<b<<" a "<<a<<endl;
                 
@@ -276,6 +279,7 @@ Light * createLight(TiXmlElement * child){
                && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
                 
                 //add to class
+                specular=true;
                 light->setLightSpecular(r,g,b,a);
                 cout<<"specular element r: "<<r<<" g: "<<g<<" b "
                 <<b<<" a "<<a<<endl;
@@ -288,12 +292,18 @@ Light * createLight(TiXmlElement * child){
                && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
                 
                 //add to class
+                diffuse=true;
                 light->setLightDiffuse(r,g,b,a);
                 cout<<"diffuse element r: "<<r<<" g: "<<g<<" b "
                 <<b<<" a "<<a<<endl;
                 
             }
-        }while((propriedades=propriedades->NextSiblingElement()));}
+        }while((propriedades=propriedades->NextSiblingElement()));
+        if(diffuse &&ambient&&ambient &&location){
+            return light;
+        }
+    
+    }
     if(child
        && child->ValueTStr()=="spot"
        && (id=child->Attribute("id"))!=""  && (child->QueryBoolAttribute("enabled",&enabled)==TIXML_SUCCESS) && (child->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS)
@@ -301,6 +311,7 @@ Light * createLight(TiXmlElement * child){
         cout<< "spot id: " << id << " enabled : " << enabled << " angle: " << angle << " exponent: " << exponent << endl;
         TiXmlElement * propriedades=child->FirstChildElement();
         //declarar class
+        light=new Spot(0, angle);
         do{ 
             float r,g,b,a,value, x,y,z;
             if(propriedades->ValueTStr()=="location"
@@ -308,7 +319,8 @@ Light * createLight(TiXmlElement * child){
                && propriedades->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
                && propriedades->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
                 
-                //add to class
+                light->setLightLocation(x, y, z, 0);
+                location=true;
                 cout<<"location x: "<<x<<" y: "<<y<<" z "
                 <<z<<endl;
                 
@@ -319,6 +331,8 @@ Light * createLight(TiXmlElement * child){
                && propriedades->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
                 
                 //add to class
+                target=true;
+                light->setSpotTarget(x, y, z);
                 cout<<"target x: "<<x<<" y: "<<y<<" z "
                 <<z<<endl;
                 
@@ -331,6 +345,8 @@ Light * createLight(TiXmlElement * child){
                && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
                 
                 //add to class
+                light->setLightAmbient(r, g, b, a);
+                ambient=true;
                 cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
                 <<b<<" a "<<a<<endl;
                 
@@ -342,6 +358,8 @@ Light * createLight(TiXmlElement * child){
                && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
                 
                 //add to class
+                light->setLightSpecular(r, g, b, a);
+                specular=true;
                 cout<<"specular element r: "<<r<<" g: "<<g<<" b "
                 <<b<<" a "<<a<<endl;
                 
@@ -353,11 +371,17 @@ Light * createLight(TiXmlElement * child){
                && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
                 
                 //add to class
+                light->setLightDiffuse(r, g, b, a);
+                diffuse=true;
                 cout<<"diffuse element r: "<<r<<" g: "<<g<<" b "
                 <<b<<" a "<<a<<endl;
                 
             }
-        }while((propriedades=propriedades->NextSiblingElement()));}
+        }while((propriedades=propriedades->NextSiblingElement()));
+        if(diffuse &&ambient&&ambient &&location&&target){
+            return light;
+        }
+    }
 
 
     return NULL;

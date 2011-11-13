@@ -28,7 +28,8 @@ public:
 	void setLightAmbient(float, float, float, float);
 	void setLightSpecular(float, float, float, float);
 	void setLightDiffuse(float, float, float, float);
-    virtual void setLightLocation(float, float, float, float);
+    virtual void setSpotTarget(float x, float y, float z)=0;
+    virtual void setLightLocation(float, float, float, float)=0;
 	void setEnabled(bool enabled);
 	bool is_enabled();
 	virtual void apply(bool enabled)=0;
@@ -39,6 +40,7 @@ class Omni:public Light{
 public:
 	Omni(int number);
 	void setLightLocation(float, float, float, float);
+    void setSpotTarget(float x, float y, float z){}
 	void apply(bool enabled);
 };
 
