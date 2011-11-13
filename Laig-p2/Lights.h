@@ -1,7 +1,11 @@
 #ifndef LIGHTS_H_
 #define LIGHTS_H_
 
-
+#ifdef __APPLE__
+#include <GLUT/GLUT.h>
+#else
+#include <gl/glut.h>
+#endif
 #ifdef __APPLE__
 #include <GLUI/GLUI.h>
 #else
@@ -24,9 +28,10 @@ public:
 	void setLightAmbient(float, float, float, float);
 	void setLightSpecular(float, float, float, float);
 	void setLightDiffuse(float, float, float, float);
+    virtual void setLightLocation(float, float, float, float);
 	void setEnabled(bool enabled);
 	bool is_enabled();
-	void virtual apply(bool enabled)=0;
+	virtual void apply(bool enabled)=0;
 };
 
 class Omni:public Light{

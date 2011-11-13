@@ -20,7 +20,7 @@ public:
 	View(float near, float far);
     void setNear(float near);
     void setFar(float far);
-    void virtual apply(float,float,float)=0;
+    void virtual apply()=0;
 };
 
 class Perspective:public View{

@@ -1,5 +1,64 @@
 #include "SceneParser.h"
 
+
+View * createView(TiXmlElement * viewchild){
+    float flodo;
+    if(viewchild ){
+        View * ret;
+    string id="";
+    if(viewchild->ValueTStr()=="perspective" && (id=viewchild->Attribute("id"))!="" 
+       && viewchild->QueryFloatAttribute("near",&flodo)==TIXML_SUCCESS
+       && viewchild->QueryFloatAttribute("far",&flodo)==TIXML_SUCCESS
+       && viewchild->QueryFloatAttribute("angle",&flodo)==TIXML_SUCCESS){
+        float near,far,angle;
+        viewchild->QueryFloatAttribute("near",&near);
+        viewchild->QueryFloatAttribute("far",&far);
+        viewchild->QueryFloatAttribute("angle",&angle);
+        TiXmlElement * from=viewchild->FirstChildElement("from");
+        TiXmlElement * to=viewchild->FirstChildElement("to");
+        if(from && to){
+            float xf,yf,zf,xo,yo,zo;
+            from->QueryFloatAttribute("x",&xf);
+            from->QueryFloatAttribute("y",&yf);
+            from->QueryFloatAttribute("z",&zf);
+            to->QueryFloatAttribute("x",&xo);
+            to->QueryFloatAttribute("y",&yo);
+            to->QueryFloatAttribute("z",&zo);
+            
+            ret= new Perspective(near,far, angle, xf, yf, zf, xo, yo, zo);
+            cout<<"perspective element id: "<<id<<" near: "<<near<<" far "
+            <<far<<" angle "<<angle<<endl;
+            cout<<"from x:"<<xf<<" y "<<yf<<" z "<<zf<<endl;
+            cout<<"to x:"<<xo<<" y "<<yo<<" z "<<zo<<endl;
+        }
+    }else
+        if(viewchild->ValueTStr()=="ortho" && (id=viewchild->Attribute("id"))!="" 
+           && viewchild->QueryFloatAttribute("near",&flodo)==TIXML_SUCCESS
+           && viewchild->QueryFloatAttribute("far",&flodo)==TIXML_SUCCESS
+           && viewchild->QueryFloatAttribute("left",&flodo)==TIXML_SUCCESS
+           && viewchild->QueryFloatAttribute("right",&flodo)==TIXML_SUCCESS
+           && viewchild->QueryFloatAttribute("top",&flodo)==TIXML_SUCCESS
+           && viewchild->QueryFloatAttribute("bottom",&flodo)==TIXML_SUCCESS){
+            float near,far,left,right,top,bottom;
+            
+            viewchild->QueryFloatAttribute("near",&near);
+            viewchild->QueryFloatAttribute("far",&far);
+            viewchild->QueryFloatAttribute("left",&left);
+            viewchild->QueryFloatAttribute("right",&right);
+            viewchild->QueryFloatAttribute("top",&top);
+            viewchild->QueryFloatAttribute("bottom",&bottom);
+            
+            ret= new Ortho(near,far,left, right, top, bottom);
+            cout<<"ortho element id: "<<id<<" near: "<<near<<" far "
+            <<far<<" left "<<left<<" right "<<right<<" top "<<top
+            <<" bottom "<<bottom<<endl;
+        }
+
+    }
+    return NULL;
+}
+
+
 int loadviews(TiXmlElement* view){
 	float flodo;
 	string default1="";
@@ -9,57 +68,9 @@ int loadviews(TiXmlElement* view){
 		TiXmlElement *viewchild=view->FirstChildElement();
 		
 		do{
-		if(viewchild ){
-			string id="";
-			if(viewchild->ValueTStr()=="perspective" && (id=viewchild->Attribute("id"))!="" 
-				&& viewchild->QueryFloatAttribute("near",&flodo)==TIXML_SUCCESS
-				&& viewchild->QueryFloatAttribute("far",&flodo)==TIXML_SUCCESS
-				&& viewchild->QueryFloatAttribute("angle",&flodo)==TIXML_SUCCESS){
-					float near,far,angle;
-					viewchild->QueryFloatAttribute("near",&near);
-					viewchild->QueryFloatAttribute("far",&far);
-					viewchild->QueryFloatAttribute("angle",&angle);
-					TiXmlElement * from=viewchild->FirstChildElement("from");
-					TiXmlElement * to=viewchild->FirstChildElement("to");
-					if(from && to){
-						float xf,yf,zf,xo,yo,zo;
-						from->QueryFloatAttribute("x",&xf);
-						from->QueryFloatAttribute("y",&yf);
-						from->QueryFloatAttribute("z",&zf);
-						to->QueryFloatAttribute("x",&xo);
-						to->QueryFloatAttribute("y",&yo);
-						to->QueryFloatAttribute("z",&zo);
-
-						//criar class;
-						cout<<"perspective element id: "<<id<<" near: "<<near<<" far "
-							<<far<<" angle "<<angle<<endl;
-						cout<<"from x:"<<xf<<" y "<<yf<<" z "<<zf<<endl;
-						cout<<"to x:"<<xo<<" y "<<yo<<" z "<<zo<<endl;
-					}
-			}else
-			if(viewchild->ValueTStr()=="ortho" && (id=viewchild->Attribute("id"))!="" 
-				&& viewchild->QueryFloatAttribute("near",&flodo)==TIXML_SUCCESS
-				&& viewchild->QueryFloatAttribute("far",&flodo)==TIXML_SUCCESS
-				&& viewchild->QueryFloatAttribute("left",&flodo)==TIXML_SUCCESS
-				&& viewchild->QueryFloatAttribute("right",&flodo)==TIXML_SUCCESS
-				&& viewchild->QueryFloatAttribute("top",&flodo)==TIXML_SUCCESS
-				&& viewchild->QueryFloatAttribute("bottom",&flodo)==TIXML_SUCCESS){
-					float near,far,left,right,top,bottom;
-
-					viewchild->QueryFloatAttribute("near",&near);
-					viewchild->QueryFloatAttribute("far",&far);
-					viewchild->QueryFloatAttribute("left",&left);
-					viewchild->QueryFloatAttribute("right",&right);
-					viewchild->QueryFloatAttribute("top",&top);
-					viewchild->QueryFloatAttribute("bottom",&bottom);
-
-						//criar class;
-						cout<<"ortho element id: "<<id<<" near: "<<near<<" far "
-							<<far<<" left "<<left<<" right "<<right<<" top "<<top
-							<<" bottom "<<bottom<<endl;
-			}
-			
-		}
+            View * ret=createView(viewchild);
+            //TODO
+            //Decidir o que fazer;
 
 		}while((viewchild=viewchild->NextSiblingElement()));
 
@@ -70,9 +81,12 @@ int loadviews(TiXmlElement* view){
 }
 
 
-int loadillumination(TiXmlElement* illu){
+
+Illumination* loadillumination(TiXmlElement* illu){
 	float flodo;
+    Illumination * ilu;
 	bool doublesided,local;
+    bool back=false,ambi=false;
 	if (illu->ValueTStr()=="illumination" 
 		&& illu->QueryBoolAttribute("doublesided",&doublesided)==TIXML_SUCCESS
 		&& illu->QueryBoolAttribute("local",&local)==TIXML_SUCCESS){
@@ -80,7 +94,9 @@ int loadillumination(TiXmlElement* illu){
 			<<" local "<<local<<endl;
 		//criar class
 		TiXmlElement *illuchild=illu->FirstChildElement();
-
+        ilu = new Illumination();
+        ilu->setDSided(doublesided);
+        ilu->setLocal(local);
 		do{
 			if(illuchild ){
 				float r,g,b,a;
@@ -90,7 +106,8 @@ int loadillumination(TiXmlElement* illu){
 					&& illuchild->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
 					&& illuchild->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
 
-							//criar class;
+                    ilu->setAmbient(r, g, b, a);
+                    ambi=true;
 							cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
 								<<b<<" a "<<a<<endl;
 						}
@@ -102,7 +119,8 @@ int loadillumination(TiXmlElement* illu){
 				&& illuchild->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
 				&& illuchild->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
 
-					//criar class;
+					ilu->setBackground(r, g, b, a);
+                back=true;
 					cout<<"background element r: "<<r<<" g: "<<g<<" b "
 						<<b<<" a "<<a<<endl;
 			}
@@ -111,10 +129,90 @@ int loadillumination(TiXmlElement* illu){
 		
 
 		}while((illuchild=illuchild->NextSiblingElement()));
-
+        if(ilu && back){
 		//validação do numero de illu tem que ter as 2.
+            return ilu;
+        }
+        else{
+            return NULL;
+        }
 	}
-return 0;
+return NULL;
+}
+
+
+Material* createMaterial(TiXmlElement * child){
+    Material * mat=NULL;
+    bool ambient=false,emission=false,diffuse=false,specular=false,shininess=false;
+    string id="";
+    if(child
+       && child->ValueTStr()=="material"
+       && (id=child->Attribute("id"))!=""){
+        TiXmlElement * propriedades=child->FirstChildElement();
+        mat=new Material(id);
+        do{ 
+            float r,g,b,a,value;
+            if(propriedades->ValueTStr()=="ambient"
+               && propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                mat->setMatAmbient(r, g,b,a);
+                ambient=true;
+                //add to class
+                cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
+                <<b<<" a "<<a<<endl;
+                
+            }
+            if(propriedades->ValueTStr()=="emission"
+               && propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                
+                mat->setMatEmission(r, g,b,a);
+                emission=true;
+                cout<<"emission element r: "<<r<<" g: "<<g<<" b "
+                <<b<<" a "<<a<<endl;
+                
+            }
+            if(propriedades->ValueTStr()=="diffuse"
+               && propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                mat->setMatDiffuse(r, g,b,a);
+                diffuse=true;
+                //add to class
+                cout<<"diffuse element r: "<<r<<" g: "<<g<<" b "
+                <<b<<" a "<<a<<endl;
+                
+            }
+            if(propriedades->ValueTStr()=="specular"
+               && propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                mat->setMatSpecular(r, g,b,a);
+                specular=true;
+                cout<<"specular element r: "<<r<<" g: "<<g<<" b "
+                <<b<<" a "<<a<<endl;
+                
+            }
+            if(propriedades->ValueTStr()=="shininess"
+               && propriedades->QueryFloatAttribute("value",&value)==TIXML_SUCCESS
+               ){
+                
+                mat->setMatShininess(value);
+                shininess=true;
+                cout<<"shininess element value: "<<value<<endl;
+                
+            }
+        }while((propriedades=propriedades->NextSiblingElement()));
+        
+    }
+
+    return NULL;
 }
 
 int loadmaterials(TiXmlElement* mat){
@@ -123,74 +221,147 @@ int loadmaterials(TiXmlElement* mat){
 		cout<<"Materials root"<<endl;
 		TiXmlElement * child=mat->FirstChildElement();
 		do{
-			string id="";
-			if(child
-				&& child->ValueTStr()=="material"
-				&& (id=child->Attribute("id"))!=""){
-					TiXmlElement * propriedades=child->FirstChildElement();
-					//declarar class
-					do{ 
-						float r,g,b,a,value;
-						if(propriedades->ValueTStr()=="ambient"
-							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-								
-								//add to class
-								cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
-									<<b<<" a "<<a<<endl;
-							
-						}
-						if(propriedades->ValueTStr()=="emission"
-							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-
-								//add to class
-								cout<<"emission element r: "<<r<<" g: "<<g<<" b "
-									<<b<<" a "<<a<<endl;
-
-						}
-						if(propriedades->ValueTStr()=="diffuse"
-							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-
-								//add to class
-								cout<<"diffuse element r: "<<r<<" g: "<<g<<" b "
-									<<b<<" a "<<a<<endl;
-
-						}
-						if(propriedades->ValueTStr()=="specular"
-							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-
-								//add to class
-								cout<<"specular element r: "<<r<<" g: "<<g<<" b "
-									<<b<<" a "<<a<<endl;
-
-						}
-						if(propriedades->ValueTStr()=="shininess"
-							&& propriedades->QueryFloatAttribute("value",&value)==TIXML_SUCCESS
-							){
-
-								//add to class
-								cout<<"shininess element value: "<<value<<endl;
-
-						}
-					}while((propriedades=propriedades->NextSiblingElement()));
-
-			}
+            Material * mat=createMaterial(child);
+		
 		}while((child=child->NextSiblingElement())!=NULL);
 
 	}
 
 return 0;
+}
+
+
+Light * createLight(TiXmlElement * child){
+    Light* light=NULL;
+    string id="";
+    bool enabled = 0;
+    float angle, exponent;
+    if(child
+       && child->ValueTStr()=="omni"
+       && (id=child->Attribute("id"))!=""  && (child->QueryBoolAttribute("enabled",&enabled)==TIXML_SUCCESS)){
+        cout<< "omni id: " << id << " enabled : " << enabled <<endl;
+        TiXmlElement * propriedades=child->FirstChildElement();
+        //declarar class
+        light=new Omni(0);
+        do{ 
+            float r,g,b,a,value, x,y,z,w;
+            if(propriedades->ValueTStr()=="location"
+               && propriedades->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("z",&z)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("w",&w)==TIXML_SUCCESS){
+                
+                //add to class
+                light->setLightLocation(x, y, z, w);
+                cout<<"location x: "<<x<<" y: "<<y<<" z "
+                <<z<<" w "<<w<<endl;
+                
+            }
+            
+            if(propriedades->ValueTStr()=="ambient"
+               && propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                
+                light->setLightAmbient(r, g, b, a);
+                cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
+                <<b<<" a "<<a<<endl;
+                
+            }
+            if(propriedades->ValueTStr()=="specular"
+               && propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                
+                //add to class
+                light->setLightSpecular(r,g,b,a);
+                cout<<"specular element r: "<<r<<" g: "<<g<<" b "
+                <<b<<" a "<<a<<endl;
+                
+            }
+            if(propriedades->ValueTStr()=="diffuse"
+               && propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                
+                //add to class
+                light->setLightDiffuse(r,g,b,a);
+                cout<<"diffuse element r: "<<r<<" g: "<<g<<" b "
+                <<b<<" a "<<a<<endl;
+                
+            }
+        }while((propriedades=propriedades->NextSiblingElement()));}
+    if(child
+       && child->ValueTStr()=="spot"
+       && (id=child->Attribute("id"))!=""  && (child->QueryBoolAttribute("enabled",&enabled)==TIXML_SUCCESS) && (child->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS)
+       && (child->QueryFloatAttribute("exponent",&exponent)==TIXML_SUCCESS)){
+        cout<< "spot id: " << id << " enabled : " << enabled << " angle: " << angle << " exponent: " << exponent << endl;
+        TiXmlElement * propriedades=child->FirstChildElement();
+        //declarar class
+        do{ 
+            float r,g,b,a,value, x,y,z;
+            if(propriedades->ValueTStr()=="location"
+               && propriedades->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
+                
+                //add to class
+                cout<<"location x: "<<x<<" y: "<<y<<" z "
+                <<z<<endl;
+                
+            }
+            if(propriedades->ValueTStr()=="target"
+               && propriedades->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
+                
+                //add to class
+                cout<<"target x: "<<x<<" y: "<<y<<" z "
+                <<z<<endl;
+                
+            }
+            
+            if(propriedades->ValueTStr()=="ambient"
+               && propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                
+                //add to class
+                cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
+                <<b<<" a "<<a<<endl;
+                
+            }
+            if(propriedades->ValueTStr()=="specular"
+               && propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                
+                //add to class
+                cout<<"specular element r: "<<r<<" g: "<<g<<" b "
+                <<b<<" a "<<a<<endl;
+                
+            }
+            if(propriedades->ValueTStr()=="diffuse"
+               && propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+               && propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                
+                //add to class
+                cout<<"diffuse element r: "<<r<<" g: "<<g<<" b "
+                <<b<<" a "<<a<<endl;
+                
+            }
+        }while((propriedades=propriedades->NextSiblingElement()));}
+
+
+    return NULL;
+
 }
 
 int loadlights(TiXmlElement* lights){
@@ -199,127 +370,7 @@ int loadlights(TiXmlElement* lights){
 		cout<<"Lights root"<<endl;
 		TiXmlElement * child=lights->FirstChildElement();
 		do{
-			string id="";
-			bool enabled = 0;
-			float angle, exponent;
-			if(child
-				&& child->ValueTStr()=="omni"
-				&& (id=child->Attribute("id"))!=""  && (child->QueryBoolAttribute("enabled",&enabled)==TIXML_SUCCESS)){
-					cout<< "omni id: " << id << " enabled : " << enabled <<endl;
-					TiXmlElement * propriedades=child->FirstChildElement();
-					//declarar class
-					do{ 
-						float r,g,b,a,value, x,y,z,w;
-						if(propriedades->ValueTStr()=="location"
-							&& propriedades->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("z",&z)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("w",&w)==TIXML_SUCCESS){
-								
-								//add to class
-								cout<<"location x: "<<x<<" y: "<<y<<" z "
-									<<z<<" w "<<w<<endl;
-							
-						}
-
-						if(propriedades->ValueTStr()=="ambient"
-							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-								
-								//add to class
-								cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
-									<<b<<" a "<<a<<endl;
-							
-						}
-						if(propriedades->ValueTStr()=="specular"
-							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-
-								//add to class
-								cout<<"specular element r: "<<r<<" g: "<<g<<" b "
-									<<b<<" a "<<a<<endl;
-
-						}
-						if(propriedades->ValueTStr()=="diffuse"
-							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-
-								//add to class
-								cout<<"diffuse element r: "<<r<<" g: "<<g<<" b "
-									<<b<<" a "<<a<<endl;
-
-						}
-					}while((propriedades=propriedades->NextSiblingElement()));}
-			if(child
-				&& child->ValueTStr()=="spot"
-				&& (id=child->Attribute("id"))!=""  && (child->QueryBoolAttribute("enabled",&enabled)==TIXML_SUCCESS) && (child->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS)
-				&& (child->QueryFloatAttribute("exponent",&exponent)==TIXML_SUCCESS)){
-					cout<< "spot id: " << id << " enabled : " << enabled << " angle: " << angle << " exponent: " << exponent << endl;
-					TiXmlElement * propriedades=child->FirstChildElement();
-					//declarar class
-					do{ 
-						float r,g,b,a,value, x,y,z;
-						if(propriedades->ValueTStr()=="location"
-							&& propriedades->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
-								
-								//add to class
-								cout<<"location x: "<<x<<" y: "<<y<<" z "
-									<<z<<endl;
-							
-						}
-						if(propriedades->ValueTStr()=="target"
-							&& propriedades->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("z",&z)==TIXML_SUCCESS){
-								
-								//add to class
-								cout<<"target x: "<<x<<" y: "<<y<<" z "
-									<<z<<endl;
-							
-						}
-
-						if(propriedades->ValueTStr()=="ambient"
-							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-								
-								//add to class
-								cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
-									<<b<<" a "<<a<<endl;
-							
-						}
-						if(propriedades->ValueTStr()=="specular"
-							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-
-								//add to class
-								cout<<"specular element r: "<<r<<" g: "<<g<<" b "
-									<<b<<" a "<<a<<endl;
-
-						}
-						if(propriedades->ValueTStr()=="diffuse"
-							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-
-								//add to class
-								cout<<"diffuse element r: "<<r<<" g: "<<g<<" b "
-									<<b<<" a "<<a<<endl;
-
-						}
-					}while((propriedades=propriedades->NextSiblingElement()));}
+			
 		}while((child=child->NextSiblingElement())!=NULL);
 
 }
@@ -503,8 +554,13 @@ int loadprimitives(TiXmlElement* primitives){
 }
 
 int loadcomponent(TiXmlElement * component){
+    if(component->ValueTStr()=="component" && component->Attribute("id")!=NULL){
+        
+    
+    }
+    
+    
     return -1;
-
 }
 
 

@@ -12,6 +12,8 @@
 #include "Lights.h"
 #include "Material.h"
 #include "Texture.h"
+#include "Views.h"
+#include "Illumination.h"
 #include <string>
 #include <cstdlib>
 #include "../tinyxml.h"
