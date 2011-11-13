@@ -39,3 +39,10 @@ void Illumination::setDSided(bool doublesided){
 bool Illumination::getDSided(){
 	return this->doublesided;
 }
+
+void Illumination::apply(){
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+        glClearColor(background[0],background[1],background[2],background[3]);
+        glLightModeli(GL_LIGHT_MODEL_TWO_SIDE,doublesided);
+        glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER,local);
+}

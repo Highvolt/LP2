@@ -1,5 +1,5 @@
 
-#include <glui.h>
+#include <GL\glui.h>
 #include "RGBpixmap.h"
 #include <fstream>
 

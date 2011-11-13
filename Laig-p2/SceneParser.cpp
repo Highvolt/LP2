@@ -192,6 +192,77 @@ int loadmaterials(TiXmlElement* mat){
 
 return 0;
 }
+
+int loadlights(TiXmlElement* lights){
+	float flodo;
+	if(lights->ValueTStr()=="lights"){
+		cout<<"Lights root"<<endl;
+		TiXmlElement * child=lights->FirstChildElement();
+		do{
+			string id="";
+			bool enabled = 0;
+			if(child
+				&& child->ValueTStr()=="omni"
+				&& (id=child->Attribute("id"))!=""  && (child->QueryBoolAttribute("enabled",&enabled)==TIXML_SUCCESS)){
+					TiXmlElement * propriedades=child->FirstChildElement();
+					//declarar class
+					do{ 
+						float r,g,b,a,value, x,y,z,w;
+						if(propriedades->ValueTStr()=="location"
+							&& propriedades->QueryFloatAttribute("x",&x)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("y",&y)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("z",&z)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("w",&w)==TIXML_SUCCESS){
+								
+								//add to class
+								cout<<"location x: "<<x<<" y: "<<y<<" z "
+									<<z<<" w "<<w<<endl;
+							
+						}
+
+						if(propriedades->ValueTStr()=="ambient"
+							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+								
+								//add to class
+								cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
+									<<b<<" a "<<a<<endl;
+							
+						}
+						if(propriedades->ValueTStr()=="specular"
+							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+
+								//add to class
+								cout<<"specular element r: "<<r<<" g: "<<g<<" b "
+									<<b<<" a "<<a<<endl;
+
+						}
+						if(propriedades->ValueTStr()=="diffuse"
+							&& propriedades->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+							&& propriedades->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+
+								//add to class
+								cout<<"diffuse element r: "<<r<<" g: "<<g<<" b "
+									<<b<<" a "<<a<<endl;
+
+						}
+					}while((propriedades=propriedades->NextSiblingElement()));}
+		}while((child=child->NextSiblingElement())!=NULL);
+
+}
+	return 0;
+}
+
+
+
+
 TiXmlElement* raiz=NULL;
 
 int loaddsxfile(const string & filename){
@@ -216,6 +287,7 @@ int loaddsxfile(const string & filename){
 		loadillumination(illumination);
 		loadmaterials(materials);
 		loadviews(views);
+		loadlights(lights);
 	}
 	return 0;
 }

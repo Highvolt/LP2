@@ -19,6 +19,7 @@ public:
 	bool getLocal();
 	void setDSided(bool doublesided);
 	bool getDSided();
+	void apply();
 };
 
 #endif

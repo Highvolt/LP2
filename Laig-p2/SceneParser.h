@@ -9,6 +9,9 @@
 #include <iostream>
 #include <map>
 #include "Primitive.h"
+#include "Lights.h"
+#include "Material.h"
+#include "Texture.h"
 #include <string>
 #include <cstdlib>
 #include "../tinyxml.h"

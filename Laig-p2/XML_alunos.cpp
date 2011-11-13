@@ -1,8 +1,6 @@
 // G1_Ilum.cpp : Defines the entry point for the console application.
 //
 
-#include "SceneLoader.h"
-
 
 #ifdef __APPLE__
 #include <GLUI/GLUI.h>
@@ -11,6 +9,7 @@
 #endif
 #include <math.h>
 #include <iostream>
+#include "SceneParser.h"
 
 using namespace std;
 
@@ -371,9 +370,9 @@ void inicializacao()
 
 int main(int argc, char* argv[])
 {
-	
-	loadScene();
 
+
+	
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowSize (DIMX, DIMY);
@@ -404,7 +403,7 @@ int main(int argc, char* argv[])
 
 	/* We register the idle callback with GLUI, not with GLUT */
 	GLUI_Master.set_glutIdleFunc( myGlutIdle );
-   
+	 loaddsxfile("cafe.xml");
 	inicializacao();
    
 	glutMainLoop();
