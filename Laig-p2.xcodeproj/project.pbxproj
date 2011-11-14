@@ -156,12 +156,12 @@
 				2C348395146FFE8900703145 /* Views.h */,
 				2C7D393A14614D530092B047 /* SceneLoader.cpp */,
 				2C7D393B14614D530092B047 /* SceneLoader.h */,
-				2C7D393C14614D530092B047 /* XML_alunos.cpp */,
 				2C7D3925146149E90092B047 /* Laig_p2.1 */,
 				2C7D394514615C490092B047 /* Primitive.h */,
 				2C7D394614615C5F0092B047 /* Primitive.cpp */,
 				2C7D394914616B6B0092B047 /* SceneParser.cpp */,
 				2C34839E1470082900703145 /* SceneParser.h */,
+				2C7D393C14614D530092B047 /* XML_alunos.cpp */,
 			);
 			path = "Laig-p2";
 			sourceTree = "<group>";

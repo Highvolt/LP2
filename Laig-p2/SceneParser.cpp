@@ -531,7 +531,7 @@ int loadtransformations(TiXmlElement* transformations){
 		//string id;
 		do{
             Transformation * t=createTransformation(transformations);
-            //adicionar ao map
+            transformations[]
             
 		}while((child=child->NextSiblingElement())!=NULL);
 	}
