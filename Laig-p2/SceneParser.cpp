@@ -711,12 +711,16 @@ int loadprimitives(TiXmlElement* primitives){
 Component* loadcomponent(TiXmlElement * component){
     string id;
     if(component->ValueTStr()=="component" && (id=component->Attribute("id"))!=""){
+        cout<<"Component id: "<<id<<endl;
         TiXmlElement * transformation=component->FirstChildElement("transformation");
         TiXmlElement * materials=component->FirstChildElement("materials");
         TiXmlElement * texture=component->FirstChildElement("texture");
         TiXmlElement * children=component->FirstChildElement("children");
         if(transformation!=NULL&&materials!=NULL&&texture!=NULL&&children!=NULL){
             Transformation * trans=NULL;
+            if(transformation->NoChildren()){
+                trans=new Transformation("");
+            }else
             if((transformation->FirstChildElement("tranformationref"))!=NULL){
                 trans=createTransformation(transformation->FirstChildElement("tranformationref"));
             }else{
