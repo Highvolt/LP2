@@ -16,6 +16,7 @@ class Transformation{
 
 public:
 	Transformation(string id);
+	string getId();
 	void rotate(float, float, float, float);
 	void translate(float, float, float);
 	void scale(float, float, float);

@@ -16,6 +16,10 @@ Primitive::Primitive(string id,string texture,string material){
 
 }
 
+string Primitive::getId(){
+	return id;
+}
+
 Torus::Torus(string id, string texture, string material, float inner, float outer,int slices,int stacks):Primitive(id,texture,material){
 	this->inner = inner;
 	this->outer = outer;

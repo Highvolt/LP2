@@ -4,6 +4,10 @@ Material::Material(string id){
 	this->id = id;
 }
 
+string Material::getId(){
+	return id;
+}
+
 void Material::setMatShininess(float value){
 	this->mat_shininess[0] = value;
 }

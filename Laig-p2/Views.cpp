@@ -5,6 +5,10 @@ View::View(float near, float far){
 	this->setFar(far);
 }
 
+string View::getId(){
+	return id;
+}
+
 void View::setNear(float near){
 	this->near=near;
 }

@@ -21,6 +21,7 @@ class Material{
 	
 public:
 	Material(string id);
+	string getId();
 	void setMatShininess(float);
 	void setMatSpecular(float, float, float, float);
 	void setMatDiffuse(float, float, float, float);

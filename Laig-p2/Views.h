@@ -18,6 +18,7 @@ protected:
 
 public:
 	View(float near, float far);
+	string getId();
     void setNear(float near);
     void setFar(float far);
     void virtual apply()=0;

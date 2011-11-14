@@ -4,6 +4,10 @@ Light::Light(int number){
 	this->light_number = number;
 }
 
+string Light::getId(){
+	return id;
+}
+
 void Light::setLightAmbient(float red, float green, float blue, float alpha) {
         this->ambient[0]=red;
 		this->ambient[1]=green;

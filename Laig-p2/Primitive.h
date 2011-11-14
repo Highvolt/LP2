@@ -28,6 +28,7 @@ protected:
 
 public:
     Primitive(string id,string texture,string material);
+	string getId();
     virtual int render()=0;
 };
 /*

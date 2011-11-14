@@ -28,6 +28,7 @@ public:
 	void setLightAmbient(float, float, float, float);
 	void setLightSpecular(float, float, float, float);
 	void setLightDiffuse(float, float, float, float);
+	string getId();
     virtual void setSpotTarget(float x, float y, float z)=0;
     virtual void setLightLocation(float, float, float, float)=0;
 	void setEnabled(bool enabled);

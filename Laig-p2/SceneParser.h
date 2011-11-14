@@ -5,7 +5,7 @@
 //  Created by Pedro Borges on 02/11/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
-
+#pragma once
 #include <iostream>
 #include <map>
 #include "Primitive.h"
@@ -17,7 +17,7 @@
 #include "Texture.h"
 #include "Transformation.h"
 #include <string>
-#include <cstdlib>
+//#include <cstdlib>
 #include "../tinyxml.h"
 using namespace std;
  

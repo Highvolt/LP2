@@ -8,6 +8,10 @@ Transformation::Transformation(string id){
 	glPopMatrix();
 }
 
+string Transformation::getId(){
+	return id;
+}
+
 void Transformation::rotate(float angle, float x, float y, float z){
 	glPushMatrix();
 	glLoadIdentity();
