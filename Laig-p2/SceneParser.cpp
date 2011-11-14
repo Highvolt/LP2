@@ -488,7 +488,13 @@ int loadscene(TiXmlElement* scene){
 Transformation * createTransformation(TiXmlElement * child){
     string id;
     Transformation * trans=NULL;
-    if(child && child->ValueTStr()=="transformation" && (id=child->Attribute("id"))!=""){
+    cout<<"create transform" << child->Value()<<endl;
+    if(child && child->ValueTStr()=="transformation" ){
+        if(child->Attribute("id")!=NULL){
+            id=child->Attribute("id");
+        }else{
+            id="Lodo";
+        }
         cout << "Transformation id: "<< id << endl;
         trans=new Transformation(id);
         TiXmlElement * subchild = child->FirstChildElement();
@@ -718,7 +724,7 @@ Component* loadcomponent(TiXmlElement * component){
             }
             string key="";
             vector<Material*> vmat;
-            if((key=materials->Attribute("key"))!=""){
+            if(materials->Attribute("key")!=NULL){ 
                 vmat=loadvectormaterials(materials);
                 //falta atribuir tecla
             }else{
@@ -768,7 +774,7 @@ int loadcomponents(TiXmlElement * components){
         
         do{
             loadcomponent(child);
-        }while((child=components->FirstChildElement())!=NULL);
+        }while((child=child->NextSiblingElement())!=NULL);
         
     }
     
