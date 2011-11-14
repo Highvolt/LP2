@@ -45,7 +45,13 @@ Cylinder::Cylinder(string id, string texture, string material,float base,float t
 int Cylinder::render(){
 	glQ = gluNewQuadric();
 	glPushMatrix();
+	glRotated(180,0,1,0);
+    gluDisk(glQ,0,top,slices,stacks);
+	glPopMatrix();
+    glPushMatrix(); 
 	gluCylinder(glQ,base,top,height,slices,stacks);
+	glTranslated(0,0,height);
+    gluDisk(glQ,0,base,slices,stacks);
 	glPopMatrix();
 	return 0;
 }
