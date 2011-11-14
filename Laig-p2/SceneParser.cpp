@@ -4,10 +4,11 @@
 
 
 
-map<string,Primitive*> primitivas;
-map<string,int> textura;
-map<string, Transformation*> transformations; 
-map<string, Material*> materials;
+map<string,Primitive*> mprimitivas;
+map<string,Texture *> mtextura;
+map<string, Transformation*> mtransformations; 
+map<string, Material*> mmaterials;
+map<string, Light*> mlight;
 
 View * createView(TiXmlElement * viewchild){
     float flodo;
@@ -230,7 +231,8 @@ int loadmaterials(TiXmlElement* mat){
 		TiXmlElement * child=mat->FirstChildElement();
 		do{
             Material * mat=createMaterial(child);
-            
+            if(mat!=NULL)
+                mmaterials[mat->getId()]=mat;
         
             
 		}while((child=child->NextSiblingElement())!=NULL);
@@ -405,6 +407,9 @@ int loadlights(TiXmlElement* lights){
 		TiXmlElement * child=lights->FirstChildElement();
 		do{
 			Light * l=createLight(child);
+            if(l!=NULL)
+                mlight[l->getId()]=l;
+            
 		}while((child=child->NextSiblingElement())!=NULL);
         
     }
@@ -436,6 +441,7 @@ int loadtextures(TiXmlElement* textures){
 		TiXmlElement * child=textures->FirstChildElement();
 		do{
 			Texture * a= createTexture(child);
+            mtextura[a->getId()]=a;
             
         }while((child=child->NextSiblingElement())!=NULL);
 	}
@@ -517,7 +523,7 @@ Transformation * createTransformation(TiXmlElement * child){
              && child->ValueTStr()=="transformationref"
              && (id=child->Attribute("id"))!=""){
     
-        return transformations[id];
+        return mtransformations[id];
     }
     
     return NULL;
@@ -531,7 +537,8 @@ int loadtransformations(TiXmlElement* transformations){
 		//string id;
 		do{
             Transformation * t=createTransformation(transformations);
-            transformations[]
+            if(t!=NULL)
+                mtransformations[t->getId()]=t;
             
 		}while((child=child->NextSiblingElement())!=NULL);
 	}
@@ -648,7 +655,9 @@ Primitive * createPrimitive(TiXmlElement * child){
         
         
     }
-    
+    else if(child && child->ValueTStr()=="primitiveref" && (id=child->Attribute("id"))!=""){
+        return mprimitivas[id];
+    }
     
     
     
@@ -662,6 +671,8 @@ int loadprimitives(TiXmlElement* primitives){
 		TiXmlElement* child = primitives->FirstChildElement();
 		do{
 			Primitive * p=createPrimitive(child);
+            if(p!=NULL)
+                mprimitivas[p->getId()]=p;
 		}while((child=child->NextSiblingElement())!=NULL);
 	}
 	return 0;
@@ -724,5 +735,6 @@ int loaddsxfile(const string & filename){
 		//loadcomponents(component);
 		loadprimitives(primitives);
 	}
+
 	return 0;
 }
