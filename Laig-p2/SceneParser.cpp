@@ -418,7 +418,7 @@ Texture * createTexture(TiXmlElement * child){
        && child->ValueTStr()=="texture"
        && (id=child->Attribute("id"))!=""  && (file=child->Attribute("file"))!="" && (child->QueryFloatAttribute("length_s",&length_s)==TIXML_SUCCESS)
        && (child->QueryFloatAttribute("length_t",&length_t)==TIXML_SUCCESS)){
-        Texture* a= new Texture();
+        Texture* a= new Texture(id, length_s, length_t, file.c_str(), 0);
         a->setLengthS(length_s);
         a->setLengthT(length_t);
         
