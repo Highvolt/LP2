@@ -28,7 +28,7 @@ class Component{
 	Transformation* transf;
 	char key;
 public:
-	Component(vector<Component*> child_comp, vector<Primitive*> child_prim, Texture* texture, Transformation* transf);
+	Component(vector<Component*> child_comp, vector<Primitive*> child_prim, vector<Material*> materials,Texture* texture, Transformation* transf);
 	void apply();
 
 };

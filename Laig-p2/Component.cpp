@@ -1,10 +1,11 @@
 #include "Component.h"
 
-Component::Component(vector<Component*> child_comp, vector<Primitive*> child_prim, Texture* texture, Transformation* transf){
+Component::Component(vector<Component*> child_comp, vector<Primitive*> child_prim,vector<Material*> materials, Texture* texture, Transformation* transf){
 	this->child_comp = child_comp;
 	this->child_prim = child_prim;
 	this->texture = texture;
 	this->transf = transf;
+    this->materials=materials;
 }
 
 void Component::apply(){

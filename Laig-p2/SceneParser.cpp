@@ -9,6 +9,7 @@ map<string,Texture *> mtextura;
 map<string, Transformation*> mtransformations; 
 map<string, Material*> mmaterials;
 map<string, Light*> mlight;
+map<string, Component*> mcomponent;
 
 View * createView(TiXmlElement * viewchild){
     float flodo;
@@ -222,6 +223,29 @@ Material* createMaterial(TiXmlElement * child){
     }
     
     return NULL;
+}
+
+
+vector<Material*> loadvectormaterials(TiXmlElement* mat){
+	float flodo;
+    vector<Material*> vect;
+	if(mat->ValueTStr()=="materials"){
+		cout<<"Materials root"<<endl;
+		TiXmlElement * child=mat->FirstChildElement();
+        string id="";
+		do{
+            if(child&&child->ValueTStr()=="material"&& (id=child->Attribute("id"))!=""){
+                Material * mat=mmaterials[id];
+            if(mat!=NULL)
+                vect.push_back(mat);
+            }
+            
+            
+		}while((child=child->NextSiblingElement())!=NULL);
+        
+	}
+    
+    return vect;
 }
 
 int loadmaterials(TiXmlElement* mat){
@@ -678,14 +702,63 @@ int loadprimitives(TiXmlElement* primitives){
 	return 0;
 }
 
-int loadcomponent(TiXmlElement * component){
-    if(component->ValueTStr()=="component" && component->Attribute("id")!=NULL){
-        
+Component* loadcomponent(TiXmlElement * component){
+    string id;
+    if(component->ValueTStr()=="component" && (id=component->Attribute("id"))!=""){
+        TiXmlElement * transformation=component->FirstChildElement("transformation");
+        TiXmlElement * materials=component->FirstChildElement("materials");
+        TiXmlElement * texture=component->FirstChildElement("texture");
+        TiXmlElement * children=component->FirstChildElement("children");
+        if(transformation!=NULL&&materials!=NULL&&texture!=NULL&&children!=NULL){
+            Transformation * trans=NULL;
+            if((transformation->FirstChildElement("tranformationref"))!=NULL){
+                trans=createTransformation(transformation->FirstChildElement("tranformationref"));
+            }else{
+                trans=createTransformation(transformation);
+            }
+            string key="";
+            vector<Material*> vmat;
+            if((key=materials->Attribute("key"))!=""){
+                vmat=loadvectormaterials(materials);
+                //falta atribuir tecla
+            }else{
+                vmat=loadvectormaterials(materials);
+            }
+            string id_tex;
+            Texture * vtex=NULL;
+            if((id_tex=texture->Attribute("id"))!=""){
+                vtex=mtextura[id_tex];
+            }
+            TiXmlElement * childchild=children->FirstChildElement();
+            vector<Component*> vcomp;
+            vector<Primitive*> vprim;
+            do{
+                string id_c="";
+                if(childchild && (id_c=childchild->Attribute("id"))!=""){
+                    if(childchild->ValueTStr()!="componentref"){
+                        Component * cmp=mcomponent[id_c];
+                        if(cmp!=NULL){
+                            vcomp.push_back(cmp);
+                        }
+                    }else if(childchild->ValueTStr()!="primitiveref"){
+                        Primitive * cmp=mprimitivas[id_c];
+                        if(cmp!=NULL){
+                            vprim.push_back(cmp);
+                        }
+                    }
+                
+                }
+            
+            }while((childchild=childchild->NextSiblingElement())!=NULL);
+            Component * newcmp=new Component(vcomp, vprim,vmat, vtex, trans);
+            mcomponent[id]=newcmp;
+            return newcmp;
+        }
         
     }
     
     
-    return -1;
+    return NULL;
 }
 
 
@@ -734,6 +807,7 @@ int loaddsxfile(const string & filename){
 		loadtransformations(transformations);
 		//loadcomponents(component);
 		loadprimitives(primitives);
+        loadcomponents(component);
 	}
 
 	return 0;
