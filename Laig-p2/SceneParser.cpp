@@ -223,7 +223,7 @@ int loadmaterials(TiXmlElement* mat){
 		do{
             Material * mat=createMaterial(child);
             
-            //guardar mats
+        
             
 		}while((child=child->NextSiblingElement())!=NULL);
         
@@ -505,6 +505,11 @@ Transformation * createTransformation(TiXmlElement * child){
         }while((subchild=subchild->NextSiblingElement())!=NULL);
         
         return trans;
+    }else if(child
+             && child->ValueTStr()=="transformationref"
+             && (id=child->Attribute("id"))!=""){
+    
+        return transformations[id];
     }
     
     return NULL;
