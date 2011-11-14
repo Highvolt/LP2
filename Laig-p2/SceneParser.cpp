@@ -5,55 +5,55 @@ View * createView(TiXmlElement * viewchild){
     float flodo;
     if(viewchild ){
         View * ret;
-    string id="";
-    if(viewchild->ValueTStr()=="perspective" && (id=viewchild->Attribute("id"))!="" 
-       && viewchild->QueryFloatAttribute("near",&flodo)==TIXML_SUCCESS
-       && viewchild->QueryFloatAttribute("far",&flodo)==TIXML_SUCCESS
-       && viewchild->QueryFloatAttribute("angle",&flodo)==TIXML_SUCCESS){
-        float near,far,angle;
-        viewchild->QueryFloatAttribute("near",&near);
-        viewchild->QueryFloatAttribute("far",&far);
-        viewchild->QueryFloatAttribute("angle",&angle);
-        TiXmlElement * from=viewchild->FirstChildElement("from");
-        TiXmlElement * to=viewchild->FirstChildElement("to");
-        if(from && to){
-            float xf,yf,zf,xo,yo,zo;
-            from->QueryFloatAttribute("x",&xf);
-            from->QueryFloatAttribute("y",&yf);
-            from->QueryFloatAttribute("z",&zf);
-            to->QueryFloatAttribute("x",&xo);
-            to->QueryFloatAttribute("y",&yo);
-            to->QueryFloatAttribute("z",&zo);
-            
-            ret= new Perspective(near,far, angle, xf, yf, zf, xo, yo, zo);
-            cout<<"perspective element id: "<<id<<" near: "<<near<<" far "
-            <<far<<" angle "<<angle<<endl;
-            cout<<"from x:"<<xf<<" y "<<yf<<" z "<<zf<<endl;
-            cout<<"to x:"<<xo<<" y "<<yo<<" z "<<zo<<endl;
-        }
-    }else
-        if(viewchild->ValueTStr()=="ortho" && (id=viewchild->Attribute("id"))!="" 
+        string id="";
+        if(viewchild->ValueTStr()=="perspective" && (id=viewchild->Attribute("id"))!="" 
            && viewchild->QueryFloatAttribute("near",&flodo)==TIXML_SUCCESS
            && viewchild->QueryFloatAttribute("far",&flodo)==TIXML_SUCCESS
-           && viewchild->QueryFloatAttribute("left",&flodo)==TIXML_SUCCESS
-           && viewchild->QueryFloatAttribute("right",&flodo)==TIXML_SUCCESS
-           && viewchild->QueryFloatAttribute("top",&flodo)==TIXML_SUCCESS
-           && viewchild->QueryFloatAttribute("bottom",&flodo)==TIXML_SUCCESS){
-            float near,far,left,right,top,bottom;
-            
+           && viewchild->QueryFloatAttribute("angle",&flodo)==TIXML_SUCCESS){
+            float near,far,angle;
             viewchild->QueryFloatAttribute("near",&near);
             viewchild->QueryFloatAttribute("far",&far);
-            viewchild->QueryFloatAttribute("left",&left);
-            viewchild->QueryFloatAttribute("right",&right);
-            viewchild->QueryFloatAttribute("top",&top);
-            viewchild->QueryFloatAttribute("bottom",&bottom);
-            
-            ret= new Ortho(near,far,left, right, top, bottom);
-            cout<<"ortho element id: "<<id<<" near: "<<near<<" far "
-            <<far<<" left "<<left<<" right "<<right<<" top "<<top
-            <<" bottom "<<bottom<<endl;
-        }
-
+            viewchild->QueryFloatAttribute("angle",&angle);
+            TiXmlElement * from=viewchild->FirstChildElement("from");
+            TiXmlElement * to=viewchild->FirstChildElement("to");
+            if(from && to){
+                float xf,yf,zf,xo,yo,zo;
+                from->QueryFloatAttribute("x",&xf);
+                from->QueryFloatAttribute("y",&yf);
+                from->QueryFloatAttribute("z",&zf);
+                to->QueryFloatAttribute("x",&xo);
+                to->QueryFloatAttribute("y",&yo);
+                to->QueryFloatAttribute("z",&zo);
+                
+                ret= new Perspective(near,far, angle, xf, yf, zf, xo, yo, zo);
+                cout<<"perspective element id: "<<id<<" near: "<<near<<" far "
+                <<far<<" angle "<<angle<<endl;
+                cout<<"from x:"<<xf<<" y "<<yf<<" z "<<zf<<endl;
+                cout<<"to x:"<<xo<<" y "<<yo<<" z "<<zo<<endl;
+            }
+        }else
+            if(viewchild->ValueTStr()=="ortho" && (id=viewchild->Attribute("id"))!="" 
+               && viewchild->QueryFloatAttribute("near",&flodo)==TIXML_SUCCESS
+               && viewchild->QueryFloatAttribute("far",&flodo)==TIXML_SUCCESS
+               && viewchild->QueryFloatAttribute("left",&flodo)==TIXML_SUCCESS
+               && viewchild->QueryFloatAttribute("right",&flodo)==TIXML_SUCCESS
+               && viewchild->QueryFloatAttribute("top",&flodo)==TIXML_SUCCESS
+               && viewchild->QueryFloatAttribute("bottom",&flodo)==TIXML_SUCCESS){
+                float near,far,left,right,top,bottom;
+                
+                viewchild->QueryFloatAttribute("near",&near);
+                viewchild->QueryFloatAttribute("far",&far);
+                viewchild->QueryFloatAttribute("left",&left);
+                viewchild->QueryFloatAttribute("right",&right);
+                viewchild->QueryFloatAttribute("top",&top);
+                viewchild->QueryFloatAttribute("bottom",&bottom);
+                
+                ret= new Ortho(near,far,left, right, top, bottom);
+                cout<<"ortho element id: "<<id<<" near: "<<near<<" far "
+                <<far<<" left "<<left<<" right "<<right<<" top "<<top
+                <<" bottom "<<bottom<<endl;
+            }
+        
     }
     return NULL;
 }
@@ -71,9 +71,9 @@ int loadviews(TiXmlElement* view){
             View * ret=createView(viewchild);
             //TODO
             //Decidir o que fazer;
-
+            
 		}while((viewchild=viewchild->NextSiblingElement()));
-
+        
 		//validação do numero de views
 		return 0;
 	}
@@ -91,7 +91,7 @@ Illumination* loadillumination(TiXmlElement* illu){
 		&& illu->QueryBoolAttribute("doublesided",&doublesided)==TIXML_SUCCESS
 		&& illu->QueryBoolAttribute("local",&local)==TIXML_SUCCESS){
 		cout<<"Root illumination doublesided:"<<doublesided
-			<<" local "<<local<<endl;
+        <<" local "<<local<<endl;
 		//criar class
 		TiXmlElement *illuchild=illu->FirstChildElement();
         ilu = new Illumination();
@@ -101,43 +101,43 @@ Illumination* loadillumination(TiXmlElement* illu){
 			if(illuchild ){
 				float r,g,b,a;
 				if(illuchild->ValueTStr()=="ambient"
-					&& illuchild->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-					&& illuchild->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-					&& illuchild->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-					&& illuchild->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-
+                   && illuchild->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+                   && illuchild->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+                   && illuchild->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+                   && illuchild->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                    
                     ilu->setAmbient(r, g, b, a);
                     ambi=true;
-							cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
-								<<b<<" a "<<a<<endl;
-						}
+                    cout<<"ambient element r: "<<r<<" g: "<<g<<" b "
+                    <<b<<" a "<<a<<endl;
+                }
 				
-
-			if(illuchild->ValueTStr()=="background"
-				&& illuchild->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
-				&& illuchild->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
-				&& illuchild->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
-				&& illuchild->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
-
+                
+                if(illuchild->ValueTStr()=="background"
+                   && illuchild->QueryFloatAttribute("r",&r)==TIXML_SUCCESS
+                   && illuchild->QueryFloatAttribute("g",&g)==TIXML_SUCCESS
+                   && illuchild->QueryFloatAttribute("b",&b)==TIXML_SUCCESS
+                   && illuchild->QueryFloatAttribute("a",&a)==TIXML_SUCCESS){
+                    
 					ilu->setBackground(r, g, b, a);
-                back=true;
+                    back=true;
 					cout<<"background element r: "<<r<<" g: "<<g<<" b "
-						<<b<<" a "<<a<<endl;
+                    <<b<<" a "<<a<<endl;
+                }
+                
 			}
-		
-			}
-		
-
+            
+            
 		}while((illuchild=illuchild->NextSiblingElement()));
         if(ilu && back){
-		//validação do numero de illu tem que ter as 2.
+            //validação do numero de illu tem que ter as 2.
             return ilu;
         }
         else{
             return NULL;
         }
 	}
-return NULL;
+    return NULL;
 }
 
 
@@ -211,7 +211,7 @@ Material* createMaterial(TiXmlElement * child){
         }while((propriedades=propriedades->NextSiblingElement()));
         
     }
-
+    
     return NULL;
 }
 
@@ -224,12 +224,12 @@ int loadmaterials(TiXmlElement* mat){
             Material * mat=createMaterial(child);
             
             //guardar mats
-		
+            
 		}while((child=child->NextSiblingElement())!=NULL);
-
+        
 	}
-
-return 0;
+    
+    return 0;
 }
 
 
@@ -304,7 +304,7 @@ Light * createLight(TiXmlElement * child){
         if(diffuse &&ambient&&ambient &&location){
             return light;
         }
-    
+        
     }
     if(child
        && child->ValueTStr()=="spot"
@@ -384,10 +384,10 @@ Light * createLight(TiXmlElement * child){
             return light;
         }
     }
-
-
+    
+    
     return NULL;
-
+    
 }
 
 int loadlights(TiXmlElement* lights){
@@ -398,8 +398,8 @@ int loadlights(TiXmlElement* lights){
 		do{
 			Light * l=createLight(child);
 		}while((child=child->NextSiblingElement())!=NULL);
-
-}
+        
+    }
 	return 0;
 }
 
@@ -428,7 +428,7 @@ int loadtextures(TiXmlElement* textures){
 		TiXmlElement * child=textures->FirstChildElement();
 		do{
 			Texture * a= createTexture(child);
-        
+            
         }while((child=child->NextSiblingElement())!=NULL);
 	}
 	return 0;
@@ -503,7 +503,7 @@ Transformation * createTransformation(TiXmlElement * child){
             }
             
         }while((subchild=subchild->NextSiblingElement())!=NULL);
-   
+        
         return trans;
     }
     
@@ -519,102 +519,136 @@ int loadtransformations(TiXmlElement* transformations){
 		do{
             Transformation * t=createTransformation(transformations);
             //adicionar ao map
-
+            
 		}while((child=child->NextSiblingElement())!=NULL);
 	}
 	return 0;
+    
 }
+
+
+Primitive * createPrimitive(TiXmlElement * child){
+    Primitive * prim;
+    string id;
+    if(child->ValueTStr()=="primitive" && (id=child->Attribute("id"))!=""){
+        cout << "id: " << id << endl;
+        TiXmlElement* subchild = child->FirstChildElement();
+        float x1, y1, x2, y2, z1, z2, x3, y3, z3, base, top, height, radius, inner, outer;
+        int slices, stacks, loops;
+        string id_mat,id_tex;
+        TiXmlElement * saved=NULL;
+        bool mat=false,tex=false,type=false;
+        do{
+            
+            
+            
+            if(subchild->ValueTStr()=="material"
+               && (id_mat=subchild->Attribute("id"))!=""){
+                mat=true;
+                //add to class
+                cout<<"material: id:"<<id<<endl;
+            }
+            if(subchild->ValueTStr()=="texture"
+               && (id_tex=subchild->Attribute("id"))!=""){
+                tex=true;
+                //add to class
+                cout<<"texture: id:"<<id<<endl;
+            }
+            if(subchild->ValueTStr()=="rectangle" ||
+               subchild->ValueTStr()=="triangle" ||
+               subchild->ValueTStr()=="cylinder" ||
+               subchild->ValueTStr()=="sphere"   ||
+               subchild->ValueTStr()=="torus"  ){
+                type=true;
+                saved=child;
+                
+            }
+            
+            
+        }while((subchild=subchild->NextSiblingElement())!=NULL && !(type&tex&mat));
+        if(saved!=NULL && type==true){
+            subchild=saved;
+            if(subchild->ValueTStr()=="rectangle"
+               && subchild->QueryFloatAttribute("x1",&x1)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("y1",&y1)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("x2",&x2)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("y2",&y2)==TIXML_SUCCESS){
+                
+                prim=new Rectangle(id,id_tex, id_mat, x1, y1,x2, y2);
+                cout<<"rectangle: x1:"<<x1<<" y1: "<<y1<<" x2: "
+                <<x2<< " y2: " << y2 <<endl;
+                
+            }
+            if(subchild->ValueTStr()=="triangle"
+               && subchild->QueryFloatAttribute("x1",&x1)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("y1",&y1)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("z1",&z1)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("x2",&x2)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("y2",&y2)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("z2",&z2)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("x3",&x3)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("y3",&y3)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("z3",&z3)==TIXML_SUCCESS){
+                
+                prim=new Triangle(id, id_tex, id_mat, x1, y1, z1, x2, y2, z2, x3, y3, z3);
+                cout<<"rectangle: x1:"<<x1<<" y1: "<<y1<< " z1: "<<z1<<
+                "x2: "<<x2<< " y2: " << y2 << " z2: " << z2 <<
+                " x3: " << x3 << " y3: " << y3 << " z3: " << z3 <<endl;
+            }
+            
+            if(subchild->ValueTStr()=="cylinder"
+               && subchild->QueryFloatAttribute("base",&base)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("top",&top)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("height",&height)==TIXML_SUCCESS
+               && subchild->QueryIntAttribute("slices",&slices)==TIXML_SUCCESS
+               && subchild->QueryIntAttribute("stacks",&stacks)==TIXML_SUCCESS){
+                
+                //add to class
+                prim = new Cylinder(id, id_tex, id_mat, base, top, height, slices, stacks);
+                cout<<"cylinder: base:"<<base<<" top: "<<top<<" height: "
+                <<height<< " slices: " << slices << " stacks: " << stacks << endl;
+                
+            }
+            if(subchild->ValueTStr()=="sphere"
+               && subchild->QueryFloatAttribute("radius",&radius)==TIXML_SUCCESS
+               && subchild->QueryIntAttribute("slices",&slices)==TIXML_SUCCESS
+               && subchild->QueryIntAttribute("stacks",&stacks)==TIXML_SUCCESS){
+                
+                //add to class
+                prim=new Sphere(id, id_tex, id_mat, radius, slices, stacks);
+                cout<<"Sphere: radius:"<<radius << " slices: " << slices << " stacks: " << stacks << endl;
+                
+            }
+            
+            if(subchild->ValueTStr()=="torus"
+               && subchild->QueryFloatAttribute("inner",&inner)==TIXML_SUCCESS
+               && subchild->QueryFloatAttribute("outer",&outer)==TIXML_SUCCESS
+               && subchild->QueryIntAttribute("slices",&slices)==TIXML_SUCCESS
+               && subchild->QueryIntAttribute("loops",&loops)==TIXML_SUCCESS){
+                
+                //add to class
+                prim=new Torus(id, id_tex, id_mat, inner, outer, slices, stacks);
+                cout<<"torus: inner:"<<inner << " outer: "<< outer<< " slices: " << slices << " loops: " << loops << endl;
+                
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    
+    return NULL;
+}
+
 
 int loadprimitives(TiXmlElement* primitives){
 	if(primitives->ValueTStr()=="primitives"){
 		cout << "Primitives root" << endl;
 		TiXmlElement* child = primitives->FirstChildElement();
 		do{
-			string id;
-			if(child->ValueTStr()=="primitive" && (id=child->Attribute("id"))!=""){
-				cout << "id: " << id << endl;
-				TiXmlElement* subchild = child->FirstChildElement();
-				do{
-					string id;
-					float x1, y1, x2, y2, z1, z2, x3, y3, z3, base, top, height, radius, inner, outer;
-					int slices, stacks, loops;
-
-					if(subchild->ValueTStr()=="material"
-						&& (id=subchild->Attribute("id"))!=""){
-
-						//add to class
-						cout<<"material: id:"<<id<<endl;
-					}
-					if(subchild->ValueTStr()=="texture"
-						&& (id=subchild->Attribute("id"))!=""){
-
-						//add to class
-						cout<<"texture: id:"<<id<<endl;
-					}
-					if(subchild->ValueTStr()=="rectangle"
-					&& subchild->QueryFloatAttribute("x1",&x1)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("y1",&y1)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("x2",&x2)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("y2",&y2)==TIXML_SUCCESS){
-
-						//add to class
-						cout<<"rectangle: x1:"<<x1<<" y1: "<<y1<<" x2: "
-							<<x2<< " y2: " << y2 <<endl;
-
-					}
-					if(subchild->ValueTStr()=="triangle"
-					&& subchild->QueryFloatAttribute("x1",&x1)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("y1",&y1)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("z1",&z1)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("x2",&x2)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("y2",&y2)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("z2",&z2)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("x3",&x3)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("y3",&y3)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("z3",&z3)==TIXML_SUCCESS){
-
-						//add to class
-						cout<<"rectangle: x1:"<<x1<<" y1: "<<y1<< " z1: "<<z1<<
-							"x2: "<<x2<< " y2: " << y2 << " z2: " << z2 <<
-							" x3: " << x3 << " y3: " << y3 << " z3: " << z3 <<endl;
-					}
-
-					if(subchild->ValueTStr()=="cylinder"
-					&& subchild->QueryFloatAttribute("base",&base)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("top",&top)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("height",&height)==TIXML_SUCCESS
-					&& subchild->QueryIntAttribute("slices",&slices)==TIXML_SUCCESS
-					&& subchild->QueryIntAttribute("stacks",&stacks)==TIXML_SUCCESS){
-
-						//add to class
-						cout<<"cylinder: base:"<<base<<" top: "<<top<<" height: "
-							<<height<< " slices: " << slices << " stacks: " << stacks << endl;
-
-					}
-					if(subchild->ValueTStr()=="sphere"
-					&& subchild->QueryFloatAttribute("radius",&radius)==TIXML_SUCCESS
-					&& subchild->QueryIntAttribute("slices",&slices)==TIXML_SUCCESS
-					&& subchild->QueryIntAttribute("stacks",&stacks)==TIXML_SUCCESS){
-
-						//add to class
-						cout<<"cylinder: radius:"<<radius << " slices: " << slices << " stacks: " << stacks << endl;
-
-					}
-
-					if(subchild->ValueTStr()=="torus"
-					&& subchild->QueryFloatAttribute("inner",&inner)==TIXML_SUCCESS
-					&& subchild->QueryFloatAttribute("outer",&outer)==TIXML_SUCCESS
-					&& subchild->QueryIntAttribute("slices",&slices)==TIXML_SUCCESS
-					&& subchild->QueryIntAttribute("loops",&loops)==TIXML_SUCCESS){
-
-						//add to class
-						cout<<"torus: inner:"<<inner << " outer: "<< outer<< " slices: " << slices << " loops: " << loops << endl;
-
-					}
-
-
-				}while((subchild=subchild->NextSiblingElement())!=NULL);
-			}
+			Primitive * p=createPrimitive(child);
 		}while((child=child->NextSiblingElement())!=NULL);
 	}
 	return 0;
@@ -623,7 +657,7 @@ int loadprimitives(TiXmlElement* primitives){
 int loadcomponent(TiXmlElement * component){
     if(component->ValueTStr()=="component" && component->Attribute("id")!=NULL){
         
-    
+        
     }
     
     
@@ -638,9 +672,9 @@ int loadcomponents(TiXmlElement * components){
         do{
             loadcomponent(child);
         }while((child=components->FirstChildElement())!=NULL);
-    
-    }
         
+    }
+    
     return -1;
 }
 
@@ -653,7 +687,7 @@ int loaddsxfile(const string & filename){
 		cout<<filename<<" not found!!!"<<endl;
 		return -1;
 	}
-
+    
 	raiz=doc.FirstChildElement("dsx");
 	if(raiz){
 		TiXmlElement* scene=raiz->FirstChildElement("scene");
@@ -665,7 +699,7 @@ int loaddsxfile(const string & filename){
 		TiXmlElement* materials=raiz->FirstChildElement("materials");
 		TiXmlElement* transformations=raiz->FirstChildElement("transformations");
 		TiXmlElement* primitives=raiz->FirstChildElement("primitives");
-
+        
 		loadscene(scene);
 		loadviews(views);
 		loadillumination(illumination);
