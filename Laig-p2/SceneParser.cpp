@@ -1,6 +1,14 @@
 #include "SceneParser.h"
 
 
+
+
+
+map<string,Primitive*> primitivas;
+map<string,int> textura;
+map<string, Transformation*> transformations; 
+map<string, Material*> materials;
+
 View * createView(TiXmlElement * viewchild){
     float flodo;
     if(viewchild ){

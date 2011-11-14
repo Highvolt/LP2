@@ -24,10 +24,4 @@ using namespace std;
 
 
 
-
-map<string,Primitive*> primitivas;
-map<string,int> textura;
-map<string, Transformation*> transformations; 
-map<string, Material*> materials;
-
 int loaddsxfile(const string & filename);
