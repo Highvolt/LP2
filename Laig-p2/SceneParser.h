@@ -12,6 +12,10 @@
 #include "Lights.h"
 #include "Material.h"
 #include "Texture.h"
+#include "Views.h"
+#include "Illumination.h"
+#include "Texture.h"
+#include "Transformation.h"
 #include <string>
 #include <cstdlib>
 #include "../tinyxml.h"
@@ -19,10 +23,5 @@ using namespace std;
  
 
 
-/*
 
-map<string,Primitive*> primitivas;
-map<string,int> textura;
-map<string, float*> transformations; 
-*/
 int loaddsxfile(const string & filename);
