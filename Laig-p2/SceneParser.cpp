@@ -529,7 +529,7 @@ Transformation * createTransformation(TiXmlElement * child){
                 }
                 
                 //add to class
-                trans->rotate(ax, ay, az, angle);
+                trans->rotate(angle, ax, ay, az);
                 cout<<"rotate: axis:"<<axis<<" angle: "<<angle<<endl;
                 
             }
