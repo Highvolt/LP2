@@ -25,11 +25,11 @@ class Component{
 	vector<Component*> child_comp;
 	vector<Primitive*> child_prim;
 	vector<Material*> materials;
-	Texture* texture;
+	Textures* texture;
 	Transformation* transf;
 	char key;
 public:
-	Component(vector<string> id_comp, vector<Primitive*> child_prim, vector<Material*> materials,Texture* texture, Transformation* transf);
+	Component(vector<string> id_comp, vector<Primitive*> child_prim, vector<Material*> materials,Textures* texture, Transformation* transf);
 	void apply();
     void setComp(vector<Component*> cmp);
     vector<string> getIDvector();

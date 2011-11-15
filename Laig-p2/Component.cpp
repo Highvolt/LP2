@@ -1,6 +1,6 @@
 #include "Component.h"
 
-Component::Component(vector<string> id_comp, vector<Primitive*> child_prim, vector<Material*> materials,Texture* texture, Transformation* transf){
+Component::Component(vector<string> id_comp, vector<Primitive*> child_prim, vector<Material*> materials,Textures* texture, Transformation* transf){
 	this->id_comp= id_comp;
 	this->child_prim = child_prim;
 	this->texture = texture;

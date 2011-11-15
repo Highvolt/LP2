@@ -14,7 +14,7 @@ using namespace std;
 
 
 
-class Texture{
+class Textures{
 	string id_texture;
 	float length_s;
     float length_t;
@@ -23,7 +23,7 @@ class Texture{
 	static int pos_tex;
 public:
 	bool has_none, inherits;
-	Texture(string id, float ls, float lt, char* file, int tex_type);
+	Textures(string id, float ls, float lt, char* file, int tex_type);
 	string getId();
 	int getIdNum();
 	void setLengthS(float lenght_s);

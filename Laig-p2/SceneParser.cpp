@@ -3,7 +3,7 @@
 
 
 map<string,Primitive*> mprimitivas;
-map<string,Texture *> mtextura;
+map<string,Textures *> mtextura;
 map<string, Transformation*> mtransformations; 
 map<string, Material*> mmaterials;
 map<string, Light*> mlight;
@@ -442,17 +442,22 @@ int loadlights(TiXmlElement* lights){
 	return 0;
 }
 
-Texture * createTexture(TiXmlElement * child){
+Textures * createTexture(TiXmlElement * child){
     string id, file;
-    float length_s, length_t;
+    Textures* a;
+    float length_s=0, length_t=0;
     if(child
        && child->ValueTStr()=="texture"
-       && (id=child->Attribute("id"))!=""  && (file=child->Attribute("file"))!="" && (child->QueryFloatAttribute("length_s",&length_s)==TIXML_SUCCESS)
+       && (id=child->Attribute("id"))!=""  && (file=child->Attribute("file"))!="" && (child->QueryFloatAttribute("length_s", (float*)&length_s)==TIXML_SUCCESS)
        && (child->QueryFloatAttribute("length_t",&length_t)==TIXML_SUCCESS)){
-        Texture* a= new Texture(id, length_s, length_t, (char *)file.c_str(), 0);
-        a->setLengthS(length_s);
-        a->setLengthT(length_t);
         
+        a= (Textures*) new Textures(id, length_s, length_t, (char *)file.c_str(), 0);
+        //a->setLengthS(length_s);
+        //a->setLengthT(length_t);
+        if(a!=NULL){
+            mtextura[id]=a;
+            cout<<"textura id: "<<id<<" added"<<endl;
+        }
         cout<< "id: " << id << " file: " << file << " length_s: " << length_s << " length_t: " << length_t<<endl;
         return a;
     }
@@ -466,8 +471,8 @@ int loadtextures(TiXmlElement* textures){
 		cout<<"Textures root"<<endl;
 		TiXmlElement * child=textures->FirstChildElement();
 		do{
-			Texture * a= createTexture(child);
-            mtextura[a->getId()]=a;
+			Textures * a= createTexture(child);
+
             
         }while((child=child->NextSiblingElement())!=NULL);
 	}
@@ -727,6 +732,7 @@ int loadprimitives(TiXmlElement* primitives){
 
 Component* loadcomponent(TiXmlElement * component){
     string id;
+    Textures * vtex;
     if(component->ValueTStr()=="component" && (id=component->Attribute("id"))!=""){
         cout<<"Component id: "<<id<<endl;
         TiXmlElement * transformation=component->FirstChildElement("transformation");
@@ -755,10 +761,15 @@ Component* loadcomponent(TiXmlElement * component){
                 vmat=loadvectormaterials(materials);
             }
             string id_tex;
-            Texture * vtex=NULL;
-            if((id_tex=texture->Attribute("id"))!=""){
-                vtex=mtextura[id_tex];
+            
+            if(texture->Attribute("id")!=NULL){
+                id_tex=texture->Attribute("id");
+                if(mtextura[id_tex]!=NULL)
+                    vtex=mtextura[id_tex];
+                else
+                    cout<<"Texture not found "<<id_tex<<endl;
             }
+            
             TiXmlElement * childchild=children->FirstChildElement();
             vector<string> vcomp;
             vector<Primitive*> vprim;

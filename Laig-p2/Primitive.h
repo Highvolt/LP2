@@ -27,7 +27,7 @@ using namespace std;
 class Primitive {
 protected:
     string id, texture,material;
-    Texture * tex;
+    Textures * tex;
     Material * mat;
 
 public:
@@ -40,7 +40,7 @@ public:
     string getMat(){
         return material;
     }
-    void setTex(Texture * tex){
+    void setTex(Textures * tex){
         this->tex=tex;
     }
     void setMat(Material * mat){
