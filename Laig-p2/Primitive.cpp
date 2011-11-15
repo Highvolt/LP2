@@ -90,6 +90,8 @@ Triangle::Triangle(string id, string texture, string material,
 }
 int Triangle::render(Textures* tx){
     glEnable(GL_NORMALIZE);
+    if(tx!=NULL)
+        tx->apply();
 	float acN= sqrt( (x3-x1)*(x3-x1) + (y3-y1)*(y3-y1) + (z3-z1)*(z3-z1));
     float abN= sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) + (z2-z1)*(z2-z1));
 	float ab[3],ac[3];
@@ -105,23 +107,25 @@ int Triangle::render(Textures* tx){
     float AE = abN*sin(acos(cosAlfa));
 
 
-
+    glColor3d(1.0, 1.0, 1.0);
 	glPushMatrix();
 	glBegin(GL_TRIANGLES);
     glNormal3f(0,0,1);
     
     glVertex3f(x1, y1, z1);
+    if(tx!=NULL)
     glTexCoord2f(acN/tx->getLengthS(), 0.0);
     glVertex3f(x2, y2, z2); 
+    if(tx!=NULL)
     glTexCoord2f(AD/tx->getLengthS(),AE/tx->getLengthT());
     glVertex3f(x3, y3, z3);
+    if(tx!=NULL)
     glTexCoord2f(0.0, 0.0);
     
 
     glEnd();
 	glPopMatrix();
-	 if(this->tex!=NULL)
-		 tex->apply();
+
 		return 0;
 
 }
@@ -145,27 +149,28 @@ int Rectangle::render(Textures* tx){
             glEnable(GL_TEXTURE_2D);
 			glBindTexture(GL_TEXTURE_2D, tx->getIdNum());
     }
-
-	float ls=tx->getLengthS();
-    float lt=tx->getLengthT();
-	float xrep = (x2-x1)  /ls;
-    float yrep = (y2-y1)  /lt;
+    float ls,lt,xrep,yrep;
+	if(tx!=NULL){
+   ls=tx->getLengthS();
+     lt=tx->getLengthT();
+	 xrep = (x2-x1)  /ls;
+       yrep = (y2-y1)  /lt;}
     glColor3d(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glNormal3d(0, 0, 1);
-    glVertex3f(x1, y1, 0);	glTexCoord2f(0.0, 0.0); 
+    glVertex3f(x1, y1, 0);	if(tx!=NULL)glTexCoord2f(0.0, 0.0); 
     
 
 		 
-    glVertex3f(x2, y1, 0);glTexCoord2f(xrep, 0.0);
+    glVertex3f(x2, y1, 0);if(tx!=NULL)glTexCoord2f(xrep, 0.0);
 
-    glVertex3f(x2, y2, 0);glTexCoord2f(xrep, yrep);
+    glVertex3f(x2, y2, 0);if(tx!=NULL)glTexCoord2f(xrep, yrep);
     
 		
-    glVertex3f(x1, y2, 0);glTexCoord2f(0.0, yrep); 
+    glVertex3f(x1, y2, 0);if(tx!=NULL)glTexCoord2f(0.0, yrep); 
     glEnd();
 	glPopMatrix();
-    if(has_texture)
+    if(tx!=NULL)
         glDisable(GL_TEXTURE_2D);
 		return 0;
 	

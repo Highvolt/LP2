@@ -591,7 +591,7 @@ int loadtransformations(TiXmlElement* transformations){
 
 
 Primitive * createPrimitive(TiXmlElement * child){
-    Primitive * prim;
+    Primitive * prim=NULL;
     string id;
     if(child->ValueTStr()=="primitive" && child->Attribute("id")!=NULL){
         id=child->Attribute("id");
@@ -630,7 +630,7 @@ Primitive * createPrimitive(TiXmlElement * child){
             
             
         }while((subchild=subchild->NextSiblingElement())!=NULL && !(type&tex&mat));
-        if(saved!=NULL && type==true){
+        if(saved!=NULL && type==true&& tex && mat){
             subchild=saved;
             
             if(subchild->ValueTStr()=="rectangle"
@@ -657,7 +657,7 @@ Primitive * createPrimitive(TiXmlElement * child){
                && subchild->QueryFloatAttribute("z3",&z3)==TIXML_SUCCESS){
                 
                 prim=new Triangle(id, id_tex, id_mat, x1, y1, z1, x2, y2, z2, x3, y3, z3);
-                cout<<"rectangle: x1:"<<x1<<" y1: "<<y1<< " z1: "<<z1<<
+                cout<<"triangle: x1:"<<x1<<" y1: "<<y1<< " z1: "<<z1<<
                 "x2: "<<x2<< " y2: " << y2 << " z2: " << z2 <<
                 " x3: " << x3 << " y3: " << y3 << " z3: " << z3 <<endl;
                 return prim;
@@ -789,7 +789,8 @@ Component* loadcomponent(TiXmlElement * component){
                         cout<<"children primref id: "<<id_c<<endl;
                         Primitive * cmp=mprimitivas[id_c];
                         if(cmp!=NULL){
-                            cout<<"children primitiva id: "<<id_c<<endl;
+                            cout<<"children primitiva id: "<<cmp->getId()<<endl;
+                            cmp->render((*mtextura.begin()).second);
                             vprim.push_back(cmp);
                         }
                     }

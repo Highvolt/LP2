@@ -1,5 +1,5 @@
 #include "Component.h"
-
+#include <iostream>
 Component::Component(vector<string> id_comp, vector<Primitive*> child_prim, vector<Material*> materials,Textures* texture, Transformation* transf){
 	this->id_comp= id_comp;
 	this->child_prim = child_prim;
@@ -35,8 +35,10 @@ void Component::apply(){
 
     
         for(vector<Primitive*>::iterator it= child_prim.begin(); it != child_prim.end(); ++it){
-            if(this->texture!=NULL)
+            
                 (*it)->render(texture);
+            
+        
         }
     
         for(vector<Component*>::iterator it= child_comp.begin(); it != child_comp.end(); ++it){
