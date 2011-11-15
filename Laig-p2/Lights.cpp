@@ -38,6 +38,9 @@ int Light::getLightX()
 
 Light::Light(int number){
 	this->light_number = used++;
+    glLightf(getLightX(), GL_CONSTANT_ATTENUATION,  0);
+    glLightf(getLightX(), GL_LINEAR_ATTENUATION,    1);
+    glLightf(getLightX(), GL_QUADRATIC_ATTENUATION, 0);
 }
 
 string Light::getId(){
@@ -141,6 +144,7 @@ void Spot::apply(bool enabled){
 	if(enabled){
 		glLightfv(getLightX(), GL_POSITION, location);
         glLightfv(getLightX(), GL_SPOT_DIRECTION, direction);
+        glEnable(getLightX());
 	}
 }
 

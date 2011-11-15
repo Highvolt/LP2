@@ -93,6 +93,11 @@ int main_window;
 GLUI  *glui2;
 //Utiliza as estruturas de dados com a informação do xml para construir o plano
 
+
+extern map<string, Light*> mlight;
+extern map<string, View*> mview;
+extern View * active;
+
 void display_axis(){
 	GLUquadric* glQ2;
 	glQ2 = gluNewQuadric();
@@ -131,10 +136,12 @@ void display(void)
 	GLUquadric* glQ;	// nec. p/ criar sup. quadraticas (cilindros, esferas...)
 
 	// ****** fim de todas as declaracoes da funcao display() ******
-
+    
 
 
 	glQ = gluNewQuadric();
+    
+    
 	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
@@ -144,21 +151,24 @@ void display(void)
 	glFrustum( -xy_aspect*.04, xy_aspect*.04, -.04, .04, .1, 500.0 );
 
 	//inicializacoes da matriz de transformacoes geometricas
-	glMatrixMode( GL_MODELVIEW );
-	glLoadIdentity();
+	//glMatrixMode( GL_MODELVIEW );
+	//glLoadIdentity();
 	
 	// afasta a cena de 25 unidades mais a distância...
-	glTranslated(0.0,0.0,-25.0);
+	//glTranslated(0.0,0.0,-25.0);
 	// ...decorrente da utilizacao do botao de afastamento
-    glTranslatef( obj_pos[0], obj_pos[1], -obj_pos[2] );    
+  //  glTranslatef( obj_pos[0], obj_pos[1], -obj_pos[2] );    
 
 	// roda a cena para ficar em perspectiva
-	glRotated(20.0, 1.0,0.0,0.0 );		// 20 graus em torno de X
-	glRotated(-45.0, 0.0,1.0,0.0 );		//-45 graus em torno de Y
+//	glRotated(20.0, 1.0,0.0,0.0 );		// 20 graus em torno de X
+//	glRotated(-45.0, 0.0,1.0,0.0 );		//-45 graus em torno de Y
 
 	// aplica efeito do botao de rotacao
-	glMultMatrixf( view_rotate );
-
+	//glMultMatrixf( view_rotate );
+    //(*mview.begin()).second->apply();
+    if(active!=NULL){
+        active->apply();
+    }
 	// permissao de atribuicao directa de cores
 	// para objectos ue nao tem material atribuido
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
@@ -195,6 +205,14 @@ void display(void)
 	// falta declarar a cor
 	// desenhar o objecto
 
+    for(map<string,Light*>::iterator it=mlight.begin();it!=mlight.end();it++){
+        if((*it).second!=NULL)
+            (*it).second->apply(true);
+        
+    }
+
+    
+    
     glCallList(1);
     
 	// inibicao de atribuicao directa de cores

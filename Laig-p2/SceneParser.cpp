@@ -10,6 +10,8 @@ map<string, Light*> mlight;
 map<string, Component*> mcomponent;
 map<string, View*> mview;
 
+View * active;
+
 View * createView(TiXmlElement * viewchild){
     float flodo;
     if(viewchild ){
@@ -39,7 +41,10 @@ View * createView(TiXmlElement * viewchild){
                 <<far<<" angle "<<angle<<endl;
                 cout<<"from x:"<<xf<<" y "<<yf<<" z "<<zf<<endl;
                 cout<<"to x:"<<xo<<" y "<<yo<<" z "<<zo<<endl;
+                ret->setId(id);
+                return ret;
             }
+            
         }else
             if(viewchild->ValueTStr()=="ortho" && (id=viewchild->Attribute("id"))!="" 
                && viewchild->QueryFloatAttribute("near",&flodo)==TIXML_SUCCESS
@@ -61,6 +66,8 @@ View * createView(TiXmlElement * viewchild){
                 cout<<"ortho element id: "<<id<<" near: "<<near<<" far "
                 <<far<<" left "<<left<<" right "<<right<<" top "<<top
                 <<" bottom "<<bottom<<endl;
+                 ret->setId(id);
+                return ret;
             }
         
     }
@@ -878,6 +885,14 @@ int loaddsxfile(const string & filename){
 		loadprimitives(primitives);
         loadcomponents(component);
         
+        string default_view="";
+        if(views->Attribute("default")!=NULL){
+            default_view=views->Attribute("default");
+            if(mview[default_view]!=NULL)
+                active=mview[default_view];
+            
+        }
+
         for(map<string,Primitive*>::iterator it=mprimitivas.begin();it!=mprimitivas.end();it++){
             if((*it).second!=NULL){
                 (*it).second->setMat(mmaterials[(*it).second->getMat()]);
@@ -896,6 +911,9 @@ int loaddsxfile(const string & filename){
         }
         mcomponent[rootcomp]->apply();
         glEndList();
+        //active=(*mview.begin()).second;
+        cout<<(*mview.begin()).second->getId()<<endl;
+        cout<<(*mview.begin()).first<<endl;
 		return length;
 	}
 

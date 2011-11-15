@@ -28,7 +28,12 @@ Perspective::Perspective(float near,float far, float angle, float from_x, float 
 }
 
 void Perspective::apply(){
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glMatrixMode( GL_PROJECTION );
+        glLoadIdentity();
         gluPerspective(angle, xy_aspect, near,far);
+        glMatrixMode( GL_MODELVIEW );
+        glLoadIdentity();
         if(to_x==from_x && to_z==from_z)
                 gluLookAt(from_x,from_y,from_z,to_x,to_y,to_z,1,0,0);
         else
@@ -44,5 +49,10 @@ Ortho::Ortho(float near, float far, float left, float right, float top, float bo
 }
 
 void Ortho::apply(){
-        glOrtho(left,  right,  bottom,  top,  near,  far);
+    glMatrixMode( GL_PROJECTION );
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    glOrtho(left*xy_aspect,  right*xy_aspect,  bottom,  top,  near,  far);
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
 }
