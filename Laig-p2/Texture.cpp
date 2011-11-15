@@ -1,7 +1,7 @@
 #include "Texture.h"
 #include <iostream>
 
-int Textures::pos_tex=0;
+int Textures::pos_tex=1;
 
 Textures::Textures(string id, float ls, float lt, char* file, int tex_type)
 {

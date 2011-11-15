@@ -144,10 +144,10 @@
 		2CC1041C1471E56100330FB4 /* placa.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = placa.bmp; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/placa.bmp; sourceTree = "<group>"; };
 		2CC1041D1471E56100330FB4 /* relva.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = relva.bmp; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/relva.bmp; sourceTree = "<group>"; };
 		2CC104231472006700330FB4 /* demo.dsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demo.dsx; path = ../../Downloads/LAIG_TP2_DSX_T03_G05/demo.dsx; sourceTree = "<group>"; };
-		2CC104251472006700330FB4 /* front_wall.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = front_wall.bmp; sourceTree = "<group>"; };
-		2CC104261472006700330FB4 /* grass.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = grass.bmp; sourceTree = "<group>"; };
-		2CC104271472006700330FB4 /* pillar_mid.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pillar_mid.bmp; sourceTree = "<group>"; };
-		2CC104281472006700330FB4 /* rock.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = rock.bmp; sourceTree = "<group>"; };
+		2CC104251472006700330FB4 /* front_wall.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = front_wall.bmp; path = ../../Downloads/LAIG_TP2_DSX_T03_G05/Textures/front_wall.bmp; sourceTree = "<group>"; };
+		2CC104261472006700330FB4 /* grass.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = grass.bmp; path = ../../Downloads/LAIG_TP2_DSX_T03_G05/Textures/grass.bmp; sourceTree = "<group>"; };
+		2CC104271472006700330FB4 /* pillar_mid.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = pillar_mid.bmp; path = ../../Downloads/LAIG_TP2_DSX_T03_G05/Textures/pillar_mid.bmp; sourceTree = "<group>"; };
+		2CC104281472006700330FB4 /* rock.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = rock.bmp; path = ../../Downloads/LAIG_TP2_DSX_T03_G05/Textures/rock.bmp; sourceTree = "<group>"; };
 		2CCC9D25147206D9009FF849 /* chao.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = chao.bmp; path = ../../Downloads/LAIG_TP2_DSX_T3G09/chao.bmp; sourceTree = "<group>"; };
 		2CCC9D26147206D9009FF849 /* demograph2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demograph2.xml; path = ../../Downloads/LAIG_TP2_DSX_T3G09/demograph2.xml; sourceTree = "<group>"; };
 		2CCC9D27147206D9009FF849 /* madeira.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = madeira.bmp; path = ../../Downloads/LAIG_TP2_DSX_T3G09/madeira.bmp; sourceTree = "<group>"; };
@@ -181,6 +181,10 @@
 		2C34839F14700A7800703145 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2CC104251472006700330FB4 /* front_wall.bmp */,
+				2CC104261472006700330FB4 /* grass.bmp */,
+				2CC104271472006700330FB4 /* pillar_mid.bmp */,
+				2CC104281472006700330FB4 /* rock.bmp */,
 				2C4DA1D114723C620066715C /* cafe.xml */,
 				2CCC9D33147207C8009FF849 /* bus.dsx */,
 				2CCC9D34147207C8009FF849 /* textures */,
@@ -271,10 +275,6 @@
 		2CC104241472006700330FB4 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
-				2CC104251472006700330FB4 /* front_wall.bmp */,
-				2CC104261472006700330FB4 /* grass.bmp */,
-				2CC104271472006700330FB4 /* pillar_mid.bmp */,
-				2CC104281472006700330FB4 /* rock.bmp */,
 			);
 			name = Textures;
 			path = ../../Downloads/LAIG_TP2_DSX_T03_G05/Textures;

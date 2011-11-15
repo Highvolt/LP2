@@ -41,6 +41,8 @@ void Material::setMatEmission(float red, float green, float blue, float alpha){
 }
 
 void Material::applyMat(){
+    glEnable(GL_COLOR);
+    glEnable(GL_COLOR_MATERIAL);
 	glMaterialfv(GL_FRONT,GL_SHININESS,&mat_shininess[0]);
 	glMaterialfv(GL_FRONT,GL_EMISSION,&mat_emission[0]);
 	glMaterialfv(GL_FRONT,GL_SPECULAR,&mat_specular[0]);

@@ -732,7 +732,7 @@ int loadprimitives(TiXmlElement* primitives){
 
 Component* loadcomponent(TiXmlElement * component){
     string id;
-    Textures * vtex;
+    Textures * vtex=NULL;
     if(component->ValueTStr()=="component" && (id=component->Attribute("id"))!=""){
         cout<<"Component id: "<<id<<endl;
         TiXmlElement * transformation=component->FirstChildElement("transformation");

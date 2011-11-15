@@ -35,7 +35,8 @@ void Component::apply(){
 
     
         for(vector<Primitive*>::iterator it= child_prim.begin(); it != child_prim.end(); ++it){
-                (*it)->render();
+            if(this->texture!=NULL)
+                (*it)->render(texture);
         }
     
         for(vector<Component*>::iterator it= child_comp.begin(); it != child_comp.end(); ++it){

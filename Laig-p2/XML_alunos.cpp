@@ -195,6 +195,8 @@ void display(void)
 	// falta declarar a cor
 	// desenhar o objecto
 
+    glCallList(1);
+    
 	// inibicao de atribuicao directa de cores
 	glDisable(GL_COLOR_MATERIAL);
 
@@ -206,7 +208,7 @@ void display(void)
 	glMaterialfv(GL_FRONT, GL_AMBIENT,   mat1_ambient);
 
 	
-glCallList(1);
+
 
 	
 	// swapping the buffers causes the rendering above to be shown
@@ -418,7 +420,7 @@ int main(int argc, char* argv[])
 	GLUI_Master.set_glutIdleFunc( myGlutIdle );
 	
 	inicializacao();
-	axis_lenght = loaddsxfile("greenhill.dsx");
+	axis_lenght = loaddsxfile("demo.dsx");
 	glutMainLoop();
 
 	return 0;

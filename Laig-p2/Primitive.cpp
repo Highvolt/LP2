@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "Primitive.h"
+#include <cmath>
 
 Primitive::Primitive(string id,string texture,string material){
 	this->id=id;
@@ -48,8 +49,8 @@ Cylinder::Cylinder(string id, string texture, string material,float base,float t
 
 int Cylinder::render(Textures* tx){
     glEnable(GL_NORMALIZE);
-    if(this->tex!=NULL)
-    this->tex->apply();
+    if(tx!=NULL)
+    tx->apply();
     glQ = gluNewQuadric();
 	/*glPushMatrix();
 	glRotated(180,0,1,0);
@@ -106,14 +107,16 @@ int Triangle::render(Textures* tx){
 
 
 	glPushMatrix();
-	glBegin(GL_POLYGON);
+	glBegin(GL_TRIANGLES);
     glNormal3f(0,0,1);
-    glTexCoord2f(acN/tx->getLengthS(), 0.0);
+    
     glVertex3f(x1, y1, z1);
-	glTexCoord2f(AD/tx->getLengthS(),AE/tx->getLengthT());
-     glVertex3f(x2, y2, z2); 
-    glTexCoord2f(0.0, 0.0);
+    glTexCoord2f(acN/tx->getLengthS(), 0.0);
+    glVertex3f(x2, y2, z2); 
+    glTexCoord2f(AD/tx->getLengthS(),AE/tx->getLengthT());
     glVertex3f(x3, y3, z3);
+    glTexCoord2f(0.0, 0.0);
+    
 
     glEnd();
 	glPopMatrix();
@@ -133,35 +136,33 @@ Rectangle::Rectangle(string id, string texture, string material,float x1,float y
 int Rectangle::render(Textures* tx){
 	glEnable(GL_NORMALIZE);
     bool has_texture=false;
-    if(this->tex!=NULL)
-	this->tex->apply();
+    if(tx!=NULL)
+	tx->apply();
     glPushMatrix();
     //VERIFICA SE TEM TEXTURA
     //CARREGAR MATERIAL
-    if(has_texture){
+    if(tx!=NULL){
             glEnable(GL_TEXTURE_2D);
-			glBindTexture(GL_TEXTURE_2D, tex->getIdNum());
+			glBindTexture(GL_TEXTURE_2D, tx->getIdNum());
     }
 
 	float ls=tx->getLengthS();
     float lt=tx->getLengthT();
 	float xrep = (x2-x1)  /ls;
     float yrep = (y2-y1)  /lt;
-
+    glColor3d(1.0, 1.0, 1.0);
     glBegin(GL_POLYGON);
     glNormal3d(0, 0, 1);
-    if(has_texture)
-		glTexCoord2f(0.0, 0.0); 
-    glVertex3f(x1, y1, 0);
-    if(has_texture)
-		glTexCoord2f(xrep, 0.0); 
-    glVertex3f(x2, y1, 0);
-    if(has_texture)
-		glTexCoord2f(xrep, yrep); 
-    glVertex3f(x2, y2, 0);
-    if(has_texture)
-		glTexCoord2f(0.0, yrep); 
-    glVertex3f(x1, y2, 0);
+    glVertex3f(x1, y1, 0);	glTexCoord2f(0.0, 0.0); 
+    
+
+		 
+    glVertex3f(x2, y1, 0);glTexCoord2f(xrep, 0.0);
+
+    glVertex3f(x2, y2, 0);glTexCoord2f(xrep, yrep);
+    
+		
+    glVertex3f(x1, y2, 0);glTexCoord2f(0.0, yrep); 
     glEnd();
 	glPopMatrix();
     if(has_texture)
@@ -177,8 +178,8 @@ Sphere::Sphere(string id, string texture, string material, float radius,int slic
 }
 
 int Sphere::render(Textures* tx){
-    if(this->tex!=NULL)
-    this->tex->apply();
+    if(tx!=NULL)
+    tx->apply();
     glEnable(GL_NORMALIZE);
 	glQ = gluNewQuadric();
 	glPushMatrix();
