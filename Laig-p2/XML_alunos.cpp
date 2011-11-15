@@ -202,7 +202,7 @@ void display(void)
 	glMaterialfv(GL_FRONT, GL_AMBIENT,   mat1_ambient);
 
 	
-
+glCallList(1);
 
 	
 	// swapping the buffers causes the rendering above to be shown

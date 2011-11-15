@@ -580,7 +580,8 @@ int loadtransformations(TiXmlElement* transformations){
 Primitive * createPrimitive(TiXmlElement * child){
     Primitive * prim;
     string id;
-    if(child->ValueTStr()=="primitive" && (id=child->Attribute("id"))!=""){
+    if(child->ValueTStr()=="primitive" && child->Attribute("id")!=NULL){
+        id=child->Attribute("id");
         cout << "id: " << id << endl;
         TiXmlElement* subchild = child->FirstChildElement();
         float x1, y1, x2, y2, z1, z2, x3, y3, z3, base, top, height, radius, inner, outer;
@@ -610,7 +611,7 @@ Primitive * createPrimitive(TiXmlElement * child){
                subchild->ValueTStr()=="sphere"   ||
                subchild->ValueTStr()=="torus"  ){
                 type=true;
-                saved=child;
+                saved=subchild;
                 
             }
             
@@ -618,6 +619,7 @@ Primitive * createPrimitive(TiXmlElement * child){
         }while((subchild=subchild->NextSiblingElement())!=NULL && !(type&tex&mat));
         if(saved!=NULL && type==true){
             subchild=saved;
+            
             if(subchild->ValueTStr()=="rectangle"
                && subchild->QueryFloatAttribute("x1",&x1)==TIXML_SUCCESS
                && subchild->QueryFloatAttribute("y1",&y1)==TIXML_SUCCESS
@@ -627,6 +629,7 @@ Primitive * createPrimitive(TiXmlElement * child){
                 prim=new Rectangle(id,id_tex, id_mat, x1, y1,x2, y2);
                 cout<<"rectangle: x1:"<<x1<<" y1: "<<y1<<" x2: "
                 <<x2<< " y2: " << y2 <<endl;
+                return prim;
                 
             }
             if(subchild->ValueTStr()=="triangle"
@@ -644,6 +647,7 @@ Primitive * createPrimitive(TiXmlElement * child){
                 cout<<"rectangle: x1:"<<x1<<" y1: "<<y1<< " z1: "<<z1<<
                 "x2: "<<x2<< " y2: " << y2 << " z2: " << z2 <<
                 " x3: " << x3 << " y3: " << y3 << " z3: " << z3 <<endl;
+                return prim;
             }
             
             if(subchild->ValueTStr()=="cylinder"
@@ -657,6 +661,7 @@ Primitive * createPrimitive(TiXmlElement * child){
                 prim = new Cylinder(id, id_tex, id_mat, base, top, height, slices, stacks);
                 cout<<"cylinder: base:"<<base<<" top: "<<top<<" height: "
                 <<height<< " slices: " << slices << " stacks: " << stacks << endl;
+                return prim;
                 
             }
             if(subchild->ValueTStr()=="sphere"
@@ -667,6 +672,7 @@ Primitive * createPrimitive(TiXmlElement * child){
                 //add to class
                 prim=new Sphere(id, id_tex, id_mat, radius, slices, stacks);
                 cout<<"Sphere: radius:"<<radius << " slices: " << slices << " stacks: " << stacks << endl;
+                return prim;
                 
             }
             
@@ -679,9 +685,12 @@ Primitive * createPrimitive(TiXmlElement * child){
                 //add to class
                 prim=new Torus(id, id_tex, id_mat, inner, outer, slices, stacks);
                 cout<<"torus: inner:"<<inner << " outer: "<< outer<< " slices: " << slices << " loops: " << loops << endl;
-                
+                return prim;
             }
+        
+        
         }
+        
         
         
     }
@@ -744,15 +753,20 @@ Component* loadcomponent(TiXmlElement * component){
             vector<Primitive*> vprim;
             do{
                 string id_c="";
-                if(childchild && (id_c=childchild->Attribute("id"))!=""){
-                    if(childchild->ValueTStr()!="componentref"){
+                if(childchild && childchild->Attribute("id")!=NULL){
+                    id_c=childchild->Attribute("id");
+                    if(childchild->ValueTStr()=="componentref"){
+                        cout<<"children cmpref id: "<<id_c<<endl;
                         Component * cmp=mcomponent[id_c];
                         if(cmp!=NULL){
+                            cout<<"children comp id: "<<id_c<<endl;
                             vcomp.push_back(cmp);
                         }
-                    }else if(childchild->ValueTStr()!="primitiveref"){
+                    }else if(childchild->ValueTStr()=="primitiveref"){
+                        cout<<"children primref id: "<<id_c<<endl;
                         Primitive * cmp=mprimitivas[id_c];
                         if(cmp!=NULL){
+                            cout<<"children primitiva id: "<<id_c<<endl;
                             vprim.push_back(cmp);
                         }
                     }
@@ -818,6 +832,14 @@ int loaddsxfile(const string & filename){
 		//loadcomponents(component);
 		loadprimitives(primitives);
         loadcomponents(component);
+        
+        
+        glNewList(1, GL_COMPILE);
+        for(map<string,Component*>::iterator it=mcomponent.begin();it!=mcomponent.end();it++){
+            if((*it).second!=NULL)
+                (*it).second->apply();
+        }
+        glEndList();
 	}
 
 	return 0;

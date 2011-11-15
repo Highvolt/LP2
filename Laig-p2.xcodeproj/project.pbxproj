@@ -29,6 +29,10 @@
 		2C7D394414614E190092B047 /* demograph.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C7D394214614DF00092B047 /* demograph.xml */; };
 		2C7D394714615C5F0092B047 /* Primitive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D394614615C5F0092B047 /* Primitive.cpp */; };
 		2C7D394A14616B6B0092B047 /* SceneParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C7D394914616B6B0092B047 /* SceneParser.cpp */; };
+		2CC1041F1471E56D00330FB4 /* checkered.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC1041A1471E56100330FB4 /* checkered.bmp */; };
+		2CC104201471E56D00330FB4 /* greenhill.dsx in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC1041B1471E56100330FB4 /* greenhill.dsx */; };
+		2CC104211471E56D00330FB4 /* placa.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC1041C1471E56100330FB4 /* placa.bmp */; };
+		2CC104221471E56D00330FB4 /* relva.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC1041D1471E56100330FB4 /* relva.bmp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +52,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				2CC1041F1471E56D00330FB4 /* checkered.bmp in CopyFiles */,
+				2CC104201471E56D00330FB4 /* greenhill.dsx in CopyFiles */,
+				2CC104211471E56D00330FB4 /* placa.bmp in CopyFiles */,
+				2CC104221471E56D00330FB4 /* relva.bmp in CopyFiles */,
 				2C3483A114700AAC00703145 /* cafe.xml in CopyFiles */,
 				2C7D394414614E190092B047 /* demograph.xml in CopyFiles */,
 			);
@@ -93,6 +101,10 @@
 		2C7D394514615C490092B047 /* Primitive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Primitive.h; sourceTree = "<group>"; };
 		2C7D394614615C5F0092B047 /* Primitive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Primitive.cpp; sourceTree = "<group>"; };
 		2C7D394914616B6B0092B047 /* SceneParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneParser.cpp; sourceTree = "<group>"; };
+		2CC1041A1471E56100330FB4 /* checkered.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = checkered.bmp; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/checkered.bmp; sourceTree = "<group>"; };
+		2CC1041B1471E56100330FB4 /* greenhill.dsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = greenhill.dsx; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/greenhill.dsx; sourceTree = "<group>"; };
+		2CC1041C1471E56100330FB4 /* placa.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = placa.bmp; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/placa.bmp; sourceTree = "<group>"; };
+		2CC1041D1471E56100330FB4 /* relva.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = relva.bmp; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/relva.bmp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +124,10 @@
 		2C34839F14700A7800703145 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2CC1041A1471E56100330FB4 /* checkered.bmp */,
+				2CC1041B1471E56100330FB4 /* greenhill.dsx */,
+				2CC1041C1471E56100330FB4 /* placa.bmp */,
+				2CC1041D1471E56100330FB4 /* relva.bmp */,
 				2C3483A014700A9D00703145 /* cafe.xml */,
 			);
 			name = Resources;

@@ -11,7 +11,9 @@ Component::Component(vector<Component*> child_comp, vector<Primitive*> child_pri
 void Component::apply(){
        
         glPushMatrix();
-        transf->apply();
+        if(transf!=NULL){
+            transf->apply();
+        }
         
         for(vector<Primitive*>::iterator it= child_prim.begin(); it != child_prim.end(); ++it){
                 (*it)->render();
