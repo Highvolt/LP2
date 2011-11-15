@@ -12,7 +12,11 @@
 
 Primitive::Primitive(string id,string texture,string material){
 	this->id=id;
-	this->texture=texture;
+    if(texture.compare("inherit")!=0 && texture.compare("none")!=0){
+        this->texture=texture;
+    }else{
+        tex=NULL;
+    }
 	this->material=material;
 
 }
@@ -49,6 +53,9 @@ Cylinder::Cylinder(string id, string texture, string material,float base,float t
 
 int Cylinder::render(Textures* tx){
     glEnable(GL_NORMALIZE);
+    if(tex!=NULL){
+        tx=tex;
+    }
     if(tx!=NULL)
     tx->apply();
     glQ = gluNewQuadric();
@@ -90,6 +97,9 @@ Triangle::Triangle(string id, string texture, string material,
 }
 int Triangle::render(Textures* tx){
     glEnable(GL_NORMALIZE);
+    if(tex!=NULL){
+        tx=tex;
+    }
     if(tx!=NULL)
         tx->apply();
 	float acN= sqrt( (x3-x1)*(x3-x1) + (y3-y1)*(y3-y1) + (z3-z1)*(z3-z1));
@@ -140,8 +150,12 @@ Rectangle::Rectangle(string id, string texture, string material,float x1,float y
 int Rectangle::render(Textures* tx){
 	glEnable(GL_NORMALIZE);
     bool has_texture=false;
+    if(tex!=NULL){
+        tx=tex;
+    }
     if(tx!=NULL)
 	tx->apply();
+    
     glPushMatrix();
     //VERIFICA SE TEM TEXTURA
     //CARREGAR MATERIAL

@@ -420,7 +420,7 @@ int main(int argc, char* argv[])
 	GLUI_Master.set_glutIdleFunc( myGlutIdle );
 	
 	inicializacao();
-	axis_lenght = loaddsxfile("demo.dsx");
+	axis_lenght = loaddsxfile("cafe.xml");
 	glutMainLoop();
 
 	return 0;

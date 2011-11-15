@@ -41,7 +41,14 @@ public:
         return material;
     }
     void setTex(Textures * tex){
-        this->tex=tex;
+        if(tex==NULL){
+            this->tex=NULL;
+        }else
+        if(tex->getId().compare("inherit")!=0 && tex->getId().compare("none")!=0){
+            this->tex=tex;
+        }else{
+            this->tex=NULL;
+        }
     }
     void setMat(Material * mat){
         this->mat=mat;

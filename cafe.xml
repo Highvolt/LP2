@@ -98,35 +98,35 @@
         <!-- Deve existir um ou mais blocos "texture" -->
         <!-- Os identificadores "id" nao podem ser repetidos -->
         <!-- s e t: factores de escala (ver notas finais) -->
-        <texture id="cafe_text" file="Textures/cafe.bmp" length_s="180" length_t="150" />  
-		<texture id="chao_text" file="Textures/chao.bmp" length_s="8" length_t="8" />  
-		<texture id="edificio_text" file="Textures/building.bmp" length_s="90" length_t="150" />  		
-		<texture id="mesa_superficie_text" file="Textures/mesa.bmp" length_s="15" length_t="15" /> 
-		<texture id="mesa_lados_text" file="Textures/mesa.bmp" length_s="15" length_t="1" /> 
-		<texture id="mesa_suporte_text" file="Textures/cup_base.bmp" length_s="1" length_t="1" />  
-		<texture id="cadeira_assent_sup_text" file="Textures/cadeira.bmp" length_s="5" length_t="5" />  
-		<texture id="cadeira_assento_lado_text" file="Textures/cadeira.bmp" length_s="5" length_t="0.5" /> 		
-		<texture id="cadeira_suporte_text" file="Textures/cadeira.bmp" length_s="5" length_t="7" />  		
-		<texture id="perna_cadeira_text" file="Textures/cup_base.bmp" length_s="1" length_t="1" />  		
-		<texture id="cabeca_text" file="Textures/face.bmp" length_s="1" length_t="1" />  
-		<texture id="pescoco_text" file="Textures/neck.bmp" length_s="1" length_t="1" /> 
-		<texture id="tronco_frente_text" file="Textures/tshirt.bmp" length_s="4" length_t="6" /> 
-		<texture id="tronco_tras_text" file="Textures/tshirt_lados.bmp" length_s="4" length_t="6" /> 
-		<texture id="tronco_lados_text" file="Textures/tshirt_lados.bmp" length_s="2" length_t="6" />
-		<texture id="tronco_topo_text" file="Textures/tshirt_topo.bmp" length_s="4" length_t="2" />
-		<texture id="mao_text" file="Textures/hands.bmp" length_s="1" length_t="1" />  
-		<texture id="calcas_text" file="Textures/trousers.bmp" length_s="1" length_t="1" />  
-		<texture id="joelho_text" file="Textures/knees.bmp" length_s="1" length_t="1" /> 
-		<texture id="bico_pe_text" file="Textures/front.bmp" length_s="1" length_t="1" />  
-		<texture id="topo_pe_text" file="Textures/top.bmp" length_s="1" length_t="2" />  
-		<texture id="sola_text" file="Textures/sola.bmp" length_s="1" length_t="2" />  
-		<texture id="lado_pe_text" file="Textures/shoe_side.bmp" length_s="2" length_t="0.7" /> 
-		<texture id="tras_pe_text" file="Textures/back.bmp" length_s="1" length_t="0.7" /> 		 
-		<texture id="base_copo_text" file="Textures/cup_base.bmp" length_s="1" length_t="1" />  
-		<texture id="fundo_copo_text" file="Textures/beer_bottom.bmp" length_s="1" length_t="1" />  
-		<texture id="topo_copo_text" file="Textures/beer.bmp" length_s="1" length_t="1" /> 
-		<texture id="espuma_text" file="Textures/espuma.bmp" length_s="1" length_t="1" />  
-		<texture id="donuts_text" file="Textures/donut.bmp" length_s="1" length_t="1" />  				
+        <texture id="cafe_text" file="cafe.bmp" length_s="180" length_t="150" />  
+		<texture id="chao_text" file="chao.bmp" length_s="8" length_t="8" />  
+		<texture id="edificio_text" file="building.bmp" length_s="90" length_t="150" />  		
+		<texture id="mesa_superficie_text" file="mesa.bmp" length_s="15" length_t="15" /> 
+		<texture id="mesa_lados_text" file="mesa.bmp" length_s="15" length_t="1" /> 
+		<texture id="mesa_suporte_text" file="cup_base.bmp" length_s="1" length_t="1" />  
+		<texture id="cadeira_assent_sup_text" file="cadeira.bmp" length_s="5" length_t="5" />  
+		<texture id="cadeira_assento_lado_text" file="cadeira.bmp" length_s="5" length_t="0.5" /> 		
+		<texture id="cadeira_suporte_text" file="cadeira.bmp" length_s="5" length_t="7" />  		
+		<texture id="perna_cadeira_text" file="cup_base.bmp" length_s="1" length_t="1" />  		
+		<texture id="cabeca_text" file="face.bmp" length_s="1" length_t="1" />  
+		<texture id="pescoco_text" file="neck.bmp" length_s="1" length_t="1" /> 
+		<texture id="tronco_frente_text" file="tshirt.bmp" length_s="4" length_t="6" /> 
+		<texture id="tronco_tras_text" file="tshirt_lados.bmp" length_s="4" length_t="6" /> 
+		<texture id="tronco_lados_text" file="tshirt_lados.bmp" length_s="2" length_t="6" />
+		<texture id="tronco_topo_text" file="tshirt_topo.bmp" length_s="4" length_t="2" />
+		<texture id="mao_text" file="hands.bmp" length_s="1" length_t="1" />  
+		<texture id="calcas_text" file="trousers.bmp" length_s="1" length_t="1" />  
+		<texture id="joelho_text" file="knees.bmp" length_s="1" length_t="1" /> 
+		<texture id="bico_pe_text" file="front.bmp" length_s="1" length_t="1" />  
+		<texture id="topo_pe_text" file="top.bmp" length_s="1" length_t="2" />  
+		<texture id="sola_text" file="sola.bmp" length_s="1" length_t="2" />  
+		<texture id="lado_pe_text" file="shoe_side.bmp" length_s="2" length_t="0.7" /> 
+		<texture id="tras_pe_text" file="back.bmp" length_s="1" length_t="0.7" /> 		 
+		<texture id="base_copo_text" file="cup_base.bmp" length_s="1" length_t="1" />  
+		<texture id="fundo_copo_text" file="beer_bottom.bmp" length_s="1" length_t="1" />  
+		<texture id="topo_copo_text" file="beer.bmp" length_s="1" length_t="1" /> 
+		<texture id="espuma_text" file="espuma.bmp" length_s="1" length_t="1" />  
+		<texture id="donuts_text" file="donut.bmp" length_s="1" length_t="1" />  				
     </textures>
 
    
