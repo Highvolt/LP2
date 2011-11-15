@@ -52,6 +52,10 @@
 		2C93CA731472EB5900D86B61 /* tshirt_lados.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C93CA5B1472EB4700D86B61 /* tshirt_lados.bmp */; };
 		2C93CA741472EB5900D86B61 /* tshirt_topo.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C93CA5C1472EB4700D86B61 /* tshirt_topo.bmp */; };
 		2C93CA751472EB5900D86B61 /* tshirt.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C93CA5D1472EB4700D86B61 /* tshirt.bmp */; };
+		2C93CA7A14731B5900D86B61 /* cenario.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C93CA7614731B5200D86B61 /* cenario.xml */; };
+		2C93CA7B14731B5900D86B61 /* claque.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C93CA7714731B5200D86B61 /* claque.bmp */; };
+		2C93CA7C14731B5900D86B61 /* table.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C93CA7814731B5200D86B61 /* table.bmp */; };
+		2C93CA7D14731B5900D86B61 /* wood.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C93CA7914731B5200D86B61 /* wood.bmp */; };
 		2CC1041F1471E56D00330FB4 /* checkered.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC1041A1471E56100330FB4 /* checkered.bmp */; };
 		2CC104201471E56D00330FB4 /* greenhill.dsx in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC1041B1471E56100330FB4 /* greenhill.dsx */; };
 		2CC104211471E56D00330FB4 /* placa.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC1041C1471E56100330FB4 /* placa.bmp */; };
@@ -93,6 +97,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				2C93CA7A14731B5900D86B61 /* cenario.xml in CopyFiles */,
+				2C93CA7B14731B5900D86B61 /* claque.bmp in CopyFiles */,
+				2C93CA7C14731B5900D86B61 /* table.bmp in CopyFiles */,
+				2C93CA7D14731B5900D86B61 /* wood.bmp in CopyFiles */,
 				2C93CA5F1472EB5900D86B61 /* back.bmp in CopyFiles */,
 				2C93CA601472EB5900D86B61 /* beer_bottom.bmp in CopyFiles */,
 				2C93CA611472EB5900D86B61 /* beer.bmp in CopyFiles */,
@@ -206,6 +214,10 @@
 		2C93CA5B1472EB4700D86B61 /* tshirt_lados.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tshirt_lados.bmp; sourceTree = "<group>"; };
 		2C93CA5C1472EB4700D86B61 /* tshirt_topo.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tshirt_topo.bmp; sourceTree = "<group>"; };
 		2C93CA5D1472EB4700D86B61 /* tshirt.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tshirt.bmp; sourceTree = "<group>"; };
+		2C93CA7614731B5200D86B61 /* cenario.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = cenario.xml; sourceTree = "<group>"; };
+		2C93CA7714731B5200D86B61 /* claque.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = claque.bmp; sourceTree = "<group>"; };
+		2C93CA7814731B5200D86B61 /* table.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = table.bmp; sourceTree = "<group>"; };
+		2C93CA7914731B5200D86B61 /* wood.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = wood.bmp; sourceTree = "<group>"; };
 		2CC1041A1471E56100330FB4 /* checkered.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = checkered.bmp; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/checkered.bmp; sourceTree = "<group>"; };
 		2CC1041B1471E56100330FB4 /* greenhill.dsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = greenhill.dsx; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/greenhill.dsx; sourceTree = "<group>"; };
 		2CC1041C1471E56100330FB4 /* placa.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = placa.bmp; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/placa.bmp; sourceTree = "<group>"; };
@@ -247,6 +259,10 @@
 		2C34839F14700A7800703145 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2C93CA7614731B5200D86B61 /* cenario.xml */,
+				2C93CA7714731B5200D86B61 /* claque.bmp */,
+				2C93CA7814731B5200D86B61 /* table.bmp */,
+				2C93CA7914731B5200D86B61 /* wood.bmp */,
 				2C93CA471472EB4700D86B61 /* back.bmp */,
 				2C93CA481472EB4700D86B61 /* beer_bottom.bmp */,
 				2C93CA491472EB4700D86B61 /* beer.bmp */,

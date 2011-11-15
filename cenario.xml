@@ -1,0 +1,440 @@
+<dsx>
+    <scene root="raiz" axis_length="20.0" />
+		
+	<!-- ALTERAR A ALTURA DA CAMERA -->
+	<views default="frente" >
+		<perspective id="frente" near="0.1" far="50.0" angle="45.0">
+            <from x="0.0" y="7.5" z="10.0" />
+            <to x="0.0" y="7.5" z="0.0" />
+        </perspective>
+		<perspective id="lado" near="0.1" far="50.0" angle="45.0">
+			<from x="10.0" y="7.5" z="0.0"/>
+			<to x="0.0" y="7.5" z="0.0"/>
+		</perspective>
+    </views>
+	
+	<illumination doublesided="0" local="1" >
+		<ambient r="1.0" g="1.0" b="1.0" a="1.0"/>
+		<background r="0.0" g="0.0" b="0.0" a="1.0"/>
+    </illumination>
+	
+	<!-- ALTERAR LOCALIZAÇAO LUZ -->
+	<lights>
+		<omni id="light0" enabled="1" >
+            <location x="-10.0" y="10.0" z="10.0" w="1.0" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+            <diffuse r="0.3" g="0.3" b="0.3" a="1.0" />
+            <specular r="0.5" g="0.5" b="0.5" a="1.0" />
+        </omni>
+		<spot id="spotlight" enabled="1" angle="45.0" exponent="5">
+            <location x="0.0" y="10.0" z="0.0" w="1.0" />
+            <target x="0.0" y="0.0" z="0.0" />
+            <ambient r="0.5" g="0.5" b="0.5" a="1.0" />
+            <diffuse r="0.5" g="0.5" b="0.5" a="1.0" />
+            <specular r="0.7" g="0.7" b="0.7" a="1.0" />
+        </spot>
+    </lights>
+	
+	<textures>
+		<texture id="table" file="table.bmp" length_s="1.0" length_t="1.0"/>
+		<texture id="wood" file="wood.bmp" length_s="1.0" length_t="1.0"/>
+		<texture id="claque" file="claque.bmp" length_s="1.0" length_t="1.0"/>
+	</textures>
+	
+	<materials>
+		<material id="vermelho" >
+			<emission r="0.5" g="0.5" b="0.5" a="1.0" />
+			<ambient  r="0.05" g="0.0" b="0.0" a="1.0" />
+			<diffuse  r="0.5" g="0.4" b="0.4" a="1.0" />
+			<specular r="0.7" g="0.04" b="0.04" a="1.0" />
+			<shininess value="0.78125" />
+		</material>
+		<material id="branco" >
+			<emission r="0.5" g="0.5" b="0.5" a="1.0" />
+			<ambient r="0.05" g="0.05" b="0.05" a="1.0" />
+			<diffuse r="0.5" g="0.5" b="0.5" a="1.0" />
+			<specular r="0.7" g="0.7" b="0.7" a="1.0" />
+			<shininess value="0.78125" />
+		</material>
+		<material id="metal" >
+			<emission r="0.5" g="0.5" b="0.5" a="1.0" />
+			<ambient  r="0.19225" g="0.19225" b="0.19225" a="1.0" />
+			<diffuse  r="0.50754" g="0.50754" b="0.50754" a="1.0" />
+			<specular r="0.508273" g="0.508273" b="0.508273" a="1.0" />
+			<shininess value="0.4" />
+		</material>
+		<material id="preto" >
+			<emission r="0.0" g="0.0" b="0.0" a="1.0" />
+			<ambient  r="0.0" g="0.0" b="0.0" a="1.0" />
+			<diffuse  r="0.0" g="0.0" b="0.0" a="1.0" />
+			<specular r="0.0" g="0.0" b="0.00" a="1.0" />
+			<shininess value="0.0" />
+		</material>
+		<material id="laranja" >
+			<emission r="1.0" g="0.5" b="0.0" a="1.0" />
+			<ambient  r="0.05" g="0.0" b="0.0" a="1.0" />
+			<diffuse  r="0.5" g="0.4" b="0.4" a="1.0" />
+			<specular r="0.7" g="0.04" b="0.04" a="1.0" />
+			<shininess value="0.78125" />
+		</material>
+    </materials>
+	
+	<transformations> 
+		<!-- Tabela -->
+		<transformation id = "tDirTabela">
+			<translate x="0.5" y="0.0" z="0.0" />
+			<rotate axis="y" angle="90.0" />
+		</transformation>
+
+		<transformation id = "tEsqTabela">
+			<translate x="-0.5" y="0.0" z="0.0" />
+			<rotate axis="y" angle="-90.0" />
+		</transformation>
+
+		<transformation id = "tTrasTabela">
+			<translate x="0.0" y="0.0" z="-0.5" />
+			<rotate axis="y" angle="180.0" />
+		</transformation>
+        
+		<transformation id = "tFrenteTabela">
+			<translate x="0.0" y="0.0" z="0.5" />
+		</transformation>
+        
+		<transformation id = "tBaixoTabela">
+			<translate x="0.0" y="-0.5" z="0.0" />
+			<rotate axis="x" angle="90.0" />
+		</transformation>
+
+		<transformation id = "tCimaTabela">
+			<translate x="0.0" y="0.5" z="0.0" />
+			<rotate axis="x" angle="-90.0" />
+		</transformation> 
+		
+		<!-- Poste -->
+		<transformation id = "tPoste">
+			<translate x="0.0" y="0.0" z="-0.225" />
+			<rotate axis="x" angle="-90" />
+		</transformation>
+		
+		<!-- Aro -->
+		<transformation id = "tAro">
+			<translate x="0.0" y="5.8" z="1.1" />
+			<scale x="1.0" y="0.3" z="1.0" />
+			<rotate axis="x" angle="-90" />
+		</transformation>		
+
+		<!-- Bola -->
+		<transformation id = "tEsfera">
+			<translate x="0.0" y="7.5" z="0.0" />
+		</transformation>	
+	
+		<!-- Chao -->
+		<transformation id = "tChao">
+			<scale x="30.0" y="30.0" z="30.0" />
+			<rotate axis="x" angle="-90" />
+		</transformation>			   
+	   
+	   <!-- Impostores -->
+	   	<transformation id = "tTrasImpostor">
+			<translate x="0.0" y="0.0" z="-15.0" />
+			<scale x="30.0" y="30.0" z="30.0" />
+		</transformation>
+		
+	   	<transformation id = "tEsqImpostor">
+			<translate x="-15.0" y="0.0" z="0.0" />
+			<scale x="30.0" y="30.0" z="30.0" />
+			<rotate axis="y" angle="90" />			
+		</transformation>
+
+	   	<transformation id = "tDirImpostor">
+			<translate x="15.0" y="0.0" z="0.0" />
+			<scale x="30.0" y="30.0" z="30.0" />
+			<rotate axis="y" angle="-90" />			
+		</transformation>		
+	   </transformations>
+	
+	<primitives>
+		<primitive id="rectangulo">
+			<material id="inherit" />
+			<texture id="inherit" />
+			<rectangle x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
+		</primitive>
+		
+		<primitive id="cilindro">
+			<material id="inherit" />
+			<texture id="inherit" />
+			<cylinder base="0.25" top="0.25" height="7.0" slices="20" stacks="20" />
+		</primitive>
+		
+		<primitive id="aro">
+			<material id="inherit" />
+			<texture id="inherit" />
+			<torus inner="0.1" outer="1.0" slices="20" loops="20" />
+		</primitive>
+		
+		<primitive id="triangulo">
+			<material id="laranja" />
+			<texture id="inherit" />
+			<triangle x1="-6.0" y1="0.1" z1="0.0" x2="0.0" y2="0.1" z2="12.0" x3="6.0" y3="0.1" z3="0.0" /> 
+		</primitive>	
+		
+		<primitive id="esfera">
+			<material id="inherit" />
+			<texture id="inherit" />
+			<sphere radius="0.7" slices="50" stacks="50" />
+		</primitive>
+	</primitives>
+		
+	<!-- COMPONENTES -->
+	<components>
+		<!-- Tabela -->
+		<component id="DirTabela">
+			<transformation>
+				<transformationref id="tDirTabela" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="rectangulo" />
+			</children>
+		</component>
+		
+		<component id="EsqTabela">
+			<transformation>
+				<transformationref id="tEsqTabela" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="rectangulo" />
+			</children>
+		</component>	
+		
+		<component id="TrasTabela">
+			<transformation>
+				<transformationref id="tTrasTabela" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="rectangulo" />
+			</children>
+		</component>
+		
+		<component id="FrenteTabela">
+			<transformation>
+				<transformationref id="tFrenteTabela" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="table" />
+			<children>
+				<primitiveref id="rectangulo" />
+			</children>
+		</component>
+		
+		<component id="BaixoTabela">
+			<transformation>
+				<transformationref id="tBaixoTabela" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="rectangulo" />
+			</children>
+		</component>
+		
+		<component id="CimaTabela">
+			<transformation>
+				<transformationref id="tCimaTabela" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="rectangulo" />
+			</children>
+		</component>			
+				
+		<component id="tabela">
+			<transformation>
+				<translate x="0.0" y="7.0" z="0.0" />
+				<scale x="4.0" y="3.0" z="0.10" />
+			</transformation>
+			<materials>
+				<material id="branco" />
+			</materials>
+            	<texture id="none" />
+            <children>
+				<componentref id="DirTabela" />
+				<componentref id="EsqTabela" />
+				<componentref id="TrasTabela" />
+				<componentref id="FrenteTabela" />
+				<componentref id="BaixoTabela" />
+				<componentref id="CimaTabela" />
+			</children>
+        </component>
+		
+		<component id="poste">
+			<transformation>
+				<transformationref id="tPoste" />
+			</transformation>
+			<materials>
+				<material id="metal" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="cilindro" />
+			</children>
+		</component>	
+		
+		<component id="aro">
+			<transformation>
+				<transformationref id="tAro" />
+			</transformation>
+			<materials>
+				<material id="vermelho" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="aro" />
+			</children>
+		</component>
+		
+		<component id="garrafao">
+			<transformation>
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="triangulo" />
+			</children>
+		</component>
+		
+		<component id="tabelaCompleta">
+			<transformation>
+				<translate x="0.0" y="0.0" z="-5.0" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<componentref id="tabela" />
+				<componentref id="poste" />
+				<componentref id="aro" />
+				<componentref id="garrafao" />
+			</children>
+		</component>		
+		
+		<component id="esfera">
+			<transformation>
+				<transformationref id="tEsfera" />
+			</transformation>
+			<materials>
+				<material id="laranja" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="esfera" />
+			</children>
+		</component>	
+
+		<component id="chao">
+			<transformation>
+				<transformationref id="tChao" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="wood" />
+			<children>
+				<primitiveref id="rectangulo" />
+			</children>
+		</component>	
+		
+		<component id="impostorTras">
+			<transformation>
+				<transformationref id="tTrasImpostor" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="rectangulo" />
+			</children>
+		</component>
+		
+		<component id="impostorEsq">
+			<transformation>
+				<transformationref id="tEsqImpostor" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="rectangulo" />
+			</children>
+		</component>	
+		
+		<component id="impostorDir">
+			<transformation>
+				<transformationref id="tDirImpostor" />
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="inherit" />
+			<children>
+				<primitiveref id="rectangulo" />
+			</children>
+		</component>
+		
+		<component id="impostores">
+			<transformation>
+			</transformation>
+			<materials>
+				<material id="inherit" />
+			</materials>
+			<texture id="claque" />
+			<children>
+				<componentref id="impostorTras" />
+				<componentref id="impostorDir" />
+				<componentref id="impostorEsq" />
+			</children>
+		</component>
+
+		<component id="raiz">
+			<transformation>
+			</transformation>
+			<materials>
+				<material id="branco" />
+			</materials>
+            	<texture id="none" />
+            <children>
+				<componentref id="tabelaCompleta" />
+				<componentref id="esfera" />
+				<componentref id="chao" />
+				<componentref id="impostores" />
+			</children>
+        </component>
+		
+	</components>
+</dsx>
+	
+	
+	
