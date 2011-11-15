@@ -212,6 +212,9 @@ Sphere::Sphere(string id, string texture, string material, float radius,int slic
     gluQuadricTexture(glQ, GL_TRUE);}
 
 int Sphere::render(Textures* tx){
+    if(tex!=NULL && texture.compare("inherit")!=0){
+        tx=tex;
+    }
     if(tx!=NULL)
         tx->apply();
     glEnable(GL_NORMALIZE);
