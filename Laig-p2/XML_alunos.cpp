@@ -91,10 +91,36 @@ float light_ambient[] = {0.2, 0.2, 0.2, 1.0}; /* Set the background ambient ligh
 // variaveis para a janela
 int main_window;
 GLUI  *glui2;
-
-//SceneLoader *scene;
-
 //Utiliza as estruturas de dados com a informação do xml para construir o plano
+
+void display_axis(){
+	GLUquadric* glQ2;
+	glQ2 = gluNewQuadric();
+	// cilindro representativo do eixo X
+	glColor3f(1.0,0.0,0.0);		// vermelho
+	glPushMatrix();
+	glRotated(90.0, 0.0,1.0,0.0 );
+	gluCylinder(glQ2, axis_radius_begin, axis_radius_end,
+		axis_lenght, axis_nslices, axis_nstacks);   // nao tem bases
+	glPopMatrix();
+
+	// cilindro representativo do eixo Y
+	glColor3f(0.0,1.0,0.0);		// verde
+	glPushMatrix();
+	glRotated(-90.0, 1.0,0.0,0.0 );
+	cout<<axis_lenght;
+	gluCylinder(glQ2, axis_radius_begin, axis_radius_end,
+		             axis_lenght, axis_nslices, axis_nstacks);   // nao tem bases
+	glPopMatrix();
+	
+	// cilindro representativo do eixo Z
+	glColor3f(0.0,0.0,1.0);		// azul
+	glPushMatrix();
+	// nao necessita rotacao... glRotated(...);
+	gluCylinder(glQ2, axis_radius_begin, axis_radius_end,
+		             axis_lenght, axis_nslices, axis_nstacks);   // nao tem bases
+	glPopMatrix();
+}
 
 
 
@@ -155,8 +181,10 @@ void display(void)
 
 
 //	//desenhar a esfera no centro
-	glColor3f(1.0,1.0,1.0);		
-	gluSphere(glQ, orig_radius, orig_slices, orig_stacks);
+	//glColor3f(1.0,1.0,1.0);		
+	//gluSphere(glQ, orig_radius, orig_slices, orig_stacks);
+
+	display_axis();
 
 //  aumentar e diminuir a atenuação
 	glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION,  light0_kc);
@@ -166,30 +194,6 @@ void display(void)
 	// esfera representativa da origem das coordenadas
 	// falta declarar a cor
 	// desenhar o objecto
-
-	// cilindro representativo do eixo X
-	glColor3f(1.0,0.0,0.0);		// vermelho
-	glPushMatrix();
-	glRotated(90.0, 0.0,1.0,0.0 );
-	gluCylinder(glQ, axis_radius_begin, axis_radius_end,
-		             axis_lenght, axis_nslices, axis_nstacks);   // nao tem bases
-	glPopMatrix();
-
-	// cilindro representativo do eixo Y
-	glColor3f(0.0,1.0,0.0);		// verde
-	glPushMatrix();
-	glRotated(-90.0, 1.0,0.0,0.0 );
-	gluCylinder(glQ, axis_radius_begin, axis_radius_end,
-		             axis_lenght, axis_nslices, axis_nstacks);   // nao tem bases
-	glPopMatrix();
-	
-	// cilindro representativo do eixo Z
-	glColor3f(0.0,0.0,1.0);		// azul
-	glPushMatrix();
-	// nao necessita rotacao... glRotated(...);
-	gluCylinder(glQ, axis_radius_begin, axis_radius_end,
-		             axis_lenght, axis_nslices, axis_nstacks);   // nao tem bases
-	glPopMatrix();
 
 	// inibicao de atribuicao directa de cores
 	glDisable(GL_COLOR_MATERIAL);
@@ -363,7 +367,7 @@ void inicializacao()
 	// a direccao e a posicao estao na rotina display()
 	//glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 90.0);
 	//glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_direction);
-	//glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+	glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -414,7 +418,7 @@ int main(int argc, char* argv[])
 	GLUI_Master.set_glutIdleFunc( myGlutIdle );
 	
 	inicializacao();
-	 loaddsxfile("cafe.xml");
+	axis_lenght = loaddsxfile("cafe.xml");
 	glutMainLoop();
 
 	return 0;

@@ -2,8 +2,6 @@
 
 
 
-
-
 map<string,Primitive*> mprimitivas;
 map<string,Texture *> mtextura;
 map<string, Transformation*> mtransformations; 
@@ -483,6 +481,7 @@ int loadscene(TiXmlElement* scene){
 		if((root=scene->Attribute("root"))!="" && scene->QueryFloatAttribute("axis_length",&axis_length)==TIXML_SUCCESS){
 			cout << "scene root -" <<  root << " axis_length: " << axis_length << endl;
 		}
+		return axis_length;
 	}
 	return 0;
 }
@@ -855,7 +854,7 @@ int loaddsxfile(const string & filename){
         }else{
             return -1;
         }
-		loadscene(scene);
+		int length = loadscene(scene);
 		loadviews(views);
 		loadillumination(illumination);
 		loadlights(lights);
@@ -871,7 +870,7 @@ int loaddsxfile(const string & filename){
         
         
         glNewList(1, GL_COMPILE);
-        (*mview.begin()).second->apply();
+        //(*mview.begin()).second->apply();
         for(map<string,Light*>::iterator it=mlight.begin();it!=mlight.end();it++){
             if((*it).second!=NULL)
                 (*it).second->apply(true);
@@ -879,6 +878,7 @@ int loaddsxfile(const string & filename){
         }
         mcomponent[rootcomp]->apply();
         glEndList();
+		return length;
 	}
 
 	return 0;
