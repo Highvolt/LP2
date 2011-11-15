@@ -412,9 +412,9 @@ int main(int argc, char* argv[])
 
 	/* We register the idle callback with GLUI, not with GLUT */
 	GLUI_Master.set_glutIdleFunc( myGlutIdle );
-	 loaddsxfile("demo.dsx");
-	inicializacao();
 	
+	inicializacao();
+	 loaddsxfile("cafe.xml");
 	glutMainLoop();
 
 	return 0;

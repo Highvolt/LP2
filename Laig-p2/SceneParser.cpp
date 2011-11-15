@@ -692,7 +692,7 @@ Primitive * createPrimitive(TiXmlElement * child){
                && subchild->QueryIntAttribute("loops",&loops)==TIXML_SUCCESS){
                 
                 //add to class
-                prim=new Torus(id, id_tex, id_mat, inner, outer, slices, stacks);
+                prim=new Torus(id, id_tex, id_mat, inner, outer, slices, loops);
                 cout<<"torus: inner:"<<inner << " outer: "<< outer<< " slices: " << slices << " loops: " << loops << endl;
                 return prim;
             }
