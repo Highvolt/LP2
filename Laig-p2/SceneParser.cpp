@@ -848,7 +848,13 @@ int loaddsxfile(const string & filename){
 		TiXmlElement* materials=raiz->FirstChildElement("materials");
 		TiXmlElement* transformations=raiz->FirstChildElement("transformations");
 		TiXmlElement* primitives=raiz->FirstChildElement("primitives");
+        string rootcomp="";
+        if(scene->Attribute("root")){
+            rootcomp=scene->Attribute("root");
         
+        }else{
+            return -1;
+        }
 		loadscene(scene);
 		loadviews(views);
 		loadillumination(illumination);
@@ -871,10 +877,7 @@ int loaddsxfile(const string & filename){
                 (*it).second->apply(true);
             
         }
-        for(map<string,Component*>::iterator it=mcomponent.begin();it!=mcomponent.end();it++){
-            if((*it).second!=NULL)
-                (*it).second->apply();
-        }
+        mcomponent[rootcomp]->apply();
         glEndList();
 	}
 

@@ -14,7 +14,7 @@
 		2C34839A146FFE8900703145 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C348390146FFE8900703145 /* Texture.cpp */; };
 		2C34839B146FFE8900703145 /* Transformation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C348392146FFE8900703145 /* Transformation.cpp */; };
 		2C34839C146FFE8900703145 /* Views.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C348394146FFE8900703145 /* Views.cpp */; };
-		2C3483A114700AAC00703145 /* cafe.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C3483A014700A9D00703145 /* cafe.xml */; };
+		2C4DA1D214723C840066715C /* cafe.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C4DA1D114723C620066715C /* cafe.xml */; };
 		2C6423B91471600C004D7660 /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C6423B71471600B004D7660 /* Component.cpp */; };
 		2C7D3926146149E90092B047 /* Laig_p2.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2C7D3925146149E90092B047 /* Laig_p2.1 */; };
 		2C7D392D14614A520092B047 /* GLUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7D392C14614A520092B047 /* GLUI.framework */; };
@@ -71,6 +71,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				2C4DA1D214723C840066715C /* cafe.xml in CopyFiles */,
 				2CCC9D3B147207D7009FF849 /* bus.dsx in CopyFiles */,
 				2CCC9D3C147207D7009FF849 /* ceu.bmp in CopyFiles */,
 				2CCC9D3D147207D7009FF849 /* farol.bmp in CopyFiles */,
@@ -94,7 +95,6 @@
 				2CC104201471E56D00330FB4 /* greenhill.dsx in CopyFiles */,
 				2CC104211471E56D00330FB4 /* placa.bmp in CopyFiles */,
 				2CC104221471E56D00330FB4 /* relva.bmp in CopyFiles */,
-				2C3483A114700AAC00703145 /* cafe.xml in CopyFiles */,
 				2C7D394414614E190092B047 /* demograph.xml in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,7 +118,7 @@
 		2C348394146FFE8900703145 /* Views.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Views.cpp; sourceTree = "<group>"; };
 		2C348395146FFE8900703145 /* Views.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Views.h; sourceTree = "<group>"; };
 		2C34839E1470082900703145 /* SceneParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneParser.h; sourceTree = "<group>"; };
-		2C3483A014700A9D00703145 /* cafe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = cafe.xml; path = "Laig-p2/cafe.xml"; sourceTree = "<group>"; };
+		2C4DA1D114723C620066715C /* cafe.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = cafe.xml; sourceTree = "<group>"; };
 		2C6423B71471600B004D7660 /* Component.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
 		2C6423B81471600B004D7660 /* Component.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
 		2C7D391F146149E90092B047 /* Laig-p2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Laig-p2"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +181,7 @@
 		2C34839F14700A7800703145 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2C4DA1D114723C620066715C /* cafe.xml */,
 				2CCC9D33147207C8009FF849 /* bus.dsx */,
 				2CCC9D34147207C8009FF849 /* textures */,
 				2CCC9D25147206D9009FF849 /* chao.bmp */,
@@ -196,7 +197,6 @@
 				2CC1041A1471E56100330FB4 /* checkered.bmp */,
 				2CC1041C1471E56100330FB4 /* placa.bmp */,
 				2CC1041D1471E56100330FB4 /* relva.bmp */,
-				2C3483A014700A9D00703145 /* cafe.xml */,
 			);
 			name = Resources;
 			sourceTree = "<group>";

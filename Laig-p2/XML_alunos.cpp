@@ -115,7 +115,7 @@ void display(void)
 	// inicializacoes da matriz de visualizacao
 	glMatrixMode( GL_PROJECTION );
 	glLoadIdentity();
-	glFrustum( -xy_aspect*.04, xy_aspect*.04, -.04, .04, .1, 50.0 );
+	glFrustum( -xy_aspect*.04, xy_aspect*.04, -.04, .04, .1, 500.0 );
 
 	//inicializacoes da matriz de transformacoes geometricas
 	glMatrixMode( GL_MODELVIEW );
