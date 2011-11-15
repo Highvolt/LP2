@@ -527,7 +527,7 @@ Transformation * createTransformation(TiXmlElement * child){
                 if(axis=="z" || axis=="Z"){
                     az=1;
                 }
-                
+                cout<<axis<<" ax: "<<ax<<" ay: "<<ay<<" az: "<<az<<endl;
                 //add to class
                 trans->rotate(angle, ax, ay, az);
                 cout<<"rotate: axis:"<<axis<<" angle: "<<angle<<endl;
@@ -730,9 +730,11 @@ Component* loadcomponent(TiXmlElement * component){
             if(transformation->NoChildren()){
                 trans=new Transformation("");
             }else
-            if((transformation->FirstChildElement("tranformationref"))!=NULL){
-                trans=createTransformation(transformation->FirstChildElement("tranformationref"));
+            if((transformation->FirstChildElement("transformationref"))!=NULL){
+                //cout<<transformation->FirstChildElement()->Value()<<endl;
+                trans=createTransformation(transformation->FirstChildElement("transformationref"));
             }else{
+                //cout<<transformation->FirstChildElement()->Value()<<endl;
                 trans=createTransformation(transformation);
             }
             string key="";

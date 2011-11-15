@@ -12,14 +12,14 @@ void Component::apply(){
        
         glPushMatrix();
         if(transf!=NULL){
+    
             transf->apply();
         }
         
         for(vector<Primitive*>::iterator it= child_prim.begin(); it != child_prim.end(); ++it){
                 (*it)->render();
         }
-        
-
+    
         for(vector<Component*>::iterator it= child_comp.begin(); it != child_comp.end(); ++it){
                 (*it)->apply();
         }

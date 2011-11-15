@@ -14,7 +14,7 @@ string Transformation::getId(){
 
 void Transformation::rotate(float angle, float x, float y, float z){
 	glPushMatrix();
-	glLoadIdentity();
+    glLoadIdentity();
 	glMultMatrixf(&transf_matrix[0][0]);
 	glRotatef(angle,x,y,z);
 	glGetFloatv(GL_MODELVIEW_MATRIX, &transf_matrix[0][0]);
