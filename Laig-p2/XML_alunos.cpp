@@ -108,7 +108,7 @@ void display_axis(){
 	glColor3f(0.0,1.0,0.0);		// verde
 	glPushMatrix();
 	glRotated(-90.0, 1.0,0.0,0.0 );
-	cout<<axis_lenght;
+	//cout<<axis_lenght;
 	gluCylinder(glQ2, axis_radius_begin, axis_radius_end,
 		             axis_lenght, axis_nslices, axis_nstacks);   // nao tem bases
 	glPopMatrix();
@@ -418,7 +418,7 @@ int main(int argc, char* argv[])
 	GLUI_Master.set_glutIdleFunc( myGlutIdle );
 	
 	inicializacao();
-	axis_lenght = loaddsxfile("cafe.xml");
+	axis_lenght = loaddsxfile("greenhill.dsx");
 	glutMainLoop();
 
 	return 0;

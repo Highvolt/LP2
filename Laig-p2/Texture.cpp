@@ -11,9 +11,9 @@ Texture::Texture(string id, float ls, float lt, char* file, int tex_type)
 		this->length_s = ls;
 		this->length_t = lt;
 		RGBpixmap * pixmap = new RGBpixmap();
-		this->id_num = pos_tex;
+		this->id_num = pos_tex++;
         pixmap->readBMPFile(file);
-		pixmap->setTexture(pos_tex++);
+		pixmap->setTexture(this->id_num);
 	}else if(tex_type == 1){
 		this->inherits = true;
 	}else if(tex_type == 2){

@@ -25,7 +25,15 @@ void Component::apply(){
     
             transf->apply();
         }
-        
+    
+    for(vector<Material*>::iterator it= this->materials.begin(); it != this->materials.end(); ++it){
+        (*it)->applyMat();
+    }  
+
+    if(this->texture!=NULL){
+        this->texture->apply();}
+
+    
         for(vector<Primitive*>::iterator it= child_prim.begin(); it != child_prim.end(); ++it){
                 (*it)->render();
         }

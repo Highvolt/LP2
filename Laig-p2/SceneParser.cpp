@@ -866,7 +866,13 @@ int loaddsxfile(const string & filename){
 		loadprimitives(primitives);
         loadcomponents(component);
         
-        
+        for(map<string,Primitive*>::iterator it=mprimitivas.begin();it!=mprimitivas.end();it++){
+            if((*it).second!=NULL){
+                (*it).second->setMat(mmaterials[(*it).second->getMat()]);
+                (*it).second->setTex(mtextura[(*it).second->getTex()]);
+            }
+        }
+
         
         
         glNewList(1, GL_COMPILE);

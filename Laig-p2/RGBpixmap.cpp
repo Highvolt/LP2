@@ -6,7 +6,7 @@
 #endif
 #include "RGBpixmap.h"
 #include <fstream>
-
+#include <iostream>
 FILE *inf;
 
 
@@ -52,8 +52,8 @@ int RGBpixmap::readBMPFile(char * fname)
 	unsigned long fileSize, offBits, headerSize, numCols, numRows, compression, imageSize;
 	unsigned long xPels, yPels, numLUTentries, impColors;
 	unsigned short reserved, planes, bitsPerPixel;
-
-	inf = fopen(fname, "r+b");
+    std::cout<<fname<<std::endl;
+    inf = fopen(fname, "r+b");
 	if (inf == NULL)
 		return 0;
 	

@@ -9,6 +9,8 @@
 #ifndef Laig_p2_Primitive_h
 #define Laig_p2_Primitive_h
 
+#include "Texture.h"
+#include "Material.h"
 #include <string>
 #ifdef __APPLE__
 #include <GLUT/GLUT.h>
@@ -25,11 +27,25 @@ using namespace std;
 class Primitive {
 protected:
     string id, texture,material;
+    Texture * tex;
+    Material * mat;
 
 public:
     Primitive(string id,string texture,string material);
 	string getId();
     virtual int render()=0;
+    string getTex(){
+        return texture;
+    }
+    string getMat(){
+        return material;
+    }
+    void setTex(Texture * tex){
+        this->tex=tex;
+    }
+    void setMat(Material * mat){
+        this->mat=mat;
+    }
 };
 /*
 class Circle: public Primitive {
