@@ -27,7 +27,7 @@ Torus::Torus(string id, string texture, string material, float inner, float oute
 	this->stacks = stacks;
 }
 
-int Torus::render(){
+int Torus::render(Textures* tx){
 	if(this->tex!=NULL && this->texture.compare("inherit"))
         this->tex->apply();
     glPushMatrix();
@@ -46,7 +46,7 @@ Cylinder::Cylinder(string id, string texture, string material,float base,float t
 	this->stacks = stacks;
 }
 
-int Cylinder::render(){
+int Cylinder::render(Textures* tx){
     glEnable(GL_NORMALIZE);
     if(this->tex!=NULL)
     this->tex->apply();
@@ -87,22 +87,38 @@ Triangle::Triangle(string id, string texture, string material,
 		this->y3 = y3;
 		this->z3 = z3;
 }
-int Triangle::render(){
+int Triangle::render(Textures* tx){
     glEnable(GL_NORMALIZE);
-    if(this->tex!=NULL)
-	this->tex->apply();
-    //Carregar textura e material
+	float acN= sqrt( (x3-x1)*(x3-x1) + (y3-y1)*(y3-y1) + (z3-z1)*(z3-z1));
+    float abN= sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) + (z2-z1)*(z2-z1));
+	float ab[3],ac[3];
+    ab[0]=(x2-x1)/abN;
+    ab[1]=(y2-y1)/abN;
+    ab[2]=(z2-z1)/abN;
+    ac[0]=(x3-x1)/acN;
+    ac[1]=(y3-y1)/acN;
+    ac[2]=(z3-z1)/acN;
+        
+    float cosAlfa =abs(ab[0]*ac[0]+ab[1]*ac[1]+ab[2]*ac[2]);
+    float AD = abN*cosAlfa;
+    float AE = abN*sin(acos(cosAlfa));
+
+
+
 	glPushMatrix();
-	glBegin(GL_TRIANGLES);
+	glBegin(GL_POLYGON);
     glNormal3f(0,0,1);
-    //glTexCoord2f(0,0);
-    glVertex3f(x1,y1,z1);
-    //glTexCoord2f();
-    glVertex3f(x2,y2,z2);
-    //glTexCoord2f();
-    glVertex3f(x3,y3,z3);
+    glTexCoord2f(acN/tx->getLengthS(), 0.0);
+    glVertex3f(x1, y1, z1);
+	glTexCoord2f(AD/tx->getLengthS(),AE/tx->getLengthT());
+     glVertex3f(x2, y2, z2); 
+    glTexCoord2f(0.0, 0.0);
+    glVertex3f(x3, y3, z3);
+
     glEnd();
 	glPopMatrix();
+	 if(this->tex!=NULL)
+		 tex->apply();
 		return 0;
 
 }
@@ -114,7 +130,7 @@ Rectangle::Rectangle(string id, string texture, string material,float x1,float y
 	this->y2 = y2;
 }
 
-int Rectangle::render(){
+int Rectangle::render(Textures* tx){
 	glEnable(GL_NORMALIZE);
     bool has_texture=false;
     if(this->tex!=NULL)
@@ -124,21 +140,27 @@ int Rectangle::render(){
     //CARREGAR MATERIAL
     if(has_texture){
             glEnable(GL_TEXTURE_2D);
-           // glBindTexture(GL_TEXTURE_2D, /*id da textura*/);
+			glBindTexture(GL_TEXTURE_2D, tex->getIdNum());
     }
+
+	float ls=tx->getLengthS();
+    float lt=tx->getLengthT();
+	float xrep = (x2-x1)  /ls;
+    float yrep = (y2-y1)  /lt;
+
     glBegin(GL_POLYGON);
     glNormal3d(0, 0, 1);
     if(has_texture)
 		glTexCoord2f(0.0, 0.0); 
     glVertex3f(x1, y1, 0);
     if(has_texture)
-		glTexCoord2f(1.0, 0.0); 
+		glTexCoord2f(xrep, 0.0); 
     glVertex3f(x2, y1, 0);
     if(has_texture)
-		glTexCoord2f(1.0, 1.0); 
+		glTexCoord2f(xrep, yrep); 
     glVertex3f(x2, y2, 0);
     if(has_texture)
-		glTexCoord2f(0.0, 1.0); 
+		glTexCoord2f(0.0, yrep); 
     glVertex3f(x1, y2, 0);
     glEnd();
 	glPopMatrix();
@@ -154,7 +176,7 @@ Sphere::Sphere(string id, string texture, string material, float radius,int slic
 	this->stacks = stacks;
 }
 
-int Sphere::render(){
+int Sphere::render(Textures* tx){
     if(this->tex!=NULL)
     this->tex->apply();
     glEnable(GL_NORMALIZE);

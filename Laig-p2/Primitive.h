@@ -33,7 +33,7 @@ protected:
 public:
     Primitive(string id,string texture,string material);
 	string getId();
-    virtual int render()=0;
+    virtual int render(Textures*)=0;
     string getTex(){
         return texture;
     }
@@ -61,7 +61,7 @@ class Torus: public Primitive {
 
 public:
     Torus(string id, string texture, string material, float inner, float outer,int slices,int stacks);
-    int render();
+    int render(Textures*);
 };
 
 class Cylinder: public Primitive {
@@ -71,7 +71,7 @@ class Cylinder: public Primitive {
 
 public:
     Cylinder(string id, string texture, string material,float base,float top,float height,int slices,int stacks);
-    int render();
+    int render(Textures*);
 };
 
 class Triangle: public Primitive {
@@ -79,7 +79,7 @@ class Triangle: public Primitive {
 
 public:
     Triangle(string id, string texture, string material,float x1,float y1,float z1,float x2,float y2,float z2, float x3, float y3,float z3);
-    int render();
+    int render(Textures*);
 };
 
 class Rectangle: public Primitive {
@@ -87,7 +87,7 @@ class Rectangle: public Primitive {
 
 public:
     Rectangle(string id, string texture, string material,float x1,float y1,float x2, float y2);
-	int render();
+	int render(Textures*);
 };
 
 class Sphere: public Primitive {
@@ -97,7 +97,7 @@ class Sphere: public Primitive {
 
 public:
 	Sphere(string id, string texture, string material, float radius, int slices, int stacks);
-	int render();
+	int render(Textures*);
 };
 
 #endif
