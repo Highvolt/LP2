@@ -551,9 +551,14 @@ Transformation * createTransformation(TiXmlElement * child){
         return trans;
     }else if(child
              && child->ValueTStr()=="transformationref"
-             && (id=child->Attribute("id"))!=""){
-    
-        return mtransformations[id];
+             && child->Attribute("id")!=NULL){
+        id=child->Attribute("id");
+        cout<<"Responder a transformationref id: "<<id<<endl;
+        if(mtransformations[id]!=NULL)
+            return mtransformations[id];
+        else
+            cout<<"Erro a encontrar trans"<<endl;
+        exit(-1);
     }
     
     return NULL;
@@ -566,7 +571,7 @@ int loadtransformations(TiXmlElement* transformations){
 		TiXmlElement * child=transformations->FirstChildElement();
 		//string id;
 		do{
-            Transformation * t=createTransformation(transformations);
+            Transformation * t=createTransformation(child);
             if(t!=NULL)
                 mtransformations[t->getId()]=t;
             
@@ -733,6 +738,7 @@ Component* loadcomponent(TiXmlElement * component){
             if((transformation->FirstChildElement("transformationref"))!=NULL){
                 //cout<<transformation->FirstChildElement()->Value()<<endl;
                 trans=createTransformation(transformation->FirstChildElement("transformationref"));
+                
             }else{
                 //cout<<transformation->FirstChildElement()->Value()<<endl;
                 trans=createTransformation(transformation);

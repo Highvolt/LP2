@@ -33,6 +33,11 @@
 		2CC104201471E56D00330FB4 /* greenhill.dsx in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC1041B1471E56100330FB4 /* greenhill.dsx */; };
 		2CC104211471E56D00330FB4 /* placa.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC1041C1471E56100330FB4 /* placa.bmp */; };
 		2CC104221471E56D00330FB4 /* relva.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC1041D1471E56100330FB4 /* relva.bmp */; };
+		2CC104291472007B00330FB4 /* demo.dsx in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC104231472006700330FB4 /* demo.dsx */; };
+		2CC1042A1472007B00330FB4 /* front_wall.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC104251472006700330FB4 /* front_wall.bmp */; };
+		2CC1042B1472007B00330FB4 /* grass.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC104261472006700330FB4 /* grass.bmp */; };
+		2CC1042C1472007B00330FB4 /* pillar_mid.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC104271472006700330FB4 /* pillar_mid.bmp */; };
+		2CC1042D1472007B00330FB4 /* rock.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC104281472006700330FB4 /* rock.bmp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +57,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				2CC104291472007B00330FB4 /* demo.dsx in CopyFiles */,
+				2CC1042A1472007B00330FB4 /* front_wall.bmp in CopyFiles */,
+				2CC1042B1472007B00330FB4 /* grass.bmp in CopyFiles */,
+				2CC1042C1472007B00330FB4 /* pillar_mid.bmp in CopyFiles */,
+				2CC1042D1472007B00330FB4 /* rock.bmp in CopyFiles */,
 				2CC1041F1471E56D00330FB4 /* checkered.bmp in CopyFiles */,
 				2CC104201471E56D00330FB4 /* greenhill.dsx in CopyFiles */,
 				2CC104211471E56D00330FB4 /* placa.bmp in CopyFiles */,
@@ -105,6 +115,11 @@
 		2CC1041B1471E56100330FB4 /* greenhill.dsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = greenhill.dsx; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/greenhill.dsx; sourceTree = "<group>"; };
 		2CC1041C1471E56100330FB4 /* placa.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = placa.bmp; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/placa.bmp; sourceTree = "<group>"; };
 		2CC1041D1471E56100330FB4 /* relva.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = relva.bmp; path = ../../Downloads/LAIG_TP2_DSX_T06_G01/relva.bmp; sourceTree = "<group>"; };
+		2CC104231472006700330FB4 /* demo.dsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = demo.dsx; path = ../../Downloads/LAIG_TP2_DSX_T03_G05/demo.dsx; sourceTree = "<group>"; };
+		2CC104251472006700330FB4 /* front_wall.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = front_wall.bmp; sourceTree = "<group>"; };
+		2CC104261472006700330FB4 /* grass.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = grass.bmp; sourceTree = "<group>"; };
+		2CC104271472006700330FB4 /* pillar_mid.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pillar_mid.bmp; sourceTree = "<group>"; };
+		2CC104281472006700330FB4 /* rock.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = rock.bmp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,8 +139,10 @@
 		2C34839F14700A7800703145 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2CC1041A1471E56100330FB4 /* checkered.bmp */,
 				2CC1041B1471E56100330FB4 /* greenhill.dsx */,
+				2CC104231472006700330FB4 /* demo.dsx */,
+				2CC104241472006700330FB4 /* Textures */,
+				2CC1041A1471E56100330FB4 /* checkered.bmp */,
 				2CC1041C1471E56100330FB4 /* placa.bmp */,
 				2CC1041D1471E56100330FB4 /* relva.bmp */,
 				2C3483A014700A9D00703145 /* cafe.xml */,
@@ -198,6 +215,18 @@
 				2C7D393514614D250092B047 /* tinyxmlparser.cpp */,
 			);
 			name = tinyxml;
+			sourceTree = "<group>";
+		};
+		2CC104241472006700330FB4 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				2CC104251472006700330FB4 /* front_wall.bmp */,
+				2CC104261472006700330FB4 /* grass.bmp */,
+				2CC104271472006700330FB4 /* pillar_mid.bmp */,
+				2CC104281472006700330FB4 /* rock.bmp */,
+			);
+			name = Textures;
+			path = ../../Downloads/LAIG_TP2_DSX_T03_G05/Textures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
