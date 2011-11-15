@@ -761,7 +761,7 @@ Component* loadcomponent(TiXmlElement * component){
                 vtex=mtextura[id_tex];
             }
             TiXmlElement * childchild=children->FirstChildElement();
-            vector<Component*> vcomp;
+            vector<string> vcomp;
             vector<Primitive*> vprim;
             do{
                 string id_c="";
@@ -769,11 +769,12 @@ Component* loadcomponent(TiXmlElement * component){
                     id_c=childchild->Attribute("id");
                     if(childchild->ValueTStr()=="componentref"){
                         cout<<"children cmpref id: "<<id_c<<endl;
-                        Component * cmp=mcomponent[id_c];
+                        vcomp.push_back(id_c);
+                        /*Component * cmp=mcomponent[id_c];
                         if(cmp!=NULL){
                             cout<<"children comp id: "<<id_c<<endl;
                             vcomp.push_back(cmp);
-                        }
+                        }*/
                     }else if(childchild->ValueTStr()=="primitiveref"){
                         cout<<"children primref id: "<<id_c<<endl;
                         Primitive * cmp=mprimitivas[id_c];
@@ -805,6 +806,21 @@ int loadcomponents(TiXmlElement * components){
         do{
             loadcomponent(child);
         }while((child=child->NextSiblingElement())!=NULL);
+        
+        for(map<string,Component*>::iterator it=mcomponent.begin();it!=mcomponent.end();it++){
+            if((*it).second!=NULL){
+                vector<string> v=(*it).second->getIDvector();
+                vector<Component*> c;
+                for(int i=0; i<v.size();i++){
+                   Component* cp= mcomponent[v[i]];
+                    if(cp!=NULL){
+                        c.push_back(cp);
+                    }
+                }
+                (*it).second->setComp(c);
+            
+            }
+        }
         
     }
     

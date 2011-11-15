@@ -21,6 +21,7 @@ using namespace std;
 #include "Texture.h"
 
 class Component{
+    vector<string> id_comp;
 	vector<Component*> child_comp;
 	vector<Primitive*> child_prim;
 	vector<Material*> materials;
@@ -28,8 +29,10 @@ class Component{
 	Transformation* transf;
 	char key;
 public:
-	Component(vector<Component*> child_comp, vector<Primitive*> child_prim, vector<Material*> materials,Texture* texture, Transformation* transf);
+	Component(vector<string> id_comp, vector<Primitive*> child_prim, vector<Material*> materials,Texture* texture, Transformation* transf);
 	void apply();
+    void setComp(vector<Component*> cmp);
+    vector<string> getIDvector();
 
 };
 
