@@ -30,14 +30,22 @@ Torus::Torus(string id, string texture, string material, float inner, float oute
 	this->outer = outer;
 	this->slices = slices;
 	this->stacks = stacks;
+    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR );
+    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR );
 }
 
 int Torus::render(Textures* tx){
-	if(this->tex!=NULL && this->texture.compare("inherit"))
+    if(this->tex!=NULL && this->texture.compare("inherit")!=0)
         this->tex->apply();
     glPushMatrix();
 	glEnable(GL_NORMALIZE);
+	glEnable(GL_TEXTURE_GEN_S);
+    glEnable(GL_TEXTURE_GEN_T);
+    
     glutSolidTorus(inner, outer, slices, stacks);
+	glDisable(GL_TEXTURE_GEN_S);
+    glDisable(GL_TEXTURE_GEN_T);
+    
 	glPopMatrix();
 	return 0;
 }
@@ -49,6 +57,11 @@ Cylinder::Cylinder(string id, string texture, string material,float base,float t
 	this->top = top;
 	this->slices = slices;
 	this->stacks = stacks;
+	glQ = gluNewQuadric();
+    gluQuadricDrawStyle(glQ, GLU_FILL);             
+    gluQuadricNormals(glQ, GLU_SMOOTH);             
+    gluQuadricOrientation(glQ, GLU_OUTSIDE);
+    gluQuadricTexture(glQ, GL_TRUE);
 }
 
 int Cylinder::render(Textures* tx){
@@ -58,7 +71,7 @@ int Cylinder::render(Textures* tx){
     }
     if(tx!=NULL)
     tx->apply();
-    glQ = gluNewQuadric();
+    //glQ = gluNewQuadric();
 	/*glPushMatrix();
 	glRotated(180,0,1,0);
     gluDisk(glQ,0,base,slices,stacks);
@@ -189,18 +202,21 @@ int Rectangle::render(Textures* tx){
 }
 
 Sphere::Sphere(string id, string texture, string material, float radius,int slices,int stacks):Primitive(id,texture,material){
-	this->radius = radius;
+    this->radius = radius;
 	this->slices = slices;
 	this->stacks = stacks;
-}
+	glQ = gluNewQuadric();
+    gluQuadricDrawStyle(glQ, GLU_FILL);             
+    gluQuadricNormals(glQ, GLU_SMOOTH);             
+    gluQuadricOrientation(glQ, GLU_OUTSIDE);
+    gluQuadricTexture(glQ, GL_TRUE);}
 
 int Sphere::render(Textures* tx){
     if(tx!=NULL)
-    tx->apply();
+        tx->apply();
     glEnable(GL_NORMALIZE);
-	glQ = gluNewQuadric();
 	glPushMatrix();
 	gluSphere(glQ, radius, slices, stacks);
 	glPopMatrix();
-		return 0;
+    return 0;
 }
