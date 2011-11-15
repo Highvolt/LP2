@@ -1,7 +1,43 @@
 #include "Lights.h"
 
+
+int Light::used=0;
+
+
+int Light::getLightX()
+{
+    switch(light_number){
+        case 0:
+            return GL_LIGHT0;
+            break;
+        case 1:
+            return GL_LIGHT1;
+            break;
+        case 2:
+            return GL_LIGHT2;
+            break;
+        case 3:
+            return GL_LIGHT3;
+            break;
+        case 4:
+            return GL_LIGHT4;
+            break;
+        case 5:
+            return GL_LIGHT5;
+            break;
+        case 6:
+            return GL_LIGHT6;
+            break;
+        case 7:
+            return GL_LIGHT7;
+            break;
+    }
+}
+
+
+
 Light::Light(int number){
-	this->light_number = number;
+	this->light_number = used++;
 }
 
 string Light::getId(){
@@ -13,7 +49,7 @@ void Light::setLightAmbient(float red, float green, float blue, float alpha) {
 		this->ambient[1]=green;
 		this->ambient[2]=blue;
 		this->ambient[3]=alpha;
-        glLightfv(light_number, GL_AMBIENT, ambient);
+        glLightfv(getLightX(), GL_AMBIENT, ambient);
 }
 
 void Light::setLightDiffuse(float red, float green, float blue, float alpha) {
@@ -21,7 +57,7 @@ void Light::setLightDiffuse(float red, float green, float blue, float alpha) {
 		this->diffuse[1]=green;
 		this->diffuse[2]=blue;
 		this->diffuse[3]=alpha;
-        glLightfv(light_number, GL_DIFFUSE, diffuse);
+        glLightfv(getLightX(), GL_DIFFUSE, diffuse);
 }
 
 void Light::setLightSpecular(float red, float green, float blue, float alpha) {
@@ -29,7 +65,7 @@ void Light::setLightSpecular(float red, float green, float blue, float alpha) {
 		this->specular[1]=green;
 		this->specular[2]=blue;
 		this->specular[3]=alpha;
-        glLightfv(light_number, GL_SPECULAR, specular);
+        glLightfv(getLightX(), GL_SPECULAR, specular);
 }
 
 int Light::getNumber(){
@@ -56,12 +92,12 @@ void Omni::setLightLocation(float x, float y, float z, float w) {
 		this->location[2]=z;
 		this->location[3]=w;
 		int num = this->getNumber();
-        glLightfv(num, GL_POSITION, location);
+        glLightfv(getLightX(), GL_POSITION, location);
 }
 
 void Omni::apply(bool enabled){
 	if(enabled)
-		glLightfv(this->getNumber(), GL_POSITION, location);
+		glLightfv(getLightX(), GL_POSITION, location);
 }
 
 Spot::Spot(int number, float angle): Light(number){
@@ -75,7 +111,7 @@ void Spot::setLightLocation(float x, float y, float z, float w) {
 		this->location[2]=z;
 		this->location[3]=w;
 		int num = this->getNumber();
-        glLightfv(num, GL_POSITION, location);
+        glLightfv(getLightX(), GL_POSITION, location);
 }
 
 void Spot::setSpotAngle(float angle){
@@ -98,13 +134,13 @@ void Spot::setSpotTarget(float x, float y, float z){
 	this->direction[1] /= norma;
 	this->direction[2] /= norma;
 	int num = this->getNumber();
-    glLightfv(num, GL_SPOT_DIRECTION, direction);
+    glLightfv(getLightX(), GL_SPOT_DIRECTION, direction);
 }
 
 void Spot::apply(bool enabled){
 	if(enabled){
-		glLightfv(this->getNumber(), GL_POSITION, location);
-        glLightfv(this->getNumber(), GL_SPOT_DIRECTION, direction);
+		glLightfv(getLightX(), GL_POSITION, location);
+        glLightfv(getLightX(), GL_SPOT_DIRECTION, direction);
 	}
 }
 

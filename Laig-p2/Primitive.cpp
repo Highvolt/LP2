@@ -29,13 +29,15 @@ Torus::Torus(string id, string texture, string material, float inner, float oute
 
 int Torus::render(){
 	glPushMatrix();
-	glutSolidTorus(inner, outer, slices, stacks);
+	glEnable(GL_NORMALIZE);
+    glutSolidTorus(inner, outer, slices, stacks);
 	glPopMatrix();
 	return 0;
 }
 
 Cylinder::Cylinder(string id, string texture, string material,float base,float top,float height,int slices,int stacks):Primitive(id,texture,material){
-	this->base = base;
+	
+    this->base = base;
 	this->height = height;
 	this->top = top;
 	this->slices = slices;
@@ -43,7 +45,8 @@ Cylinder::Cylinder(string id, string texture, string material,float base,float t
 }
 
 int Cylinder::render(){
-	glQ = gluNewQuadric();
+	glEnable(GL_NORMALIZE);
+    glQ = gluNewQuadric();
 	glPushMatrix();
 	glRotated(180,0,1,0);
     gluDisk(glQ,0,top,slices,stacks);
@@ -70,7 +73,7 @@ Triangle::Triangle(string id, string texture, string material,
 		this->z3 = z3;
 }
 int Triangle::render(){
-
+    glEnable(GL_NORMALIZE);
 	//Carregar textura e material
 	glPushMatrix();
 	glBegin(GL_TRIANGLES);
@@ -95,7 +98,8 @@ Rectangle::Rectangle(string id, string texture, string material,float x1,float y
 }
 
 int Rectangle::render(){
-	bool has_texture=false;
+	glEnable(GL_NORMALIZE);
+    bool has_texture=false;
 	glPushMatrix();
     //VERIFICA SE TEM TEXTURA
     //CARREGAR MATERIAL
@@ -132,6 +136,7 @@ Sphere::Sphere(string id, string texture, string material, float radius,int slic
 }
 
 int Sphere::render(){
+    glEnable(GL_NORMALIZE);
 	glQ = gluNewQuadric();
 	glPushMatrix();
 	gluSphere(glQ, radius, slices, stacks);

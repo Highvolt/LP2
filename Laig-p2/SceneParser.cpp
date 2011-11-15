@@ -10,6 +10,7 @@ map<string, Transformation*> mtransformations;
 map<string, Material*> mmaterials;
 map<string, Light*> mlight;
 map<string, Component*> mcomponent;
+map<string, View*> mview;
 
 View * createView(TiXmlElement * viewchild){
     float flodo;
@@ -81,6 +82,9 @@ int loadviews(TiXmlElement* view){
             View * ret=createView(viewchild);
             //TODO
             //Decidir o que fazer;
+            if(ret!=NULL){
+                mview[ret->getId()]=ret;
+            }
             
 		}while((viewchild=viewchild->NextSiblingElement()));
         
@@ -842,7 +846,15 @@ int loaddsxfile(const string & filename){
         loadcomponents(component);
         
         
+        
+        
         glNewList(1, GL_COMPILE);
+        (*mview.begin()).second->apply();
+        for(map<string,Light*>::iterator it=mlight.begin();it!=mlight.end();it++){
+            if((*it).second!=NULL)
+                (*it).second->apply(true);
+            
+        }
         for(map<string,Component*>::iterator it=mcomponent.begin();it!=mcomponent.end();it++){
             if((*it).second!=NULL)
                 (*it).second->apply();

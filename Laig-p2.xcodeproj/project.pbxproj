@@ -38,6 +38,20 @@
 		2CC1042B1472007B00330FB4 /* grass.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC104261472006700330FB4 /* grass.bmp */; };
 		2CC1042C1472007B00330FB4 /* pillar_mid.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC104271472006700330FB4 /* pillar_mid.bmp */; };
 		2CC1042D1472007B00330FB4 /* rock.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CC104281472006700330FB4 /* rock.bmp */; };
+		2CCC9D2C147206E5009FF849 /* chao.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D25147206D9009FF849 /* chao.bmp */; };
+		2CCC9D2D147206E5009FF849 /* demograph2.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D26147206D9009FF849 /* demograph2.xml */; };
+		2CCC9D2E147206E5009FF849 /* madeira.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D27147206D9009FF849 /* madeira.bmp */; };
+		2CCC9D2F147206E5009FF849 /* quadro.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D28147206D9009FF849 /* quadro.bmp */; };
+		2CCC9D30147206E5009FF849 /* quadro2.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D29147206D9009FF849 /* quadro2.bmp */; };
+		2CCC9D31147206E5009FF849 /* screen.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D2A147206D9009FF849 /* screen.jpg */; };
+		2CCC9D32147206E5009FF849 /* sofa.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D2B147206D9009FF849 /* sofa.bmp */; };
+		2CCC9D3B147207D7009FF849 /* bus.dsx in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D33147207C8009FF849 /* bus.dsx */; };
+		2CCC9D3C147207D7009FF849 /* ceu.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D35147207C8009FF849 /* ceu.bmp */; };
+		2CCC9D3D147207D7009FF849 /* farol.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D36147207C8009FF849 /* farol.bmp */; };
+		2CCC9D3E147207D7009FF849 /* glass.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D37147207C8009FF849 /* glass.bmp */; };
+		2CCC9D3F147207D7009FF849 /* paisagem1.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D38147207C8009FF849 /* paisagem1.bmp */; };
+		2CCC9D40147207D7009FF849 /* paisagem2.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D39147207C8009FF849 /* paisagem2.bmp */; };
+		2CCC9D41147207D7009FF849 /* road.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2CCC9D3A147207C8009FF849 /* road.bmp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +71,20 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				2CCC9D3B147207D7009FF849 /* bus.dsx in CopyFiles */,
+				2CCC9D3C147207D7009FF849 /* ceu.bmp in CopyFiles */,
+				2CCC9D3D147207D7009FF849 /* farol.bmp in CopyFiles */,
+				2CCC9D3E147207D7009FF849 /* glass.bmp in CopyFiles */,
+				2CCC9D3F147207D7009FF849 /* paisagem1.bmp in CopyFiles */,
+				2CCC9D40147207D7009FF849 /* paisagem2.bmp in CopyFiles */,
+				2CCC9D41147207D7009FF849 /* road.bmp in CopyFiles */,
+				2CCC9D2C147206E5009FF849 /* chao.bmp in CopyFiles */,
+				2CCC9D2D147206E5009FF849 /* demograph2.xml in CopyFiles */,
+				2CCC9D2E147206E5009FF849 /* madeira.bmp in CopyFiles */,
+				2CCC9D2F147206E5009FF849 /* quadro.bmp in CopyFiles */,
+				2CCC9D30147206E5009FF849 /* quadro2.bmp in CopyFiles */,
+				2CCC9D31147206E5009FF849 /* screen.jpg in CopyFiles */,
+				2CCC9D32147206E5009FF849 /* sofa.bmp in CopyFiles */,
 				2CC104291472007B00330FB4 /* demo.dsx in CopyFiles */,
 				2CC1042A1472007B00330FB4 /* front_wall.bmp in CopyFiles */,
 				2CC1042B1472007B00330FB4 /* grass.bmp in CopyFiles */,
@@ -120,6 +148,20 @@
 		2CC104261472006700330FB4 /* grass.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = grass.bmp; sourceTree = "<group>"; };
 		2CC104271472006700330FB4 /* pillar_mid.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pillar_mid.bmp; sourceTree = "<group>"; };
 		2CC104281472006700330FB4 /* rock.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = rock.bmp; sourceTree = "<group>"; };
+		2CCC9D25147206D9009FF849 /* chao.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = chao.bmp; path = ../../Downloads/LAIG_TP2_DSX_T3G09/chao.bmp; sourceTree = "<group>"; };
+		2CCC9D26147206D9009FF849 /* demograph2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = demograph2.xml; path = ../../Downloads/LAIG_TP2_DSX_T3G09/demograph2.xml; sourceTree = "<group>"; };
+		2CCC9D27147206D9009FF849 /* madeira.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = madeira.bmp; path = ../../Downloads/LAIG_TP2_DSX_T3G09/madeira.bmp; sourceTree = "<group>"; };
+		2CCC9D28147206D9009FF849 /* quadro.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = quadro.bmp; path = ../../Downloads/LAIG_TP2_DSX_T3G09/quadro.bmp; sourceTree = "<group>"; };
+		2CCC9D29147206D9009FF849 /* quadro2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = quadro2.bmp; path = ../../Downloads/LAIG_TP2_DSX_T3G09/quadro2.bmp; sourceTree = "<group>"; };
+		2CCC9D2A147206D9009FF849 /* screen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = screen.jpg; path = ../../Downloads/LAIG_TP2_DSX_T3G09/screen.jpg; sourceTree = "<group>"; };
+		2CCC9D2B147206D9009FF849 /* sofa.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = sofa.bmp; path = ../../Downloads/LAIG_TP2_DSX_T3G09/sofa.bmp; sourceTree = "<group>"; };
+		2CCC9D33147207C8009FF849 /* bus.dsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = bus.dsx; path = ../../Downloads/LAIG_TP2_DSX_T02_G02/bus.dsx; sourceTree = "<group>"; };
+		2CCC9D35147207C8009FF849 /* ceu.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = ceu.bmp; sourceTree = "<group>"; };
+		2CCC9D36147207C8009FF849 /* farol.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = farol.bmp; sourceTree = "<group>"; };
+		2CCC9D37147207C8009FF849 /* glass.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = glass.bmp; sourceTree = "<group>"; };
+		2CCC9D38147207C8009FF849 /* paisagem1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = paisagem1.bmp; sourceTree = "<group>"; };
+		2CCC9D39147207C8009FF849 /* paisagem2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = paisagem2.bmp; sourceTree = "<group>"; };
+		2CCC9D3A147207C8009FF849 /* road.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = road.bmp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +181,15 @@
 		2C34839F14700A7800703145 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2CCC9D33147207C8009FF849 /* bus.dsx */,
+				2CCC9D34147207C8009FF849 /* textures */,
+				2CCC9D25147206D9009FF849 /* chao.bmp */,
+				2CCC9D26147206D9009FF849 /* demograph2.xml */,
+				2CCC9D27147206D9009FF849 /* madeira.bmp */,
+				2CCC9D28147206D9009FF849 /* quadro.bmp */,
+				2CCC9D29147206D9009FF849 /* quadro2.bmp */,
+				2CCC9D2A147206D9009FF849 /* screen.jpg */,
+				2CCC9D2B147206D9009FF849 /* sofa.bmp */,
 				2CC1041B1471E56100330FB4 /* greenhill.dsx */,
 				2CC104231472006700330FB4 /* demo.dsx */,
 				2CC104241472006700330FB4 /* Textures */,
@@ -227,6 +278,20 @@
 			);
 			name = Textures;
 			path = ../../Downloads/LAIG_TP2_DSX_T03_G05/Textures;
+			sourceTree = "<group>";
+		};
+		2CCC9D34147207C8009FF849 /* textures */ = {
+			isa = PBXGroup;
+			children = (
+				2CCC9D35147207C8009FF849 /* ceu.bmp */,
+				2CCC9D36147207C8009FF849 /* farol.bmp */,
+				2CCC9D37147207C8009FF849 /* glass.bmp */,
+				2CCC9D38147207C8009FF849 /* paisagem1.bmp */,
+				2CCC9D39147207C8009FF849 /* paisagem2.bmp */,
+				2CCC9D3A147207C8009FF849 /* road.bmp */,
+			);
+			name = textures;
+			path = ../../Downloads/LAIG_TP2_DSX_T02_G02/textures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

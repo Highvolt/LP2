@@ -22,6 +22,7 @@ class Light{
 	float ambient[4];
 	float specular[4];
 	float diffuse[4];
+    static int used;
 public:
 	Light(int number);
 	int getNumber();
@@ -32,6 +33,7 @@ public:
     virtual void setSpotTarget(float x, float y, float z)=0;
     virtual void setLightLocation(float, float, float, float)=0;
 	void setEnabled(bool enabled);
+    int getLightX();
 	bool is_enabled();
 	virtual void apply(bool enabled)=0;
 };
