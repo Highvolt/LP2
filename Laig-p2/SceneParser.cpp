@@ -72,6 +72,9 @@ View * createView(TiXmlElement * viewchild){
                 return ret;
             }
         
+    }else{
+        cout<<"Invalid View"<<endl;
+        exit(-1);
     }
     return NULL;
 }
@@ -97,7 +100,10 @@ int loadviews(TiXmlElement* view){
         
 		//validação do numero de views
 		return 0;
-	}
+	}else{
+        cout<<"Invalid root View"<<endl;
+        exit(-1);
+    }
 	return -1;
 }
 
@@ -157,7 +163,10 @@ Illumination* loadillumination(TiXmlElement* illu){
         else{
             return NULL;
         }
-	}
+	}else{
+        cout<<"Invalid Ilummination"<<endl;
+        exit(-1);
+    }
     return NULL;
 }
 
@@ -232,7 +241,11 @@ Material* createMaterial(TiXmlElement * child){
             }
         }while((propriedades=propriedades->NextSiblingElement()));
         return mat;
+    }else{
+        cout<<"Invalid Material"<<endl;
+        exit(-1);
     }
+
     
     return NULL;
 }
@@ -273,7 +286,11 @@ int loadmaterials(TiXmlElement* mat){
             
 		}while((child=child->NextSiblingElement())!=NULL);
         
-	}
+	}else{
+        cout<<"Invalid Materials Root"<<endl;
+        exit(-1);
+    }
+
     
     return 0;
 }
@@ -349,7 +366,11 @@ Light * createLight(TiXmlElement * child){
         }while((propriedades=propriedades->NextSiblingElement()));
         if(diffuse &&ambient&&ambient &&location){
             return light;
+        }else{
+            cout<<"Not enought parameters in light id: "<<id<<endl;
+            exit(-1);
         }
+
         
     }
     if(child
@@ -428,7 +449,13 @@ Light * createLight(TiXmlElement * child){
         }while((propriedades=propriedades->NextSiblingElement()));
         if(diffuse &&ambient&&ambient &&location&&target){
             return light;
+        }else{
+            cout<<"Not enought parameters in light id: "<<id<<endl;
+            exit(-1);
         }
+    }else{
+        cout<<"Invalid light"<<endl;
+        exit(-1);
     }
     
     
@@ -448,6 +475,9 @@ int loadlights(TiXmlElement* lights){
             
 		}while((child=child->NextSiblingElement())!=NULL);
         
+    }else{
+        cout<<"Invalid light root"<<endl;
+        exit(-1);
     }
 	return 0;
 }
@@ -470,6 +500,9 @@ Textures * createTexture(TiXmlElement * child){
         }
         cout<< "id: " << id << " file: " << file << " length_s: " << length_s << " length_t: " << length_t<<endl;
         return a;
+    }else{
+        cout<<"Invalid Texture"<<endl;
+        exit(-1);
     }
     return NULL;
     
@@ -485,7 +518,10 @@ int loadtextures(TiXmlElement* textures){
 
             
         }while((child=child->NextSiblingElement())!=NULL);
-	}
+	}else{
+        cout<<"Invalid texture root"<<endl;
+        exit(-1);
+    }
 	return 0;
 }
 
@@ -495,8 +531,12 @@ int loadscene(TiXmlElement* scene){
 	if(scene->ValueTStr()=="scene"){
 		if((root=scene->Attribute("root"))!="" && scene->QueryFloatAttribute("axis_length",&axis_length)==TIXML_SUCCESS){
 			cout << "scene root -" <<  root << " axis_length: " << axis_length << endl;
-		}
-		return axis_length;
+            return axis_length;
+		}else{
+            cout<<"Invalid scene"<<endl;
+            exit(-1);
+        }
+		
 	}
 	return 0;
 }
@@ -577,6 +617,9 @@ Transformation * createTransformation(TiXmlElement * child){
         else
             cout<<"Erro a encontrar trans"<<endl;
         exit(-1);
+    }else{
+        cout<<"Invalid transformation"<<endl;
+        exit(-1);
     }
     
     return NULL;
@@ -595,6 +638,10 @@ int loadtransformations(TiXmlElement* transformations){
             
 		}while((child=child->NextSiblingElement())!=NULL);
 	}
+    else{
+        cout<<"Invalid transformation root"<<endl;
+        exit(-1);
+    }
 	return 0;
     
 }
@@ -717,8 +764,12 @@ Primitive * createPrimitive(TiXmlElement * child){
         
         
     }
-    else if(child && child->ValueTStr()=="primitiveref" && (id=child->Attribute("id"))!=""){
+    else if(child && child->ValueTStr()=="primitiveref" && child->Attribute("id")!=NULL){
+        id=child->Attribute("id");
         return mprimitivas[id];
+    }else{
+        cout<<"Invalid primitive"<<endl;
+        exit(-1);
     }
     
     
@@ -736,7 +787,11 @@ int loadprimitives(TiXmlElement* primitives){
             if(p!=NULL)
                 mprimitivas[p->getId()]=p;
 		}while((child=child->NextSiblingElement())!=NULL);
-	}
+	}else{
+        cout<<"Invalid primitive root"<<endl;
+        exit(-1);
+    }
+    
 	return 0;
 }
 
