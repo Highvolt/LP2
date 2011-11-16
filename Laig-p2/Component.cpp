@@ -6,6 +6,11 @@ Component::Component(vector<string> id_comp, vector<Primitive*> child_prim, vect
 	this->texture = texture;
 	this->transf = transf;
     this->materials=materials;
+    if(materials.size()>0)
+        activo=materials[0];
+    else
+        activo=NULL;
+    lastpos=0;
 }
 
 vector<string> Component::getIDvector(){
@@ -26,23 +31,36 @@ void Component::apply(){
             transf->apply();
         }
     
-    for(vector<Material*>::iterator it= this->materials.begin(); it != this->materials.end(); ++it){
+    /*for(vector<Material*>::iterator it= this->materials.begin(); it != this->materials.end(); ++it){
         (*it)->applyMat();
-    }  
+    } */
+    
 
-    if(this->texture!=NULL){
-        this->texture->apply();}
+
 
     
         for(vector<Primitive*>::iterator it= child_prim.begin(); it != child_prim.end(); ++it){
-            
+
+            if(this->texture!=NULL && texture->getId().compare("none")!=0){
+                this->texture->apply();}
+            if(activo!=NULL){
+                // cout<<this->id<<" material activo: "<<this->activo->getId()<<endl;
+                activo->applyMat();
+            }
                 (*it)->render(texture);
             
         
         }
     
         for(vector<Component*>::iterator it= child_comp.begin(); it != child_comp.end(); ++it){
-                (*it)->apply();
+
+            if(this->texture!=NULL && texture->getId().compare("none")!=0){
+                this->texture->apply();}    
+            if(activo!=NULL){
+                // cout<<this->id<<" material activo: "<<this->activo->getId()<<endl;
+                activo->applyMat();
+            }
+            (*it)->apply();
         }
         glPopMatrix();
 }

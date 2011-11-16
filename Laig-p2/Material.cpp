@@ -41,11 +41,14 @@ void Material::setMatEmission(float red, float green, float blue, float alpha){
 }
 
 void Material::applyMat(){
-    glEnable(GL_COLOR);
-    glEnable(GL_COLOR_MATERIAL);
-	glMaterialfv(GL_FRONT,GL_SHININESS,&mat_shininess[0]);
-	glMaterialfv(GL_FRONT,GL_EMISSION,&mat_emission[0]);
-	glMaterialfv(GL_FRONT,GL_SPECULAR,&mat_specular[0]);
-	glMaterialfv(GL_FRONT,GL_AMBIENT,&mat_ambient[0]);
-    glMaterialfv(GL_FRONT,GL_DIFFUSE,&mat_diffuse[0]);
+    glDisable(GL_COLOR);
+    glDisable(GL_COLOR_MATERIAL);
+    //glColor3d(1.0, 1.0, 1.0);
+    if(id.compare("inherit")!=0){
+	glMaterialfv(GL_FRONT,GL_SHININESS,mat_shininess);
+	glMaterialfv(GL_FRONT,GL_EMISSION,mat_emission);
+	glMaterialfv(GL_FRONT,GL_SPECULAR,mat_specular);
+	glMaterialfv(GL_FRONT,GL_AMBIENT,mat_ambient);
+        glMaterialfv(GL_FRONT,GL_DIFFUSE,mat_diffuse);
+    }
 }

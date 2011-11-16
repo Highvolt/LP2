@@ -9,6 +9,7 @@ map<string, Material*> mmaterials;
 map<string, Light*> mlight;
 map<string, Component*> mcomponent;
 map<string, View*> mview;
+Component * raizcmp;
 Illumination * illu;
 
 View * active;
@@ -170,6 +171,7 @@ Material* createMaterial(TiXmlElement * child){
        && (id=child->Attribute("id"))!=""){
         TiXmlElement * propriedades=child->FirstChildElement();
         mat=new Material(id);
+        cout<<"new Material id: "<<id<<endl;
         do{ 
             float r,g,b,a,value;
             if(propriedades->ValueTStr()=="ambient"
@@ -229,7 +231,7 @@ Material* createMaterial(TiXmlElement * child){
                 
             }
         }while((propriedades=propriedades->NextSiblingElement()));
-        
+        return mat;
     }
     
     return NULL;
@@ -254,7 +256,7 @@ vector<Material*> loadvectormaterials(TiXmlElement* mat){
 		}while((child=child->NextSiblingElement())!=NULL);
         
 	}
-    
+    cout<<vect.size()<<" Materiais"<<endl;
     return vect;
 }
 
@@ -740,6 +742,7 @@ int loadprimitives(TiXmlElement* primitives){
 
 Component* loadcomponent(TiXmlElement * component){
     string id;
+    string key="";
     Textures * vtex=NULL;
     if(component->ValueTStr()=="component" && (id=component->Attribute("id"))!=""){
         cout<<"Component id: "<<id<<endl;
@@ -760,11 +763,11 @@ Component* loadcomponent(TiXmlElement * component){
                 //cout<<transformation->FirstChildElement()->Value()<<endl;
                 trans=createTransformation(transformation);
             }
-            string key="";
+            
             vector<Material*> vmat;
             if(materials->Attribute("key")!=NULL){ 
                 vmat=loadvectormaterials(materials);
-                //falta atribuir tecla
+                key=materials->Attribute("key");
             }else{
                 vmat=loadvectormaterials(materials);
             }
@@ -807,6 +810,8 @@ Component* loadcomponent(TiXmlElement * component){
             
             }while((childchild=childchild->NextSiblingElement())!=NULL);
             Component * newcmp=new Component(vcomp, vprim,vmat, vtex, trans);
+            newcmp->setKey(key[0]);
+            newcmp->setId(id);
             mcomponent[id]=newcmp;
             return newcmp;
         }
@@ -910,6 +915,7 @@ int loaddsxfile(const string & filename){
                 (*it).second->apply(true);
             
         }
+        raizcmp=mcomponent[rootcomp];
         mcomponent[rootcomp]->apply();
         glEndList();
         //active=(*mview.begin()).second;

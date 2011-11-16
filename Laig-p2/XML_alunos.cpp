@@ -98,8 +98,11 @@ GLUI  *glui2;
 
 extern map<string, Light*> mlight;
 extern map<string, View*> mview;
+extern map<string, Component*> mcomponent;
 extern View * active;
 extern Illumination * illu;
+extern Component * raizcmp;
+
 
 void display_axis(){
 	GLUquadric* glQ2;
@@ -217,7 +220,8 @@ void display(void)
 
     
     
-    glCallList(1);
+    //glCallList(1);
+    raizcmp->apply();
     
 	// inibicao de atribuicao directa de cores
 	glDisable(GL_COLOR_MATERIAL);
@@ -285,58 +289,14 @@ void reshape(int w, int h)
 void keyboard(unsigned char key, int x, int y)
 {
    switch (key) {
-	  case 'q':
-		light0y+= 0.1;
-		cout << "light0y: " << light0y << endl; 
-		break;
-	  case 'a':
-		light0y-= 0.1;
-		cout << "light0y: " << light0y << endl; 
-		break;
-	  case 'i':
-		light0_kc+=0.1;
-		cout << "light0_kc: " << light0_kc << endl; 
-		break;
-	  case 'o':
-		light0_kc-=0.1;
-		cout << "light0_kc: " << light0_kc << endl; 
-		break;
-	  case 'k':
-		light0_kl+=0.1;
-		cout << "light0_kl: " << light0_kl << endl; 
-		break;
-	  case 'l':
-		light0_kl-=0.1;
-		cout << "light0_kl: " << light0_kl << endl; 
-		break;
-	  case 'n':
-		light0_kq+=0.1;
-		cout << "light0_kq: " << light0_kq << endl; 
-		break;
-	  case 'm':
-		light0_kq-=0.1;
-		cout << "light0_kq: " << light0_kq << endl; 
-		break;
-	  case 'z':
-		divisoes_i+=3;
-		cout << "div_i: " << divisoes_i <<endl;
-		break;
-	  case 'x':
-		divisoes_i-=3;
-		cout << "div_i: " << divisoes_i <<endl;
-		break;
-	  case 'c':
-		divisoes_j+=5;
-		cout << "div_j: " << divisoes_j <<endl;
-		break;
-	  case 'v':
-		divisoes_j-=5;
-		cout << "div_j: " << divisoes_j <<endl;
-		break;
-
+    
       case 27:		// tecla de escape termina o programa
          exit(0);
          break;
+       default:
+           for (map<string,Component*>::iterator it=mcomponent.begin(); it!=mcomponent.end(); it++) {
+               (*it).second->receivekey(key);
+           }
    }
 }
 
