@@ -91,7 +91,7 @@ float light_ambient[] = {0.2, 0.2, 0.2, 1.0}; /* Set the background ambient ligh
 // variaveis para a janela
 int main_window;
 GLUI  *glui2;
-
+int freev = 0;
 
 //Utiliza as estruturas de dados com a informação do xml para construir o plano
 
@@ -152,28 +152,31 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
 	// inicializacoes da matriz de visualizacao
-	glMatrixMode( GL_PROJECTION );
+	if(freev==1){
+    glMatrixMode( GL_PROJECTION );
 	glLoadIdentity();
 	glFrustum( -xy_aspect*.04, xy_aspect*.04, -.04, .04, .1, 500.0 );
 
 	//inicializacoes da matriz de transformacoes geometricas
-	//glMatrixMode( GL_MODELVIEW );
-	//glLoadIdentity();
+	glMatrixMode( GL_MODELVIEW );
+	glLoadIdentity();
 	
 	// afasta a cena de 25 unidades mais a distância...
-	//glTranslated(0.0,0.0,-25.0);
+	glTranslated(0.0,0.0,-25.0);
 	// ...decorrente da utilizacao do botao de afastamento
-  //  glTranslatef( obj_pos[0], obj_pos[1], -obj_pos[2] );    
+   glTranslatef( obj_pos[0], obj_pos[1], -obj_pos[2] );    
 
 	// roda a cena para ficar em perspectiva
-//	glRotated(20.0, 1.0,0.0,0.0 );		// 20 graus em torno de X
-//	glRotated(-45.0, 0.0,1.0,0.0 );		//-45 graus em torno de Y
+	glRotated(20.0, 1.0,0.0,0.0 );		// 20 graus em torno de X
+        glRotated(-45.0, 0.0,1.0,0.0 );		//-45 graus em torno de Y
 
 	// aplica efeito do botao de rotacao
-	//glMultMatrixf( view_rotate );
+        glMultMatrixf( view_rotate );
+    }else{
     //(*mview.begin()).second->apply();
     if(active!=NULL){
         active->apply();
+    }
     }
     illu->apply();
 	// permissao de atribuicao directa de cores
@@ -377,6 +380,7 @@ void viewchange(int d){
 }
 int wirestate=0;
 
+
 void changeViewMode(int d){
     if(wirestate){
         glPolygonMode(GL_FRONT, GL_LINE);
@@ -386,6 +390,9 @@ void changeViewMode(int d){
 
 }
 
+
+void dum(int d){
+}
 
 int main(int argc, char* argv[])
 {
@@ -435,6 +442,7 @@ int main(int argc, char* argv[])
      glui2->add_column( false );
     GLUI_Listbox *listbox = glui2->add_listbox("Active view",&f,i,viewchange);
     glui2->add_checkbox("Wireframe",&wirestate,0,changeViewMode);
+     glui2->add_checkbox("Free",&freev,0,dum);
     i=0;
     for(map<string,View*>::iterator it=mview.begin();it!=mview.end();it++){
         listbox->add_item(i++, (*it).first.c_str());
