@@ -16,7 +16,7 @@
 using namespace std;
 
 class Light{
-	
+
 	int light_number;
 	
 	float ambient[4];
@@ -40,6 +40,9 @@ public:
     virtual void setLightLocation(float, float, float, float)=0;
 	void setEnabled(bool enabled);
     int getLightX();
+    void setID(string id){
+        this->id=id;
+    }
 	bool is_enabled();
     virtual void apply()=0;
 	virtual void apply(bool enabled)=0;

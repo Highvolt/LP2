@@ -314,6 +314,7 @@ Light * createLight(TiXmlElement * child){
         else{
             light->setEnabled(false);
         }
+        light->setID(id);
         do{ 
             float r,g,b,a,value, x,y,z,w;
             if(propriedades->ValueTStr()=="location"
@@ -391,6 +392,7 @@ Light * createLight(TiXmlElement * child){
         else{
             light->setEnabled(false);
         }
+        light->setID(id);
         do{ 
             float r,g,b,a,value, x,y,z;
             if(propriedades->ValueTStr()=="location"
@@ -976,8 +978,10 @@ int loaddsxfile(const string & filename){
         glNewList(1, GL_COMPILE);
         //(*mview.begin()).second->apply();
         for(map<string,Light*>::iterator it=mlight.begin();it!=mlight.end();it++){
-            if((*it).second!=NULL)
+            if((*it).second!=NULL){
+                cout<<(*it).first<<endl;
                 (*it).second->apply();
+            }
             
         }
         raizcmp=mcomponent[rootcomp];

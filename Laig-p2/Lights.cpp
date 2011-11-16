@@ -108,7 +108,7 @@ void Omni::apply(bool enabled){
 }
 
 void Omni::apply(){
-	cout<<id<<" activa "<<enabled<<endl;
+	//cout<<id<<" activa "<<enabled<<endl;
     if(enabled){
 		glLightfv(getLightX(), GL_POSITION, location);
         glEnable(getLightX());
@@ -163,7 +163,7 @@ void Spot::apply(bool enabled){
 }
 
 void Spot::apply(){
-    cout<<id<<" activa "<<enabled<<endl;
+   // cout<<id<<" activa "<<enabled<<endl;
 	if(this->enabled){
 		glLightfv(getLightX(), GL_POSITION, location);
         glLightfv(getLightX(), GL_SPOT_DIRECTION, direction);

@@ -103,7 +103,7 @@ extern View * active;
 extern Illumination * illu;
 extern Component * raizcmp;
 
-
+GLUI_Button *ch;
 void display_axis(){
 	GLUquadric* glQ2;
 	glQ2 = gluNewQuadric();
@@ -365,6 +365,16 @@ void inicializacao()
 	//glPolygonMode(GL_FRONT, GL_LINE);	// desenha arestas dos poligonos
 	
 }
+int u=0;
+void changelight(int d){
+   /* int g=u;
+    for(map<string,Light*>::iterator it=mlight.begin();it!=mlight.end() && g>=0;it++){
+        //cout<<g<<endl;
+        (*it).second->setEnabled(!(*it).second->is_enabled());
+        g--;
+    }*/
+
+}
 
 int f=0;
 void viewchange(int d){
@@ -380,7 +390,20 @@ void viewchange(int d){
 }
 int wirestate=0;
 
-
+void ligar(int d){
+    int g=u;
+    map<string,Light*>::iterator it=mlight.begin();
+    for(it=mlight.begin();it!=mlight.end() && g>0;it++){
+        //cout<<g<<endl;
+       
+        g--;
+    }
+    if(it!=mlight.end()){
+        
+     (*it).second->setEnabled(!(*it).second->is_enabled());
+        cout<<(*it).second->getId()<<" estado: "<<(*it).second->is_enabled()<<endl;
+    }
+}
 void changeViewMode(int d){
     if(wirestate){
         glPolygonMode(GL_FRONT, GL_LINE);
@@ -441,14 +464,21 @@ int main(int argc, char* argv[])
     }
      glui2->add_column( false );
     GLUI_Listbox *listbox = glui2->add_listbox("Active view",&f,i,viewchange);
-    glui2->add_checkbox("Wireframe",&wirestate,0,changeViewMode);
-     glui2->add_checkbox("Free",&freev,0,dum);
-    i=0;
+        i=0;
     for(map<string,View*>::iterator it=mview.begin();it!=mview.end();it++){
         listbox->add_item(i++, (char *)(*it).first.c_str());
     }
+    glui2->add_checkbox("Wireframe",&wirestate,0,changeViewMode);
+    glui2->add_checkbox("Free",&freev,0,dum);
     
-
+   i=0;
+    GLUI_Listbox *listbox2 = glui2->add_listbox("Light",&u,i,changelight);
+    
+    for(map<string,Light*>::iterator it=mlight.begin();it!=mlight.end();it++){
+       // cout<<(*it).first<<endl;
+        listbox2->add_item(i++, (char *)(*it).first.c_str());
+    }
+    ch=glui2->add_button("Ligar/desligar",-1,ligar);
 	glutMainLoop();
 
 	return 0;
