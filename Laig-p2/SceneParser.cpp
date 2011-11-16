@@ -881,7 +881,7 @@ Component* loadcomponent(TiXmlElement * component){
                         Primitive * cmp=mprimitivas[id_c];
                         if(cmp!=NULL){
                             cout<<"children primitiva id: "<<cmp->getId()<<endl;
-                            cmp->render((*mtextura.begin()).second);
+                            //cmp->render((*mtextura.begin()).second);
                             vprim.push_back(cmp);
                         }
                     }
@@ -890,7 +890,9 @@ Component* loadcomponent(TiXmlElement * component){
             
             }while((childchild=childchild->NextSiblingElement())!=NULL);
             Component * newcmp=new Component(vcomp, vprim,vmat, vtex, trans);
-            newcmp->setKey(key[0]);
+            if(key.size()>0){
+                newcmp->setKey(key[0]);
+            }
             newcmp->setId(id);
             mcomponent[id]=newcmp;
             return newcmp;
