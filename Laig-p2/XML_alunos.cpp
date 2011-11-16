@@ -217,7 +217,7 @@ void display(void)
 
     for(map<string,Light*>::iterator it=mlight.begin();it!=mlight.end();it++){
         if((*it).second!=NULL)
-            (*it).second->apply(true);
+            (*it).second->apply();
         
     }
 
@@ -445,7 +445,7 @@ int main(int argc, char* argv[])
      glui2->add_checkbox("Free",&freev,0,dum);
     i=0;
     for(map<string,View*>::iterator it=mview.begin();it!=mview.end();it++){
-        listbox->add_item(i++, (*it).first.c_str());
+        listbox->add_item(i++, (char *)(*it).first.c_str());
     }
     
 

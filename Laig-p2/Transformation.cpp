@@ -29,7 +29,7 @@ void Transformation::scale(float x, float y, float z){
 	glGetFloatv(GL_MODELVIEW_MATRIX, &transf_matrix[0][0]);
 	glPopMatrix();
 }
-
+ 
 void Transformation::translate(float x, float y, float z){
 	glPushMatrix();
 	glLoadIdentity();

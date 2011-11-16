@@ -309,6 +309,11 @@ Light * createLight(TiXmlElement * child){
         TiXmlElement * propriedades=child->FirstChildElement();
         //declarar class
         light=new Omni(0);
+        if(enabled)
+            light->setEnabled(true);
+        else{
+            light->setEnabled(false);
+        }
         do{ 
             float r,g,b,a,value, x,y,z,w;
             if(propriedades->ValueTStr()=="location"
@@ -381,6 +386,11 @@ Light * createLight(TiXmlElement * child){
         TiXmlElement * propriedades=child->FirstChildElement();
         //declarar class
         light=new Spot(0, angle);
+        if(enabled)
+            light->setEnabled(true);
+        else{
+            light->setEnabled(false);
+        }
         do{ 
             float r,g,b,a,value, x,y,z;
             if(propriedades->ValueTStr()=="location"
@@ -967,7 +977,7 @@ int loaddsxfile(const string & filename){
         //(*mview.begin()).second->apply();
         for(map<string,Light*>::iterator it=mlight.begin();it!=mlight.end();it++){
             if((*it).second!=NULL)
-                (*it).second->apply(true);
+                (*it).second->apply();
             
         }
         raizcmp=mcomponent[rootcomp];

@@ -16,13 +16,19 @@
 using namespace std;
 
 class Light{
-	string id;
+	
 	int light_number;
-	bool enabled;
+	
 	float ambient[4];
 	float specular[4];
 	float diffuse[4];
     static int used;
+    
+    
+protected:
+    
+    string id;
+    bool enabled;
 public:
 	Light(int number);
 	int getNumber();
@@ -35,6 +41,7 @@ public:
 	void setEnabled(bool enabled);
     int getLightX();
 	bool is_enabled();
+    virtual void apply()=0;
 	virtual void apply(bool enabled)=0;
 };
 
@@ -44,6 +51,7 @@ public:
 	Omni(int number);
 	void setLightLocation(float, float, float, float);
     void setSpotTarget(float x, float y, float z){}
+    void apply();
 	void apply(bool enabled);
 };
 
@@ -58,6 +66,7 @@ public:
 	void setSpotExponent(float);
 	void setSpotTarget(float x, float y, float z);
 	void setLightLocation(float, float, float, float);
+    void apply();
 	void apply(bool enabled);
 };
 

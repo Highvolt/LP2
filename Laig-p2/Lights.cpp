@@ -1,9 +1,9 @@
 #include "Lights.h"
-
+#include <iostream>
 
 int Light::used=0;
 
-
+using namespace std;
 int Light::getLightX()
 {
     switch(light_number){
@@ -77,10 +77,10 @@ int Light::getNumber(){
 
 void Light::setEnabled(bool enabled){
 	this->enabled = enabled;
-	if(enabled)
-		glEnable(light_number);
+	if(this->enabled)
+		glEnable(getLightX());
 	else
-		glDisable(light_number);
+		glDisable(getLightX());
 }
 
 bool Light::is_enabled(){
@@ -99,8 +99,22 @@ void Omni::setLightLocation(float x, float y, float z, float w) {
 }
 
 void Omni::apply(bool enabled){
-	if(enabled)
+	if(enabled){
 		glLightfv(getLightX(), GL_POSITION, location);
+        glEnable(getLightX());
+    }else{
+        glDisable(getLightX());
+    }
+}
+
+void Omni::apply(){
+	cout<<id<<" activa "<<enabled<<endl;
+    if(enabled){
+		glLightfv(getLightX(), GL_POSITION, location);
+        glEnable(getLightX());
+    }else{
+        glDisable(getLightX());
+    }
 }
 
 Spot::Spot(int number, float angle): Light(number){
@@ -148,3 +162,13 @@ void Spot::apply(bool enabled){
 	}
 }
 
+void Spot::apply(){
+    cout<<id<<" activa "<<enabled<<endl;
+	if(this->enabled){
+		glLightfv(getLightX(), GL_POSITION, location);
+        glLightfv(getLightX(), GL_SPOT_DIRECTION, direction);
+        glEnable(getLightX());
+	}else{
+        glDisable(getLightX());
+    }
+}
