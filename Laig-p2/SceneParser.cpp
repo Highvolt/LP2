@@ -19,10 +19,11 @@ View * createView(TiXmlElement * viewchild){
     if(viewchild ){
         View * ret;
         string id="";
-        if(viewchild->ValueTStr()=="perspective" && (id=viewchild->Attribute("id"))!="" 
+        if(viewchild->ValueTStr()=="perspective" && viewchild->Attribute("id")!=NULL
            && viewchild->QueryFloatAttribute("near",&flodo)==TIXML_SUCCESS
            && viewchild->QueryFloatAttribute("far",&flodo)==TIXML_SUCCESS
            && viewchild->QueryFloatAttribute("angle",&flodo)==TIXML_SUCCESS){
+            id=viewchild->Attribute("id");
             float near,far,angle;
             viewchild->QueryFloatAttribute("near",&near);
             viewchild->QueryFloatAttribute("far",&far);
@@ -48,13 +49,14 @@ View * createView(TiXmlElement * viewchild){
             }
             
         }else
-            if(viewchild->ValueTStr()=="ortho" && (id=viewchild->Attribute("id"))!="" 
+            if(viewchild->ValueTStr()=="ortho" && (viewchild->Attribute("id"))!=NULL 
                && viewchild->QueryFloatAttribute("near",&flodo)==TIXML_SUCCESS
                && viewchild->QueryFloatAttribute("far",&flodo)==TIXML_SUCCESS
                && viewchild->QueryFloatAttribute("left",&flodo)==TIXML_SUCCESS
                && viewchild->QueryFloatAttribute("right",&flodo)==TIXML_SUCCESS
                && viewchild->QueryFloatAttribute("top",&flodo)==TIXML_SUCCESS
                && viewchild->QueryFloatAttribute("bottom",&flodo)==TIXML_SUCCESS){
+                id=viewchild->Attribute("id");
                 float near,far,left,right,top,bottom;
                 
                 viewchild->QueryFloatAttribute("near",&near);
@@ -83,8 +85,9 @@ View * createView(TiXmlElement * viewchild){
 int loadviews(TiXmlElement* view){
 	float flodo;
 	string default1="";
-	if (view->ValueTStr()=="views" && ((default1=view->Attribute("default"))!="")){
-		cout<<"Root Views default:"<<default1<<endl;
+	if (view->ValueTStr()=="views" && ((view->Attribute("default"))!=NULL)){
+		default1=view->Attribute("default");
+        cout<<"Root Views default:"<<default1<<endl;
 		//criar class
 		TiXmlElement *viewchild=view->FirstChildElement();
 		
@@ -177,7 +180,8 @@ Material* createMaterial(TiXmlElement * child){
     string id="";
     if(child
        && child->ValueTStr()=="material"
-       && (id=child->Attribute("id"))!=""){
+       && (child->Attribute("id"))!=NULL){
+        id=child->Attribute("id");
         TiXmlElement * propriedades=child->FirstChildElement();
         mat=new Material(id);
         cout<<"new Material id: "<<id<<endl;
@@ -259,7 +263,8 @@ vector<Material*> loadvectormaterials(TiXmlElement* mat){
 		TiXmlElement * child=mat->FirstChildElement();
         string id="";
 		do{
-            if(child&&child->ValueTStr()=="material"&& (id=child->Attribute("id"))!=""){
+            if(child&&child->ValueTStr()=="material"&& (child->Attribute("id"))!=NULL){
+                id=child->Attribute("id");
                 Material * mat=mmaterials[id];
             if(mat!=NULL)
                 vect.push_back(mat);
@@ -304,7 +309,8 @@ Light * createLight(TiXmlElement * child){
     float angle, exponent;
     if(child
        && child->ValueTStr()=="omni"
-       && (id=child->Attribute("id"))!=""  && (child->QueryBoolAttribute("enabled",&enabled)==TIXML_SUCCESS)){
+       && (child->Attribute("id"))!=NULL  && (child->QueryBoolAttribute("enabled",&enabled)==TIXML_SUCCESS)){
+        id=child->Attribute("id");
         cout<< "omni id: " << id << " enabled : " << enabled <<endl;
         TiXmlElement * propriedades=child->FirstChildElement();
         //declarar class
@@ -381,8 +387,9 @@ Light * createLight(TiXmlElement * child){
     }
     if(child
        && child->ValueTStr()=="spot"
-       && (id=child->Attribute("id"))!=""  && (child->QueryBoolAttribute("enabled",&enabled)==TIXML_SUCCESS) && (child->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS)
+       && (child->Attribute("id"))!=NULL  && (child->QueryBoolAttribute("enabled",&enabled)==TIXML_SUCCESS) && (child->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS)
        && (child->QueryFloatAttribute("exponent",&exponent)==TIXML_SUCCESS)){
+        id=child->Attribute("id");
         cout<< "spot id: " << id << " enabled : " << enabled << " angle: " << angle << " exponent: " << exponent << endl;
         TiXmlElement * propriedades=child->FirstChildElement();
         //declarar class
@@ -500,9 +507,10 @@ Textures * createTexture(TiXmlElement * child){
     float length_s=0, length_t=0;
     if(child
        && child->ValueTStr()=="texture"
-       && (id=child->Attribute("id"))!=""  && (file=child->Attribute("file"))!="" && (child->QueryFloatAttribute("length_s", (float*)&length_s)==TIXML_SUCCESS)
+       && (child->Attribute("id"))!=NULL  && (child->Attribute("file"))!=NULL && (child->QueryFloatAttribute("length_s", (float*)&length_s)==TIXML_SUCCESS)
        && (child->QueryFloatAttribute("length_t",&length_t)==TIXML_SUCCESS)){
-        
+        id=child->Attribute("id");
+        file=child->Attribute("file");
         a= (Textures*) new Textures(id, length_s, length_t, (char *)file.c_str(), 0);
         //a->setLengthS(length_s);
         //a->setLengthT(length_t);
@@ -541,7 +549,8 @@ int loadscene(TiXmlElement* scene){
 	string root;
 	float axis_length;
 	if(scene->ValueTStr()=="scene"){
-		if((root=scene->Attribute("root"))!="" && scene->QueryFloatAttribute("axis_length",&axis_length)==TIXML_SUCCESS){
+		if((scene->Attribute("root"))!=NULL && scene->QueryFloatAttribute("axis_length",&axis_length)==TIXML_SUCCESS){
+            root=scene->Attribute("root");
 			cout << "scene root -" <<  root << " axis_length: " << axis_length << endl;
             return axis_length;
 		}else{
@@ -584,8 +593,9 @@ Transformation * createTransformation(TiXmlElement * child){
             }
             
             if(subchild->ValueTStr()=="rotate"
-               && (axis=subchild->Attribute("axis"))!=""
+               && (subchild->Attribute("axis"))!=NULL
                && subchild->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS){
+                axis=subchild->Attribute("axis");
                 int ax=0,ay=0,az=0;
                 
                 if(axis=="x" || axis=="X"){
@@ -676,13 +686,15 @@ Primitive * createPrimitive(TiXmlElement * child){
             
             
             if(subchild->ValueTStr()=="material"
-               && (id_mat=subchild->Attribute("id"))!=""){
+               && (subchild->Attribute("id"))!=NULL){
+                id_mat=subchild->Attribute("id");
                 mat=true;
                 //add to class
                 cout<<"material: id:"<<id<<endl;
             }
             if(subchild->ValueTStr()=="texture"
-               && (id_tex=subchild->Attribute("id"))!=""){
+               && (subchild->Attribute("id"))!=NULL){
+                id_tex=subchild->Attribute("id");
                 tex=true;
                 //add to class
                 cout<<"texture: id:"<<id<<endl;
@@ -811,7 +823,8 @@ Component* loadcomponent(TiXmlElement * component){
     string id;
     string key="";
     Textures * vtex=NULL;
-    if(component->ValueTStr()=="component" && (id=component->Attribute("id"))!=""){
+    if(component->ValueTStr()=="component" && (component->Attribute("id"))!=NULL){
+        id=component->Attribute("id");
         cout<<"Component id: "<<id<<endl;
         TiXmlElement * transformation=component->FirstChildElement("transformation");
         TiXmlElement * materials=component->FirstChildElement("materials");
@@ -940,11 +953,11 @@ int loaddsxfile(const string & filename){
 		TiXmlElement* transformations=raiz->FirstChildElement("transformations");
 		TiXmlElement* primitives=raiz->FirstChildElement("primitives");
         string rootcomp="";
-        if(scene->Attribute("root")){
+        if(scene->Attribute("root")!=NULL){
             rootcomp=scene->Attribute("root");
         
         }else{
-            return -1;
+            exit(-1);
         }
 		int length = loadscene(scene);
 		loadviews(views);
