@@ -183,7 +183,7 @@ void display(void)
 	// para objectos ue nao tem material atribuido
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 	glEnable(GL_COLOR_MATERIAL);
-
+/*
 	// Actualizacao da posicao da fonte de luz
 	light0_position[0] = light0x;	// por razoes de eficiencia, os restantes 
 	light0_position[1] = light0y;	// parametros _invariaveis_ da LIGHT0 estao
@@ -214,7 +214,7 @@ void display(void)
 	// esfera representativa da origem das coordenadas
 	// falta declarar a cor
 	// desenhar o objecto
-
+*/
     for(map<string,Light*>::iterator it=mlight.begin();it!=mlight.end();it++){
         if((*it).second!=NULL)
             (*it).second->apply();
@@ -228,7 +228,7 @@ void display(void)
     
 	// inibicao de atribuicao directa de cores
 	glDisable(GL_COLOR_MATERIAL);
-
+/*
 
 	// define caracteristicas de cor do material do plano e da caixa
 	glMaterialfv(GL_FRONT, GL_SHININESS, mat1_shininess);
@@ -238,7 +238,7 @@ void display(void)
 
 	
 
-
+*/
 	
 	// swapping the buffers causes the rendering above to be shown
 	glutSwapBuffers();
@@ -454,7 +454,7 @@ int main(int argc, char* argv[])
 	GLUI_Master.set_glutIdleFunc( myGlutIdle );
 	
 	inicializacao();
-	axis_lenght = loaddsxfile("cafe.xml");
+	axis_lenght = loaddsxfile("greenhill.dsx");
     int i=0;
     for(map<string,View*>::iterator it=mview.begin();it!=mview.end();it++){
         if((*it).first.compare(active->getId())==0){

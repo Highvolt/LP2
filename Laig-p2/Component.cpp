@@ -40,13 +40,13 @@ void Component::apply(){
 
     
         for(vector<Primitive*>::iterator it= child_prim.begin(); it != child_prim.end(); ++it){
-
-            if(this->texture!=NULL && texture->getId().compare("none")!=0){
-                this->texture->apply();}
-            if(activo!=NULL){
+            if(activo!=NULL && activo->getId().compare("inherit")!=0){
                 // cout<<this->id<<" material activo: "<<this->activo->getId()<<endl;
                 activo->applyMat();
             }
+             if(this->texture!=NULL && texture->getId().compare("none")!=0 && texture->getId().compare("inherit")!=0){
+                this->texture->apply();}
+
                 (*it)->render(texture);
             
         
@@ -54,12 +54,13 @@ void Component::apply(){
     
         for(vector<Component*>::iterator it= child_comp.begin(); it != child_comp.end(); ++it){
 
-            if(this->texture!=NULL && texture->getId().compare("none")!=0){
-                this->texture->apply();}    
-            if(activo!=NULL){
+            if(activo!=NULL && activo->getId().compare("inherit")!=0){
                 // cout<<this->id<<" material activo: "<<this->activo->getId()<<endl;
                 activo->applyMat();
             }
+            if(this->texture!=NULL && texture->getId().compare("none")!=0 && texture->getId().compare("inherit")!=0){
+                this->texture->apply();}    
+
             (*it)->apply();
         }
         glPopMatrix();
