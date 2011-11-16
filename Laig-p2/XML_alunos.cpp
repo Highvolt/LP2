@@ -91,12 +91,15 @@ float light_ambient[] = {0.2, 0.2, 0.2, 1.0}; /* Set the background ambient ligh
 // variaveis para a janela
 int main_window;
 GLUI  *glui2;
+
+
 //Utiliza as estruturas de dados com a informação do xml para construir o plano
 
 
 extern map<string, Light*> mlight;
 extern map<string, View*> mview;
 extern View * active;
+extern Illumination * illu;
 
 void display_axis(){
 	GLUquadric* glQ2;
@@ -169,6 +172,7 @@ void display(void)
     if(active!=NULL){
         active->apply();
     }
+    illu->apply();
 	// permissao de atribuicao directa de cores
 	// para objectos ue nao tem material atribuido
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
@@ -399,6 +403,28 @@ void inicializacao()
 	
 }
 
+int f=0;
+void viewchange(int d){
+    
+    int g=f;
+    for(map<string,View*>::iterator it=mview.begin();it!=mview.end() && g>=0;it++){
+        //cout<<g<<endl;
+        active=(*it).second;
+        g--;
+    }
+
+
+}
+int wirestate=0;
+
+void changeViewMode(int d){
+    if(wirestate){
+        glPolygonMode(GL_FRONT, GL_LINE);
+    }else{
+        glPolygonMode(GL_FRONT, GL_FILL);
+    }
+
+}
 
 
 int main(int argc, char* argv[])
@@ -439,6 +465,22 @@ int main(int argc, char* argv[])
 	
 	inicializacao();
 	axis_lenght = loaddsxfile("cafe.xml");
+    int i=0;
+    for(map<string,View*>::iterator it=mview.begin();it!=mview.end();it++){
+        if((*it).first.compare(active->getId())==0){
+            break;
+        }
+        i++;
+    }
+     glui2->add_column( false );
+    GLUI_Listbox *listbox = glui2->add_listbox("Active view",&f,i,viewchange);
+    glui2->add_checkbox("Wireframe",&wirestate,0,changeViewMode);
+    i=0;
+    for(map<string,View*>::iterator it=mview.begin();it!=mview.end();it++){
+        listbox->add_item(i++, (*it).first.c_str());
+    }
+    
+
 	glutMainLoop();
 
 	return 0;

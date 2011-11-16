@@ -9,6 +9,7 @@ map<string, Material*> mmaterials;
 map<string, Light*> mlight;
 map<string, Component*> mcomponent;
 map<string, View*> mview;
+Illumination * illu;
 
 View * active;
 
@@ -875,7 +876,7 @@ int loaddsxfile(const string & filename){
         }
 		int length = loadscene(scene);
 		loadviews(views);
-		loadillumination(illumination);
+		illu=loadillumination(illumination);
 		loadlights(lights);
 		loadtextures(textures);
 		loadmaterials(materials);
